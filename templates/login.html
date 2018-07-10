@@ -1,0 +1,70 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+	<!--<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>-->
+	<title>QAA|Login</title>
+</head>
+<body>
+	<style type="text/css">
+
+		.container{
+			width: 960px;
+			margin: 0 auto;
+		}
+		.content{
+			width: 960px;
+			margin: 10 auto;
+			border-top: 1px solid #ccc;
+
+		}
+		.box{
+			width:300px;
+			margin: 30px auto;
+		}
+		.header{
+			margin: 80px auto 30px auto;
+			text-align: center;
+			font-size: 34px;
+		}
+		input{
+			width: 200px;
+			padding: 6px 9px;
+		}
+		button{
+			cursor: pointer;
+			line-height: 35px;
+			width: 110px;
+			margin:30px 0 0 90px;
+			border: 1px solid #FFFFF0;
+			background-color: #31C552;
+
+			border-radius: 4px;
+			font-size: 14px;
+			color: #FFFFF0;
+		}
+	</style>
+
+	<div class="container">
+		<div class="header">
+			QA Admin
+		</div>
+		<div class="content">
+			<form method="post" action="/login">
+				<div class="box">
+					<label>用户名：</label>
+					<input type="text" name="username" value="geetest"/>
+				</div>
+				<div class="box">
+					<label>密　码：</label>
+					<input type="password" name="password" value="geetest"/>
+				</div>
+				<div class="box" id="div_geetest_lib">
+				<div class="box">
+					<button id="submit_button">登录</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
