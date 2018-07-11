@@ -1,7 +1,7 @@
 import asyncio
 from tornado.web import Application
 import os
-from apps.user.urls import url as user_url
+from apps.route import urls
 
 
 setting = {
@@ -9,7 +9,7 @@ setting = {
 }
 
 app = Application(
-    user_url,
+    urls,
     **setting
 )
 

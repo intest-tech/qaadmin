@@ -1,11 +1,9 @@
-import tornado.web
+from apps.basehandler import BaseHandler
 from libs.crypto import encrypt_password
+from libs.mongo import get_project_list
 
 
-class LoginHandler(tornado.web.RequestHandler):
-    def initialize(self):
-        self.mongo = self.settings['mongo']
-
+class LoginHandler(BaseHandler):
     async def login_check(self, username: str, password: str) -> bool:
         """
         Check username and password
@@ -22,11 +20,12 @@ class LoginHandler(tornado.web.RequestHandler):
         user = self.get_argument('username')
         pwd = self.get_argument('password')
         if await self.login_check(user, pwd):
-            # todo: redirect to dashboard
-            self.write('ok')
+            # todo: set cookies
+            project_list = await get_project_list(self.mongo)
+            self.render('dashboard.html', project_list=project_list)
         else:
-            # todo: redirect to login page
-            self.write('no')
+            # todo: never clear textbox
+            self.write("<script language='javascript'>alert('登录失败, 请检查用户名或密码');window.location.href='login';</script>")
 
     def get(self):
         self.render('login.html')
