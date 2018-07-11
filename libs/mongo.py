@@ -5,14 +5,14 @@ from bson import ObjectId
 async def conn_mongo():
     conn = MotorClient(config['mongo']['host'], int(config['mongo']['port']))
     db = conn.xtest
-    await db.authenticate(
-        config['mongo']['user'],
-        config['mongo']['password']
-    )
+    # await db.authenticate(
+    #     config['mongo']['user'],
+    #     config['mongo']['password']
+    # )
     return db
 
 async def get_project_list(db):
-    cur = db['test_project'].find({'is_del': False}, {'_id': 0, 'project_name': 1})
+    cur = db['test_project'].find({'is_del': False}, {'_id': 0, 'project_name': 1}).count()
     res = await cur.to_list(10)
     return res
 
