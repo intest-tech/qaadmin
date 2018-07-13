@@ -1,5 +1,9 @@
 from apps.basehandler import BaseHandler
 from libs.mongo import get_data_list
+import random
+from pyecharts import Pie
+
+REMOTE_HOST = "https://pyecharts.github.io/assets/js"
 
 
 class ListDataHandler(BaseHandler):
@@ -9,4 +13,27 @@ class ListDataHandler(BaseHandler):
         # self.build_output(res)
         self.render('datalist.html', project=pro_id, data_list=data_list)
 
+
 # TODO: 分页
+
+class DrawPieHandler(BaseHandler):
+    async def get(self):
+        attr = ['成功', "失败", "错误", "跳过"]
+        v2 = [55, 60, 16, 20]
+        area_color = ["#1d953f",
+                      "#1d953f",
+                      "#1d953f",
+                      "#f6f5ec"]
+        line = Pie("测试结果统计")
+        # line.add("测试结果", '成功', 55, area_color="#1d953f", is_smooth=True, mark_line=["max", "average"])
+        # line.add("测试结果", '失败', 60, area_color="#1d953f", is_smooth=True, mark_line=["max", "average"])
+        # line.add("测试结果", attr, v2, area_color=area_color, is_smooth=True, mark_line=["max", "average"])
+        line.add("测试结果", attr, v2, area_color="green", is_smooth=True, mark_line=["max", "average"])
+
+        s3d = line
+        render_em = s3d.render_embed()
+        print(render_em)
+        self.render('piechart.html',
+                    myechart=render_em,
+                    host=REMOTE_HOST,
+                    script_list=s3d.get_js_dependencies(), )
