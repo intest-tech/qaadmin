@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px;
+}
+#section {
+    width:350px;
+    float:left;
+    padding:10px;
+}
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+    position:absolute;
+    bottom:0px;
+    width: 100%;
+}
+
+
+</style>
+<div id="header">
+    <h1>QA Admin</h1>
+</div>
+
+<div id="nav">
+    <a href="/project/list">项目列表</a><br>
+    <a href="/data/list">测试结果</a><br>
+</div>
+
+<div id="section">
+    <h1>项目列表</h1>
+    <p>
+        {% for item in project_list %}
+    <a href="/data/list?pro_id=5a7fb0cd47de9d5cf3d13a44">{{ escape(item['project_name']) }}</a><br>
+
+    {% end %}
+    </p>
+</div>
+
+<div id="footer">
+    Copyright W3School.com.cn
+</div>
+
+</body>
+</html>
+

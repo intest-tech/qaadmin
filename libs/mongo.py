@@ -4,11 +4,7 @@ from bson import ObjectId
 
 async def conn_mongo():
     conn = MotorClient(config['mongo']['host'], int(config['mongo']['port']))
-    db = conn.xtest
-    # await db.authenticate(
-    #     config['mongo']['user'],
-    #     config['mongo']['password']
-    # )
+    db = conn.qaadmin
     return db
 
 async def get_project_list(db):

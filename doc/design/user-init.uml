@@ -1,0 +1,9 @@
+@startuml
+start
+:用户|打开主页;
+:后端|检查数据库'Users'表;
+if (Users collection not exist) then (yes)
+:后端|创建admin用户;
+endif
+end
+@enduml
