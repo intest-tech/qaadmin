@@ -33,14 +33,11 @@
     bottom:0px;
     width: 100%;
 }
-p {
-    position:absolute;
-    top:35px;
-}
+
 
 
 </style>
-<div id="header">
+<div>
     <p>
         {% if project%}
             {% for item in project_list %}
@@ -50,7 +47,7 @@ p {
             {% end %}
         {% else %}
             {% block item %}
-                创建一个新项目
+                 <a class="init-project" href="/project/create"> 新建项目 </a>
             {% end %}
         {% end %}
     </p>

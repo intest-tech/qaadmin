@@ -1024,10 +1024,18 @@ gallery.html css
 }
 
 .index-content {
+    margin: auto;
     position: absolute;
-    top: 50px;
+    top: 350px;
+    left: 350px;
+    bottom: 350px;
+    right: 350px;
 }
 
+.init-project {
+    text-align: center;
+    font-size: 100px;
+}
 /*.panel{background:#fff;}
 form .form-group:last-child{padding-bottom:0;}
 .passcode{position:absolute;right:0;top:0;height:32px;margin:1px;border-left:solid 1px #ddd;text-align:center;line-height:32px;border-radius:0 4px 4px 0;}
