@@ -13,18 +13,20 @@ class MainHandler(BaseHandler):
         :return:
         """
         collections = await self.mongo.list_collection_names()
-        if 'Users' not in collections:
+        if 'User' not in collections:
             salt = random.randint(10, 99)
             new_user = {
                 'salt': salt,
                 'username': 'admin',
                 "password": encrypt_password('admin', salt)}
-            result = await self.mongo.Users.insert_one(new_user)
+            new_user = self.update_doc_info(new_user)
+            result = await self.mongo.User.insert_one(new_user)
 
             print('Create user: admin, inserted id: %s' % repr(result.inserted_id))
 
     async def get(self, *args, **kwargs):
         await self.user_check()
+        self.redirect('/login')
 
 url = [
     (r'/', MainHandler)

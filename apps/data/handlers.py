@@ -1,6 +1,5 @@
 from apps.basehandler import BaseHandler
 from libs.mongo import get_data_list
-import random
 from pyecharts import Pie
 
 REMOTE_HOST = "https://pyecharts.github.io/assets/js"
@@ -19,16 +18,16 @@ class ListDataHandler(BaseHandler):
 class DrawPieHandler(BaseHandler):
     async def get(self):
         attr = ['成功', "失败", "错误", "跳过"]
-        v2 = [55, 60, 16, 20]
-        area_color = ["#1d953f",
-                      "#1d953f",
-                      "#1d953f",
-                      "#f6f5ec"]
+        v2 = [55, 3, 16, 20]
+        area_color = ["#008B00",
+                      "#CD950C",
+                      "#CD0000",
+                      "#838B8B"]
         line = Pie("测试结果统计")
-        # line.add("测试结果", '成功', 55, area_color="#1d953f", is_smooth=True, mark_line=["max", "average"])
-        # line.add("测试结果", '失败', 60, area_color="#1d953f", is_smooth=True, mark_line=["max", "average"])
-        # line.add("测试结果", attr, v2, area_color=area_color, is_smooth=True, mark_line=["max", "average"])
-        line.add("测试结果", attr, v2, area_color="green", is_smooth=True, mark_line=["max", "average"])
+        line.add("测试结果", attr, v2,
+                 label_color=area_color,
+                 is_smooth=True,
+                 mark_line=["max", "average"])
 
         s3d = line
         render_em = s3d.render_embed()

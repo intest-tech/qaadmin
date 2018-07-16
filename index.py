@@ -5,7 +5,8 @@ from apps.route import urls
 
 
 setting = {
-    'template_path': os.path.join(os.path.dirname(__file__), "templates")
+    'template_path': os.path.join(os.path.dirname(__file__), "templates"),
+    'static_path': os.path.join(os.path.dirname(__file__), "static"),
 }
 
 app = Application(

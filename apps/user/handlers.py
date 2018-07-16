@@ -11,8 +11,8 @@ class LoginHandler(BaseHandler):
         :param password: 
         :return: True: pass; False: error
         """
-        user_info = await self.mongo['g_users'].find_one({'user_id': username})
-        if user_info and encrypt_password(password, user_info.get('salt', 0)) == user_info.get('passwd'):
+        user_info = await self.mongo['User'].find_one({'username': username})
+        if user_info and encrypt_password(password, user_info.get('salt', 0)) == user_info.get('password'):
             return True
         return False
 

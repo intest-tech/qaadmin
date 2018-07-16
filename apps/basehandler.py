@@ -1,5 +1,6 @@
 import tornado.web
 import json
+import datetime
 
 class BaseHandler(tornado.web.RequestHandler):
     def build_output(self, data):
@@ -17,5 +18,19 @@ class BaseHandler(tornado.web.RequestHandler):
         self.write(response_json)
 
     def initialize(self):
+        """
+        Tornado 初始化 Handler 时执行, 将 mongo 赋值为类属性
+        :return: 
+        """
         tornado.web.RequestHandler.initialize(self)
         self.mongo = self.settings['mongo']
+
+    def update_doc_info(self, document: dict) -> dict:
+        """
+        为document字典添加create_time, is_del 
+        :param document: 插入mongo前的document
+        :return: 
+        """
+        document['create_time'] = datetime.datetime.utcnow()
+        document['is_del'] = False
+        return document

@@ -55,6 +55,8 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 }
 
 p {
+    position: absolute;
+    top: 40px;
     padding: 0 0 1em;
     margin: 0;
 }

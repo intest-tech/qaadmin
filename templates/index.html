@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    {% block title %}A bolder title{% end %}
 </head>
 <body>
 <style>
@@ -34,31 +33,29 @@
     bottom:0px;
     width: 100%;
 }
+p {
+    position:absolute;
+    top:35px;
+}
 
 
 </style>
 <div id="header">
-    <h1>QA Admin</h1>
-</div>
-
-<div id="nav">
-    <a href="/project/list">项目列表</a><br>
-    <a href="/data/list">测试结果</a><br>
-</div>
-
-<div id="section">
-    <h1>项目列表</h1>
     <p>
-        {% for item in project_list %}
-    <a href="/data/list?pro_id=5a7fb0cd47de9d5cf3d13a44">{{ escape(item['project_name']) }}</a><br>
-
-    {% end %}
+        {% if project%}
+            {% for item in project_list %}
+                {% block item %}
+                    <a href="/data/list?pro_id=5a7fb0cd47de9d5cf3d13a44">{{ escape(item['project_name']) }}</a><br>
+                {% end %}
+            {% end %}
+        {% else %}
+            {% block item %}
+                创建一个新项目
+            {% end %}
+        {% end %}
     </p>
 </div>
 
-<div id="footer">
-    Copyright W3School.com.cn
-</div>
 
 </body>
 </html>
