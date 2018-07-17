@@ -42,9 +42,13 @@
         {% if project%}
             {% for item in project_list %}
                 {% block item %}
-                    <a href="/data/list?pro_id=5a7fb0cd47de9d5cf3d13a44">{{ escape(item['project_name']) }}</a><br>
+                    <a href="/project/list?pro_id={{ escape(item['project_id']) }}">{{ escape(item['project_name']) }}</a><br>
                 {% end %}
             {% end %}
+        {% elif report %}
+                {% block item %}
+                    <a href="/data/list?pro_id=5a7fb0cd47de9d5cf3d13a44">{{ escape(item['project_name']) }}</a><br>
+                {% end %}
         {% else %}
             {% block item %}
                  <a class="init-project" href="/project/create"> 新建项目 </a>

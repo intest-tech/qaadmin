@@ -1,3 +1,4 @@
+from tornado.web import authenticated
 from apps.basehandler import BaseHandler
 from libs.mongo import get_data_list
 from pyecharts import Pie
@@ -6,11 +7,35 @@ REMOTE_HOST = "https://pyecharts.github.io/assets/js"
 
 
 class ListDataHandler(BaseHandler):
+    """
+    列出某项目下的所有测试数据
+    """
+    @authenticated
     async def get(self):
         pro_id = self.get_argument('pro_id', "")
         data_list = await get_data_list(self.mongo, pro_id)
         # self.build_output(res)
         self.render('datalist.html', project=pro_id, data_list=data_list)
+
+
+class DetailDataHandler(BaseHandler):
+    """
+
+    """
+    @authenticated
+    async def get(self):
+        pass
+
+class UploadDataHandler(BaseHandler):
+    @authenticated
+    async def post(self, *args, **kwargs):
+        pass
+
+
+class DeleteDataHandler(BaseHandler):
+    @authenticated
+    async def post(self, *args, **kwargs):
+        pass
 
 
 # TODO: 分页
