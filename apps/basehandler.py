@@ -2,7 +2,16 @@ import tornado.web
 import json
 import datetime
 
+
 class BaseHandler(tornado.web.RequestHandler):
+    def get_current_user(self) -> str:
+        """
+        根据cookie获取当前用户
+        :return: username in cookie
+        """
+        user = self.get_secure_cookie("user")
+        return user.decode('utf8') if user else ""
+
     def build_output(self, data):
         """
         构建易处理的HTTP输出

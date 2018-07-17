@@ -1,3 +1,4 @@
+from tornado.web import authenticated
 from apps.basehandler import BaseHandler
 from libs.crypto import encrypt_password
 from libs.mongo import get_project_list
@@ -20,7 +21,8 @@ class LoginHandler(BaseHandler):
         user = self.get_argument('username')
         pwd = self.get_argument('password')
         if await self.login_check(user, pwd):
-            # todo: set cookies
+            if not self.get_secure_cookie("user"):
+                self.set_secure_cookie("user", user)
             project_list = await get_project_list(self.mongo)
             self.render('index.html', project_list=project_list)
         else:
@@ -29,3 +31,9 @@ class LoginHandler(BaseHandler):
 
     def get(self):
         self.render('login.html')
+
+class LogoutHandler(BaseHandler):
+    @authenticated
+    def get(self, *args, **kwargs):
+        self.clear_cookie('user')
+        self.redirect('/login')

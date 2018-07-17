@@ -7,6 +7,8 @@ from apps.route import urls
 setting = {
     'template_path': os.path.join(os.path.dirname(__file__), "templates"),
     'static_path': os.path.join(os.path.dirname(__file__), "static"),
+    'cookie_secret': 'COOKIE_SECRET',
+    'login_url': '/login'
 }
 
 app = Application(

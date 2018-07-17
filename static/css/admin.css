@@ -1023,6 +1023,10 @@ gallery.html css
     border-color: #ff6c60;
 }
 
+.user-info {
+    padding-right: 10px;
+}
+
 .index-content {
     margin: auto;
     position: absolute;
