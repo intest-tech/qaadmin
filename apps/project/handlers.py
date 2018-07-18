@@ -1,6 +1,7 @@
 from tornado.web import authenticated
 from apps.basehandler import BaseHandler
 from libs.mongo import get_project_list
+import json
 
 
 class ListProjectHandler(BaseHandler):
@@ -9,7 +10,7 @@ class ListProjectHandler(BaseHandler):
         # res = await get_project_list(self.mongo)
         # self.build_output(res)
         project_list = await get_project_list(self.mongo)
-        self.render('dashboard.html', project_list=project_list)
+        self.render('index.html', project_list=project_list)
 
 class CreateProjectHandler(BaseHandler):
     async def project_exist(self, project_name: str) -> bool:
@@ -53,4 +54,10 @@ class UpdateProjectHandler(BaseHandler):
 class DeleteProjectHandler(BaseHandler):
     @authenticated
     async def post(self, *args, **kwargs):
+        pass
+
+
+class GenTokenHandler(BaseHandler):
+    @authenticated
+    async def get(self):
         pass

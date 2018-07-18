@@ -24,7 +24,8 @@ class LoginHandler(BaseHandler):
             if not self.get_secure_cookie("user"):
                 self.set_secure_cookie("user", user)
             project_list = await get_project_list(self.mongo)
-            self.render('index.html', project_list=project_list)
+            # self.render('index.html', project_list=project_list)
+            self.redirect('/')
         else:
             # todo: never clear textbox
             self.write("<script language='javascript'>alert('登录失败, 请检查用户名或密码');window.location.href='login';</script>")

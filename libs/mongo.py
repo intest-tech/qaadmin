@@ -8,7 +8,7 @@ async def conn_mongo():
     return db
 
 async def get_project_list(db):
-    cur = db['Project'].find({'is_del': False}, {'_id': 0, 'project_name': 1})
+    cur = db['Project'].find({'is_del': False}, {'_id': 0, 'name': 1})
     res = await cur.to_list(10)
     return res
 
