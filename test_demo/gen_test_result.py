@@ -12,15 +12,16 @@ class DemoTestCase(unittest.TestCase):
 
     def test_fail(self):
         """
-        test_fail
-        :return: 
+         stest_fail sad sf
+         asdf safd
+         :return:
         """
         a = 1
         self.assertEqual(2, a, msg='not match')
 
     def test_error(self):
         """
-        test_error
+        test_error s
         :return: 
         """
         a = {'a': 1}

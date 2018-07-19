@@ -1,9 +1,10 @@
 # import tornado.web
-import flask.views
+# import flask.views
 from flask import make_response, request
 from flask_restful import Resource
 import json
 import datetime
+# import time
 
 
 def set_headers(response, origin):
@@ -82,5 +83,6 @@ class BaseHandler(Resource):
         :return: 
         """
         document['create_time'] = datetime.datetime.utcnow()
+        # document['create_time'] = time.time()
         document['is_del'] = False
         return document

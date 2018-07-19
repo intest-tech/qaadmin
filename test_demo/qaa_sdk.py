@@ -5,10 +5,11 @@ import json
 import time
 import requests
 import unittest
+import re
 
 API_ADDR = 'http://localhost:5000'
 WEB_DOMAIN = 'http://localhost'
-API_TOKEN = '6ccdd8eb365242c29e1da2caea083461'
+API_TOKEN = '2a038c5282a340bbab958a668f1baf8e'
 
 
 def set_result(test_results: unittest.TestResult, **kwargs):
@@ -45,10 +46,9 @@ def set_result(test_results: unittest.TestResult, **kwargs):
         case_name = x[0]._testMethodName
         method_doc = x[0]._testMethodDoc  # 给测试脚本写的文档
         assert method_doc is not None, ('请给测试用例%s函数写上文档注释' % case_name)
-        explain = method_doc.rstrip('\n        :return:')
         note_data = {
             'case_name': case_name,
-            'explain': explain,
+            'explain': method_doc.replace('\n', '').strip().replace('        ', ', '),
             'status': 'failures',
             'note': x[1]
         }
@@ -58,10 +58,9 @@ def set_result(test_results: unittest.TestResult, **kwargs):
         case_name = x[0]._testMethodName
         method_doc = x[0]._testMethodDoc  # 给测试脚本写的文档
         assert method_doc is not None, ('请给测试用例%s函数写上文档注释' % case_name)
-        explain = method_doc.rstrip('\n        :return:')
         note_data = {
             'case_name': case_name,
-            'explain': explain,
+            'explain': method_doc.replace('\n', '').strip().replace('        ', ', '),
             'status': 'errors',
             'note': x[1]
         }

@@ -1,5 +1,7 @@
 from apps.basehandler import BaseHandler
-from libs.mongo import get_data_list
+from libs.mongo import get_data_list, get_test_result
+from bson import json_util
+import json
 
 
 # from pyecharts import Pie
@@ -7,23 +9,21 @@ from libs.mongo import get_data_list
 # REMOTE_HOST = "https://pyecharts.github.io/assets/js"
 
 
-# class ListResultHandler(BaseHandler):
-#     """
-#     列出某项目下的所有测试数据
-#     """
-#     def get(self):
-#         pro_id = self.get_argument('pro_id', "")
-#         data_list = get_data_list(self.mongo, pro_id)
-#         # self.build_output(res)
-#         self.render('datalist.html', project=pro_id, data_list=data_list)
+class ListResultHandler(BaseHandler):
+    """
+    列出某项目下的所有测试数据
+    """
+    # TODO: 分页
+    def get(self):
+        project_id = self.get_argument('pro_id', "")
+        result_id = self.get_argument('id', '')
+        if result_id:
+            result_data = get_test_result(self.mongo, result_id)
+        else:
+            result_data = get_data_list(self.mongo, project_id)
+        result_data = json_util._json_convert(result_data)
+        return self.json_response(result_data)
 
-
-# class DetailDataHandler(BaseHandler):
-#     """
-#
-#     """
-#     async def get(self):
-#         pass
 
 class UploadResultHandler(BaseHandler):
     def post(self, *args, **kwargs):
@@ -32,15 +32,17 @@ class UploadResultHandler(BaseHandler):
         if not token or not result:
             return self.json_response(status='forbidden', error_msg='token error')
         new_result = self.get_formdatas()
+        # todo: check arguments
+        # []
         new_result['project'] = result['_id']
-        return self.json_response(new_result)
+        new_result = self.update_doc_info(new_result)
+        insert_result = self.mongo.TestResult.insert_one(new_result)
+        return self.json_response({'inserted_id': str(insert_result.inserted_id)})
 
 # class DeleteDataHandler(BaseHandler):
 #     def post(self, *args, **kwargs):
 #         pass
 #
-#
-# # TODO: 分页
 #
 # class DrawPieHandler(BaseHandler):
 #     def get(self):
