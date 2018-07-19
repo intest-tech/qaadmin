@@ -1,12 +1,12 @@
 ## Description
 
-Platform used for collecting and sharing testing result. Powered by [Tornado](http://www.tornadoweb.org/en/stable/index.html).
+Platform used for collecting and sharing testing result. Powered by [Flask](https://github.com/pallets/flask).
 
 ## Environment
 
-- Python 3.5
+- Python 3.5.2+
 - Ubuntu 16.04
-- MongoDB 3.6
+- MongoDB 4.0
 
 ## How to
 

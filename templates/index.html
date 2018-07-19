@@ -37,18 +37,19 @@
 
 
 
+
 </style>
 <div>
     <p>
         {% block item %}
         {% if project_list %}
-            {% for project in project_list %}
-                <a href="/project/list?pro_id={{ escape(project['name']) }}">{{ escape(project['name']) }}</a><br>
-            {% end %}
+        {% for project in project_list %}
+        <a href="/project/list?pro_id={{ escape(project['name']) }}">{{ escape(project['name']) }}</a><br>
+        {% end %}
         {% elif report %}
-            <a href="/data/list?pro_id=5a7fb0cd47de9d5cf3d13a44">{{ escape(report['name']) }}</a><br>
+        <a href="/data/list?pro_id=5a7fb0cd47de9d5cf3d13a44">{{ escape(report['name']) }}</a><br>
         {% else %}
-            <a class="init-project" href="/project/create"> 新建项目 </a>
+        <a class="init-project" href="/project/create"> 新建项目 </a>
         {% end %}
         {% end %}
     </p>

@@ -1,63 +1,72 @@
-from tornado.web import authenticated
 from apps.basehandler import BaseHandler
+from apps.project.basehandler import ProjectHandler
 from libs.mongo import get_project_list
-import json
+import uuid
 
 
 class ListProjectHandler(BaseHandler):
-    # @authenticated
-    async def get(self):
-        # res = await get_project_list(self.mongo)
-        # self.build_output(res)
-        project_list = await get_project_list(self.mongo)
-        self.render('index.html', project_list=project_list)
+    def get(self):
+        project_list = get_project_list(self.mongo)
+        return self.json_response(project_list)
 
-class CreateProjectHandler(BaseHandler):
-    async def project_exist(self, project_name: str) -> bool:
-        """
-        Check project existence
-        :param project_name:
-        :return: True: pass; False: error
-        """
-        return bool(await self.mongo['Project'].find_one({'name': project_name}))
 
-    async def get(self):
-        self.render('create-project.html')
-
-    @authenticated
-    async def post(self, *args, **kwargs):
-        project_name = self.get_argument('name')
-        project_detail = self.get_argument('detail')
+class CreateProjectHandler(ProjectHandler):
+    # todo: create with token
+    def post(self):
+        project_name = self.get_formdata('name')
+        project_detail = self.get_formdata('detail')
         if not project_name:
-            self.write("<script language='javascript'>alert('请输入项目名');window.location.href='create';</script>")
+            return self.json_response(status='fail', error_msg='error project name')
         else:
-            project_info = await self.project_exist(project_name)
+            project_info = self.project_exist(project_name)
             if project_info:
-                print(project_name )
-                self.write("<script language='javascript'>alert('项目已存在');window.location.href='create';</script>")
+                return self.json_response(status='fail', error_msg='project exist')
 
             new_project = {
-                'name': project_name,
+                '_id': project_name,
                 "detail": project_detail
             }
             new_project = self.update_doc_info(new_project)
-            result = await self.mongo.Project.insert_one(new_project)
-            self.write("<script language='javascript'>alert('新建成功');window.location.href='create';</script>")
+            result = self.mongo.Project.insert_one(new_project)
+            return self.json_response({'inserted_id': str(result.inserted_id)})
 
 
-class UpdateProjectHandler(BaseHandler):
-    @authenticated
-    async def post(self, *args, **kwargs):
-        pass
+# todo: update project info
+# class UpdateProjectHandler(BaseHandler):
+#     def post(self, *args, **kwargs):
+#         pass
+#
+
+class DeleteProjectHandler(ProjectHandler):
+    # todo: bulk delete
+    def post(self, *args, **kwargs):
+        project_name = self.get_formdata('name')
+        if not project_name:
+            return self.json_response(status='fail', error_msg='error project name')
+        else:
+            project_info = self.project_exist(project_name)
+            if not project_info:
+                return self.json_response(status='fail', error_msg='project not exist')
+            result = self.mongo.Project.delete_one({'_id': project_name})
+            print(result)
+            return self.json_response({'delete_result': result.raw_result})
 
 
-class DeleteProjectHandler(BaseHandler):
-    @authenticated
-    async def post(self, *args, **kwargs):
-        pass
+class GenTokenHandler(ProjectHandler):
+    """
+    生成token, 用于测试数据上传
+    """
 
-
-class GenTokenHandler(BaseHandler):
-    @authenticated
-    async def get(self):
-        pass
+    def post(self):
+        project_name = self.get_formdata('name')
+        if not project_name:
+            return self.json_response(status='fail', error_msg='error project name')
+        else:
+            project_info = self.project_exist(project_name)
+            if not project_info:
+                return self.json_response(status='fail', error_msg='project not exist')
+            new_token = uuid.uuid4().hex
+            result = self.mongo.Project.update_one({'_id': project_name},
+                                                   {'$set': {'token': new_token}})
+            print(result)
+            return self.json_response({'token': new_token})
