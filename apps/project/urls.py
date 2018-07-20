@@ -1,9 +1,8 @@
 from apps.project.handlers import *
 
 url = [
-    ("/project/create", CreateProjectHandler),
-    ("/project", ListProjectHandler),
+    (r"/project/create", CreateProjectHandler),
+    (r"/project/list", ListProjectHandler),
     # (r"/project/list", UpdateProjectHandler),
-    ("/project/delete", DeleteProjectHandler),
-    ("/project/gen-token", GenTokenHandler),
+    # (r"/project/list", DeleteProjectHandler),
 ]
