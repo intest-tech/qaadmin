@@ -5,6 +5,7 @@ import uuid
 
 
 class ListProjectHandler(BaseHandler):
+
     def get(self):
         project_list = get_project_list(self.mongo)
         return self.json_response(project_list)
