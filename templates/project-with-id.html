@@ -4,24 +4,19 @@
 </head>
 <body>
 <div>
-    <p>
         {% block content %}
-
-    <div id="app-proj">
-
-
-    </div>
+    <div id="result-list"></div>
+    <div id="graph"></div>
     {% endblock %}
-    </p>
 </div>
 
 {% block sctipt %}
 <script>
 
 $(function(){
-    $.get('/test-result?pro_id={{ id }}',function(res){
+    $.get('/api/test-result?pro_id={{ id }}',function(res){
         if(!res){return alert('异常')}
-        $('#app-proj').html( res.data.results.map(x=>`<a href="/test-result?id=${x._id.$oid}">${x._id.$oid}</a>`).join('<br />'))
+        $('#result-list').html(res.data.results.map(x=>`<a href="/test-result?id=${x._id.$oid}">${x.create_time}</a>`).join('<br />'))
 
     })
 });
