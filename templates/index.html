@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 <head>
-    {% block title %}A bolder title{% end %}
+    {% block title %}A bolder title{% endblock %}
 </head>
 <body>
 <style>
@@ -34,24 +34,20 @@
     width: 100%;
 }
 
-
-
-
-
 </style>
 <div>
     <p>
-        {% block item %}
+        {% block content %}
         {% if project_list %}
         {% for project in project_list %}
-        <a href="/project/list?pro_id={{ escape(project['name']) }}">{{ escape(project['name']) }}</a><br>
-        {% end %}
+        <a href="/project/list?pro_id={{ escape(project['name']) }}">{{ project['name'] }}</a><br>
+        {% endfor %}
         {% elif report %}
-        <a href="/data/list?pro_id=5a7fb0cd47de9d5cf3d13a44">{{ escape(report['name']) }}</a><br>
+        <a href="/data/list?pro_id=5a7fb0cd47de9d5cf3d13a44">{{ report['name'] }}</a><br>
         {% else %}
         <a class="init-project" href="/project/create"> 新建项目 </a>
-        {% end %}
-        {% end %}
+        {% endif %}
+        {% endblock %}
     </p>
 </div>
 

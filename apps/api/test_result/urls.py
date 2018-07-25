@@ -1,4 +1,4 @@
-from apps.test_result.handlers import *
+from .handlers import *
 
 url = [
     (r"/test-result", ListResultHandler),

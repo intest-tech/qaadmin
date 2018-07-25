@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+<head>
+    {% block title %}Project{% endblock %}
+</head>
+<body>
+<div>
+    <p>
+        {% block content %}
+
+    <div id="app-proj">
+
+
+    </div>
+    {% endblock %}
+    </p>
+</div>
+
+{% block sctipt %}
+<script>
+
+$(function(){
+    $.get('/api/project',function(res){
+        if(!res){return alert('异常')}
+        $('#app-proj').html( res.data.map(x=>`<a href="/test-result?pro_id=${x._id}">${x._id}</a>`).join('<br />'))
+
+    })
+});
+
+</script>
+{% endblock %}
+</body>
+</html>
+

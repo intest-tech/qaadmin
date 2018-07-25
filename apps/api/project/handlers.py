@@ -1,7 +1,8 @@
-from apps.basehandler import BaseHandler
-from apps.project.basehandler import ProjectHandler
-from libs.mongo import get_project_list
 import uuid
+
+from apps.api.project.basehandler import ProjectHandler
+from apps.basehandler import BaseHandler
+from libs.mongo import get_project_list
 
 
 class ListProjectHandler(BaseHandler):

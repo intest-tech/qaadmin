@@ -11,7 +11,7 @@ def conn_mongo():
 
 
 def get_project_list(db):
-    cur = db['Project'].find({'is_del': False}, {'_id': 1, 'token': 1})
+    cur = db['Project'].find({'is_del': False}, {'_id': 1})
     return list(cur)
 
 
