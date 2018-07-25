@@ -9,7 +9,7 @@ import re
 
 API_ADDR = 'http://localhost:5000'
 WEB_DOMAIN = 'http://localhost'
-API_TOKEN = '2a038c5282a340bbab958a668f1baf8e'
+API_TOKEN = '6ccdd8eb365242c29e1da2caea083461'
 
 
 def set_result(test_results: unittest.TestResult, **kwargs):
