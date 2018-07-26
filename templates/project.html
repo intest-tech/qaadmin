@@ -12,20 +12,20 @@
             <div class="boxed-group-header clearfix">
                 <div class="project-card-header">
                     <h2 class="project-card-name"><a :href="'/project/'+x.project">{{x.project}}</a></h2>
-                    <div class="project-card-measure project-card-quality-gate spacer-left">
+                    <div class="project-card-measure project-card-quality-gate spacer-left" v-if="'was_successful' in x">
                         <div class="project-card-measure-inner"><span class="level level-OK level-small">Passed</span>
                         </div>
                     </div>
                     <!--version-->
-                    <div class="project-card-header-right">
+                    <div class="project-card-header-right" v-if="'version' in x">
                         <div class="outline-badge spacer-left">{{x.version}}</div>
                     </div>
                 </div>
-                <div class="project-card-dates note text-right">
+                <div class="project-card-dates note text-right" v-if="'create_time' in x">
                     <span class="big-spacer-left">Last test: July 25, 2018, 4:13 PM</span>
                 </div>
             </div>
-            <div class="boxed-group-inner">
+            <div class="boxed-group-inner" v-if="'total' in x">
                 <div class="project-card-measures">
                     <div class="project-card-measure" data-key="passed_rating">
                         <div class="project-card-measure-inner">
