@@ -1,5 +1,5 @@
 from apps.basehandler import BaseHandler
-from libs.mongo import get_test_result_page, get_test_result
+from libs.mongo import get_test_result_page, get_test_result, get_latest_result_list
 from bson import json_util, ObjectId
 import bson.errors
 
@@ -26,6 +26,16 @@ class ListResultHandler(BaseHandler):
         result_data = json_util._json_convert(result_data)
         return self.json_response(result_data)
 
+class LatestResultHandler(BaseHandler):
+    """
+    列出所有项目的最新测试数据
+    """
+
+    def get(self):
+        result_data = get_latest_result_list(self.mongo)
+        result_data = json_util._json_convert(result_data)
+        return self.json_response(result_data)
+
 
 class UploadResultHandler(BaseHandler):
     def post(self, *args, **kwargs):
@@ -39,6 +49,7 @@ class UploadResultHandler(BaseHandler):
         new_result['project'] = result['_id']
         new_result = self.update_doc_info(new_result)
         insert_result = self.mongo.TestResult.insert_one(new_result)
+        self.mongo.Project.update({'_id': result['_id']}, {"$set": {"latest_test": insert_result.inserted_id}})
         return self.json_response({'inserted_id': str(insert_result.inserted_id)})
 
 

@@ -21,6 +21,25 @@ def get_test_result(db, id):
     result = db['TestResult'].find_one(find_condition, filter_condition)
     return result
 
+def get_latest_result_list(db) -> list:
+    """
+    获取project中最新的测试记录, 用于展示project列表
+    :param db: 
+    :return: 
+    """
+    filter_condition = {'is_del': 0, '_id': 0, 'details': 0, 'create_time': 0, 'run_time': 0}
+    latest_result_list = []
+    cur = db['Project'].find({'is_del': False}, {'_id': 1, 'latest_test': 1})
+    result = list(cur)
+    for item in result:
+        latest_test = item.get('latest_test')
+        if latest_test:
+            find_condition = {'_id': latest_test}
+            result = db['TestResult'].find_one(find_condition, filter_condition)
+            latest_result_list.append(result)
+        else:
+            latest_result_list.append({'project': item['_id']})
+    return latest_result_list
 
 def get_test_result_page(db, pro_id, page_index: int, page_size: int):
     find_condition = {'is_del': False, 'project': pro_id}

@@ -4,9 +4,13 @@
 </head>
 <body>
 <div>
-        {% block content %}
-    <div id="result-list"></div>
-    <div id="graph"></div>
+    {% block content %}
+    <div id="project-activity" class="page-limited">
+    <div id="project-activity-page">
+        <ul id="project-activity-list"></ul>
+    </div>
+    <div id="result-graph">这是折线图</div>
+    </div>
     {% endblock %}
 </div>
 
@@ -16,10 +20,11 @@
 $(function(){
     $.get('/api/test-result?pro_id={{ id }}',function(res){
         if(!res){return alert('异常')}
-        $('#result-list').html(res.data.results.map(x=>`<a href="/test-result?id=${x._id.$oid}">${x.create_time}</a>`).join('<br />'))
+        $('#project-activity-list').html(res.data.results.map(x=>`<li class="project-activity-test" href="/test-result?id=${x._id.$oid}">${x.create_time.$date}</li>`).join('<br />'))
 
     })
 });
+
 
 </script>
 {% endblock %}
