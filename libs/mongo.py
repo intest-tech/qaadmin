@@ -27,7 +27,7 @@ def get_latest_result_list(db) -> list:
     :param db: 
     :return: 
     """
-    filter_condition = {'is_del': 0, '_id': 0, 'details': 0, 'create_time': 0, 'run_time': 0}
+    filter_condition = {'is_del': 0, '_id': 0, 'details': 0, 'run_time': 0}
     latest_result_list = []
     cur = db['Project'].find({'is_del': False}, {'_id': 1, 'latest_test': 1})
     result = list(cur)

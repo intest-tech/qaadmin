@@ -13,7 +13,9 @@
                 <div class="project-card-header">
                     <h2 class="project-card-name"><a :href="'/project/'+x.project">{{x.project}}</a></h2>
                     <div class="project-card-measure project-card-quality-gate spacer-left" v-if="'was_successful' in x">
-                        <div class="project-card-measure-inner"><span class="level level-OK level-small">Passed</span>
+                        <div class="project-card-measure-inner">
+                            <span class="level level-OK level-small" v-if="x.was_successful">Passed</span>
+                            <span class="level level-ERROR level-small" v-else>Failed</span>
                         </div>
                     </div>
                     <!--version-->
