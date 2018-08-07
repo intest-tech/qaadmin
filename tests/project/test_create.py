@@ -1,5 +1,4 @@
 from tests.base_testcase import BaseTestCase
-from intest.utils.converter import json_loads
 
 
 class TestProjectCreate(BaseTestCase):
@@ -21,7 +20,7 @@ class TestProjectCreate(BaseTestCase):
             'detail': '123'
         }
         response = self.client.post('/project/create', data=req_data)
-        response_dict = json_loads(response.data)
+        response_dict = response.get_json()
         print(response_dict)
         self.assertEqual(response_dict['status'], 'fail', msg='请求状态异常')
         self.assertEqual(response_dict['message'], 'error project name', msg='错误信息不匹配')
@@ -33,7 +32,7 @@ class TestProjectCreate(BaseTestCase):
             'detail': '123'
         }
         response = self.client.post('/project/create', data=req_data)
-        response_dict = json_loads(response.data)
+        response_dict = response.get_json()
         print(response_dict)
         self.assertEqual(response_dict['status'], 'fail', msg='请求状态异常')
         self.assertEqual(response_dict['message'], 'project exist', msg='错误信息不匹配')
@@ -46,7 +45,7 @@ class TestProjectCreate(BaseTestCase):
             'detail': '123'
         }
         response = self.client.post('/project/create', data=req_data)
-        response_dict = json_loads(response.data)
+        response_dict = response.get_json()
         print(response_dict)
         self.assertEqual(response_dict['status'], 'success', msg='请求状态异常')
         self.assertEqual(response_dict['data']['inserted_id'], 'new_project', msg='返回值不匹配')
