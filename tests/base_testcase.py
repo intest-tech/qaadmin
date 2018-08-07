@@ -20,12 +20,10 @@ class BaseTestCase(TestCase):
 
     def setUp(self):
         super(BaseTestCase, self).setUp()
-        print(1)
         self._patcher = []
 
     def tearDown(self):
         super(BaseTestCase, self).tearDown()
-        print(2)
         for patcher in self._patcher:
             patcher.stop()
 
