@@ -10,7 +10,7 @@ flask-restful = "==0.3.6"
 
 [dev-packages]
 flask-testing = "*"
-#nose = "*"
+nose = "*"
 intest = { git = 'https://github.com/intest-tech/intest.git', ref = 'master'}
 
 [requires]
