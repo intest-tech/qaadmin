@@ -13,6 +13,9 @@ class ListProjectHandler(BaseHandler):
 
 
 class CreateProjectHandler(ProjectHandler):
+    def create_project(self, document):
+        return self.mongo.Project.insert_one(document).inserted_id
+
     # todo: create with token
     def post(self):
         project_name = self.get_formdata('name')
@@ -29,8 +32,8 @@ class CreateProjectHandler(ProjectHandler):
                 "detail": project_detail
             }
             new_project = self.update_doc_info(new_project)
-            result = self.mongo.Project.insert_one(new_project)
-            return self.json_response({'inserted_id': str(result.inserted_id)})
+            new_project_id = self.create_project(new_project)
+            return self.json_response({'inserted_id': str(new_project_id)})
 
 
 # todo: update project info

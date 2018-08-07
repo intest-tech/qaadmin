@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+verify_ssl = true
+name = "pypi-Tsinghua"
+
+[packages]
+pymongo = "==3.7.0"
+flask = "==1.0.2"
+flask-restful = "==0.3.6"
+
+[dev-packages]
+flask-testing = "*"
+#nose = "*"
+intest = { git = 'https://github.com/intest-tech/intest.git', ref = 'master'}
+
+[requires]
+python_version = "3.6"
