@@ -1,270 +1,152 @@
 {% extends "base.html" %}
+
 <head>
     {% block title %}Project{% endblock %}
 </head>
+
 <body>
-<div>
-    {% block content %}
-    <!--<div id="project-activity" class="page-limited">-->
-    <!--<div id="project-activity-page">-->
-    <!--<ul id="project-activity-list"></ul>-->
-    <!--</div>-->
-    <!--<div id="result-graph">这是折线图</div>-->
-    <!--</div>-->
-    {% raw %}
-    <div class="layout-page project-activity-page">
-        <div class="layout-page-side-outer project-activity-page-side-outer boxed-group">
-            <ul class="project-activity-versions-list boxed-group-inner" style="padding-top: 52px;">
-                <li>
-                    <div class="project-activity-version-badge first"><span class="badge">no</span></div>
-                    <ul class="project-activity-days-list">
-                        <li class="project-activity-day"
-                            :data-day="d.date" v-for="d in list">
-                            <div class="project-activity-date"><span>{{d.date}}</span></div>
-                            <ul class="project-activity-analyses-list">
-                                <li class="project-activity-analysis clearfix" :data-date="result.create_time.$date" role="listitem"
-                                    tabindex="0" v-for="result in d.results">
-                                    <div class="project-activity-time spacer-right">
-                                        <time class="text-middle" datetime="2018-07-25T08:13:42.000Z">
-                                            {{getTime(result.create_time.$date)}}
-                                        </time>
-                                    </div>
-                                    <div class="project-activity-events">
-                                        <div class="project-activity-event">
-                                            <div class="project-activity-event-inner">
-                                                <div class="project-activity-event-inner-icon little-spacer-right">
-                                                    <svg class="project-activity-event-icon margin-align VERSION" width="14" height="14" viewBox="0 0 16 16" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"><path d="M8 2 L14 8 L8 14 L2 8 L8 2 L14 8" style="fill: rgb(255, 255, 255); stroke: currentcolor; stroke-width: 2px;"></path></svg>
+    <div>
+        {% block content %}
+        <!--<div id="project-activity" class="page-limited">-->
+        <!--<div id="project-activity-page">-->
+        <!--<ul id="project-activity-list"></ul>-->
+        <!--</div>-->
+        <!--<div id="result-graph">这是折线图</div>-->
+        <!--</div>-->
+        {% raw %}
+        <div class="layout-page project-activity-page">
+            <div class="layout-page-side-outer project-activity-page-side-outer boxed-group">
+                <ul class="project-activity-versions-list boxed-group-inner" style="padding-top: 52px;">
+                    <li>
+                        <div class="project-activity-version-badge first">
+                            <span class="badge">no</span>
+                        </div>
+                        <ul class="project-activity-days-list">
+                            <li class="project-activity-day" :data-day="d.date" v-for="d in list">
+                                <div class="project-activity-date">
+                                    <span>{{d.date}}</span>
+                                </div>
+                                <ul class="project-activity-analyses-list">
+                                    <li class="project-activity-analysis clearfix" :data-date="result.create_time.$date" role="listitem" tabindex="0" v-for="result in d.results">
+                                        <div class="project-activity-time spacer-right">
+                                            <time class="text-middle" datetime="2018-07-25T08:13:42.000Z">
+                                                {{getTime(result.create_time.$date)}}
+                                            </time>
+                                        </div>
+                                        <div class="project-activity-events">
+                                            <div class="project-activity-event">
+                                                <div class="project-activity-event-inner">
+                                                    <div class="project-activity-event-inner-icon little-spacer-right">
+                                                        <svg class="project-activity-event-icon margin-align VERSION" width="14" height="14" viewBox="0 0 16 16" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                            xml:space="preserve">
+                                                            <path d="M8 2 L14 8 L8 14 L2 8 L8 2 L14 8" style="fill: rgb(255, 255, 255); stroke: currentcolor; stroke-width: 2px;"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <span class="project-activity-event-inner-text">
+                                                        <span class="note">Version:</span>
+                                                        <strong>{{result.version}}</strong>
+                                                    </span>
                                                 </div>
-                                                <span class="project-activity-event-inner-text"><span class="note">Version:</span> <strong>{{result.version}}</strong></span>
-                                            </div>
-                                            <div class="project-activity-event-actions spacer-left">
-                                                <button class="button js-change-event button-small button-icon"
-                                                        type="button" style="color: rgb(35, 106, 151);">
-                                                    <svg width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"><path d="M4.875 12.986l.721-.72-1.861-1.862-.721.72v.848h1.014v1.014h.847zm4.143-7.35c0-.117-.058-.175-.174-.175a.183.183 0 0 0-.135.056L4.416 9.81a.183.183 0 0 0-.056.135c0 .116.058.174.175.174a.183.183 0 0 0 .134-.056L8.962 5.77a.183.183 0 0 0 .056-.134zM8.59 4.115l3.295 3.295L5.295 14H2v-3.295l6.59-6.59zm5.41.76a.97.97 0 0 1-.293.713l-1.315 1.315-3.295-3.295L10.412 2.3c.19-.2.428-.301.713-.301.28 0 .52.1.72.301l1.862 1.853c.195.206.293.447.293.721z" style="fill: currentcolor;"></path></svg>
-                                                </button>
+                                                <div class="project-activity-event-actions spacer-left">
+                                                    <button class="button js-change-event button-small button-icon" type="button" style="color: rgb(35, 106, 151);">
+                                                        <svg width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+                                                            <path d="M4.875 12.986l.721-.72-1.861-1.862-.721.72v.848h1.014v1.014h.847zm4.143-7.35c0-.117-.058-.175-.174-.175a.183.183 0 0 0-.135.056L4.416 9.81a.183.183 0 0 0-.056.135c0 .116.058.174.175.174a.183.183 0 0 0 .134-.056L8.962 5.77a.183.183 0 0 0 .056-.134zM8.59 4.115l3.295 3.295L5.295 14H2v-3.295l6.59-6.59zm5.41.76a.97.97 0 0 1-.293.713l-1.315 1.315-3.295-3.295L10.412 2.3c.19-.2.428-.301.713-.301.28 0 .52.1.72.301l1.862 1.853c.195.206.293.447.293.721z"
+                                                                style="fill: currentcolor;"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="project-activity-layout-page-main">
+                <div class="project-activity-layout-page-main-inner boxed-group boxed-group-inner">
+                    <header class="page-header">
+                        <div class="Select pull-left input-medium Select--single has-value">
+                            <div class="Select-control">
+                                <span class="Select-multi-value-wrapper" id="react-select-17--value">
+                                    <div class="Select-value">
+                                        <span class="Select-value-label" role="option" aria-selected="true" id="react-select-17--value-item">Issues</span>
                                     </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div class="project-activity-layout-page-main">
-            <div class="project-activity-layout-page-main-inner boxed-group boxed-group-inner">
-                <header class="page-header">
-                    <div class="Select pull-left input-medium Select--single has-value">
-                        <div class="Select-control"><span class="Select-multi-value-wrapper"
-                                                          id="react-select-17--value"><div class="Select-value"><span
-                                class="Select-value-label" role="option" aria-selected="true"
-                                id="react-select-17--value-item">Issues</span></div><div role="combobox"
-                                                                                         aria-expanded="false"
-                                                                                         aria-owns=""
-                                                                                         aria-activedescendant="react-select-17--value"
-                                                                                         class="Select-input"
-                                                                                         tabindex="0"
-                                                                                         aria-readonly="false"
-                                                                                         style="border: 0px; width: 1px; display: inline-block;"></div></span><span
-                                class="Select-arrow-zone"><span class="Select-arrow"></span></span></div>
-                    </div>
-                </header>
-                <div class="project-activity-graphs">
-                    <div class="project-activity-graph-container">
-                        <div class="project-activity-graph-legends"><span class="big-spacer-left big-spacer-right"><svg class="text-middle spacer-right line-chart-legend line-chart-legend-0" width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"><path d="M14.325 7.143v1.714q0 0.357-0.25 0.607t-0.607 0.25h-10.857q-0.357 0-0.607-0.25t-0.25-0.607v-1.714q0-0.357 0.25-0.607t0.607-0.25h10.857q0.357 0 0.607 0.25t0.25 0.607z" style="fill: currentcolor;"></path></svg><span
-                                class="text-middle">Bugs</span></span><span class="big-spacer-left big-spacer-right"><svg class="text-middle spacer-right line-chart-legend line-chart-legend-1" width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"><path d="M14.325 7.143v1.714q0 0.357-0.25 0.607t-0.607 0.25h-10.857q-0.357 0-0.607-0.25t-0.25-0.607v-1.714q0-0.357 0.25-0.607t0.607-0.25h10.857q0.357 0 0.607 0.25t0.25 0.607z" style="fill: currentcolor;"></path></svg><span
-                                class="text-middle">Code Smells</span></span><span
-                                class="big-spacer-left big-spacer-right"><svg class="text-middle spacer-right line-chart-legend line-chart-legend-2" width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"><path d="M14.325 7.143v1.714q0 0.357-0.25 0.607t-0.607 0.25h-10.857q-0.357 0-0.607-0.25t-0.25-0.607v-1.714q0-0.357 0.25-0.607t0.607-0.25h10.857q0.357 0 0.607 0.25t0.25 0.607z" style="fill: currentcolor;"></path></svg><span
-                                class="text-middle">Vulnerabilities</span></span></div>
-                        <div class="project-activity-graph" style="position: relative;">
-                            <div style="overflow: visible; height: 0px; width: 0px;">
-                                <div>
-                                    <svg class="line-chart chart-zoomed" width="640" height="451">
-                                        <defs>
-                                            <clipPath id="chart-clip">
-                                                <rect width="570" height="421" transform="translate(0,-5)"></rect>
-                                            </clipPath>
-                                        </defs>
-                                        <g transform="translate(60, 10)">
-                                            <rect class="leak-chart-rect" x="0" y="0" width="570" height="411"
-                                                  fill="#fbf3d5"></rect>
-                                            <g>
-                                                <g>
-                                                    <text class="line-chart-tick line-chart-tick-x" dx="-1em" dy="0.3em"
-                                                          text-anchor="end" x="0" y="411">0
-                                                    </text>
-                                                    <line class="line-chart-grid" x1="0" x2="570" y1="411"
-                                                          y2="411"></line>
-                                                </g>
-                                                <g>
-                                                    <text class="line-chart-tick line-chart-tick-x" dx="-1em" dy="0.3em"
-                                                          text-anchor="end" x="0" y="308.25">1k
-                                                    </text>
-                                                    <line class="line-chart-grid" x1="0" x2="570" y1="308.25"
-                                                          y2="308.25"></line>
-                                                </g>
-                                                <g>
-                                                    <text class="line-chart-tick line-chart-tick-x" dx="-1em" dy="0.3em"
-                                                          text-anchor="end" x="0" y="205.5">2k
-                                                    </text>
-                                                    <line class="line-chart-grid" x1="0" x2="570" y1="205.5"
-                                                          y2="205.5"></line>
-                                                </g>
-                                                <g>
-                                                    <text class="line-chart-tick line-chart-tick-x" dx="-1em" dy="0.3em"
-                                                          text-anchor="end" x="0" y="102.75">3k
-                                                    </text>
-                                                    <line class="line-chart-grid" x1="0" x2="570" y1="102.75"
-                                                          y2="102.75"></line>
-                                                </g>
-                                                <g>
-                                                    <text class="line-chart-tick line-chart-tick-x" dx="-1em" dy="0.3em"
-                                                          text-anchor="end" x="0" y="0">4k
-                                                    </text>
-                                                    <line class="line-chart-grid" x1="0" x2="570" y1="0" y2="0"></line>
-                                                </g>
-                                            </g>
-                                            <g>
-                                                <text class="line-chart-tick" x="97.61426649119434" y="411" dy="1.5em">
-                                                    Fri 13
-                                                </text>
-                                                <text class="line-chart-tick" x="178.52869416061634" y="411" dy="1.5em">
-                                                    Jul 15
-                                                </text>
-                                                <text class="line-chart-tick" x="259.4431218300383" y="411" dy="1.5em">
-                                                    Tue 17
-                                                </text>
-                                                <text class="line-chart-tick" x="340.3575494994603" y="411" dy="1.5em">
-                                                    Thu 19
-                                                </text>
-                                                <text class="line-chart-tick" x="421.27197716888224" y="411" dy="1.5em">
-                                                    Sat 21
-                                                </text>
-                                                <text class="line-chart-tick" x="502.18640483830427" y="411" dy="1.5em">
-                                                    Mon 23
-                                                </text>
-                                            </g>
-                                            <g>
-                                                <path class="line-chart-path line-chart-path-0"
-                                                      d="M0,410.178L46.918193423731154,410.178L49.06701465391042,411L49.2922452077819,411L49.563364731049234,411L49.781571463074414,409.1505L73.21350939713429,411L79.7789098042695,411L210.3578452393275,411L280.7505877829861,411L319.49024304888087,411L365.5702603989531,411L492.9875394935948,411L533.7875158344054,411L561.1794845254115,411L570,411"></path>
-                                                <path class="line-chart-path line-chart-path-1"
-                                                      d="M0,278.658L46.918193423731154,1.027499999999975L49.06701465391042,3.5962499999999977L49.2922452077819,26.509500000000003L49.563364731049234,80.04224999999997L49.781571463074414,399.6975L73.21350939713429,400.21125L79.7789098042695,405.4515L210.3578452393275,405.246L280.7505877829861,405.246L319.49024304888087,405.0405L365.5702603989531,405.0405L492.9875394935948,405.0405L533.7875158344054,404.93775L561.1794845254115,404.93775L570,404.835"></path>
-                                                <path class="line-chart-path line-chart-path-2"
-                                                      d="M0,411L46.918193423731154,411L49.06701465391042,411L49.2922452077819,411L49.563364731049234,411L49.781571463074414,410.07525L73.21350939713429,411L79.7789098042695,411L210.3578452393275,411L280.7505877829861,411L319.49024304888087,411L365.5702603989531,411L492.9875394935948,411L533.7875158344054,411L561.1794845254115,411L570,411"></path>
-                                            </g>
-                                            <rect class="chart-mouse-events-overlay" width="570" height="411"></rect>
-                                        </g>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="resize-triggers">
-                                <div class="expand-trigger">
-                                    <div style="width: 641px; height: 452px;"></div>
-                                </div>
-                                <div class="contract-trigger"></div>
+                                    <div role="combobox" aria-expanded="false" aria-owns="" aria-activedescendant="react-select-17--value" class="Select-input"
+                                        tabindex="0" aria-readonly="false" style="border: 0px; width: 1px; display: inline-block;"></div>
+                                </span>
+                                <span class="Select-arrow-zone">
+                                    <span class="Select-arrow"></span>
+                                </span>
                             </div>
                         </div>
+                    </header>
+                    <div class="project-activity-graphs" style="height: 600px;">
+
                     </div>
-                </div>
-                <div class="project-activity-graph-zoom" style="position: relative;">
-                    <div style="overflow: visible; width: 0px;">
-                        <svg class="line-chart " width="640" height="64">
-                            <g transform="translate(60, 2)">
-                                <rect x="0" y="0" width="570" height="46" fill="#fbf3d5"></rect>
-                                <line class="line-chart-grid" x1="0" x2="570" y1="46" y2="46"></line>
-                                <g>
-                                    <text class="chart-zoom-tick" x="97.61426649119434" y="46" dy="1.3em">Fri 13</text>
-                                    <text class="chart-zoom-tick" x="178.52869416061634" y="46" dy="1.3em">Jul 15</text>
-                                    <text class="chart-zoom-tick" x="259.4431218300383" y="46" dy="1.3em">Tue 17</text>
-                                    <text class="chart-zoom-tick" x="340.3575494994603" y="46" dy="1.3em">Thu 19</text>
-                                    <text class="chart-zoom-tick" x="421.27197716888224" y="46" dy="1.3em">Sat 21</text>
-                                    <text class="chart-zoom-tick" x="502.18640483830427" y="46" dy="1.3em">Mon 23</text>
-                                </g>
-                                <g>
-                                    <path class="line-chart-path line-chart-path-0"
-                                          d="M0,45.908L46.918193423731154,45.908L49.06701465391042,46L49.2922452077819,46L49.563364731049234,46L49.781571463074414,45.793L73.21350939713429,46L79.7789098042695,46L210.3578452393275,46L280.7505877829861,46L319.49024304888087,46L365.5702603989531,46L492.9875394935948,46L533.7875158344054,46L561.1794845254115,46L570,46"></path>
-                                    <path class="line-chart-path line-chart-path-1"
-                                          d="M0,31.188L46.918193423731154,0.11499999999999488L49.06701465391042,0.4025000000000034L49.2922452077819,2.9669999999999987L49.563364731049234,8.9585L49.781571463074414,44.735L73.21350939713429,44.7925L79.7789098042695,45.379L210.3578452393275,45.356L280.7505877829861,45.356L319.49024304888087,45.333L365.5702603989531,45.333L492.9875394935948,45.333L533.7875158344054,45.3215L561.1794845254115,45.3215L570,45.31"></path>
-                                    <path class="line-chart-path line-chart-path-2"
-                                          d="M0,46L46.918193423731154,46L49.06701465391042,46L49.2922452077819,46L49.563364731049234,46L49.781571463074414,45.8965L73.21350939713429,46L79.7789098042695,46L210.3578452393275,46L280.7505877829861,46L319.49024304888087,46L365.5702603989531,46L492.9875394935948,46L533.7875158344054,46L561.1794845254115,46L570,46"></path>
-                                </g>
-                                <g class="chart-zoom">
-                                    <rect class="zoom-overlay" x="0" y="0" height="46" width="570"
-                                          style="touch-action: none;"></rect>
-                                    <rect class="zoom-selection react-draggable" x="0" y="0" height="47" width="570"
-                                          transform="translate(0,0)" style="touch-action: none;"></rect>
-                                    <rect class="zoom-selection-handle react-draggable" x="-3" y="0" height="47"
-                                          width="6" transform="translate(0,0)" style="touch-action: none;"></rect>
-                                    <rect class="zoom-selection-handle react-draggable" x="-3" y="0" height="47"
-                                          width="6" transform="translate(570,0)" style="touch-action: none;"></rect>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
-                    <div class="resize-triggers">
-                        <div class="expand-trigger">
-                            <div style="width: 641px; height: 65px;"></div>
-                        </div>
-                        <div class="contract-trigger"></div>
-                    </div>
+
                 </div>
             </div>
         </div>
+
+        {% endraw %} {% endblock %}
     </div>
 
-    {% endraw %}
-    {% endblock %}
-</div>
+    {% block sctipt %}
+    <script>
 
-{% block sctipt %}
-<script>
-
-$(function(){
-    $.get('/api/test-result?pro_id={{ id }}',function(res){
-        if(!res){return alert('异常')}
-        var datetime = new Date(res.data.results[0].create_time.$date);
-        var max_date = datetime.getFullYear().toString() + "-" + (datetime.getMonth()+1).toString() + "-" + datetime.getDate().toString();
-        var data_group = {
-            results: [res.data.results[0]],
-            date: max_date
-        }
-        for(var i=1, len=res.data.results.length; i < len; i++){
-            var item = res.data.results[i];
-            var datetime = new Date(item.create_time.$date);
-            var date = datetime.getFullYear().toString() + "-" + (datetime.getMonth()+1).toString() + "-" + datetime.getDate().toString();
-            if(date < data_group['date']){
-                app.list.push(data_group);
+        $(function () {
+            $.get('/api/test-result?pro_id={{ id }}', function (res) {
+                if (!res) { return alert('异常') }
+                var RawData = JSON.parse(JSON.stringify(res));
+                var datetime = new Date(res.data.results[0].create_time.$date);
+                var max_date = datetime.getFullYear().toString() + "-" + (datetime.getMonth() + 1).toString() + "-" + datetime.getDate().toString();
                 var data_group = {
-                    results: [item],
-                    date: date
+                    results: [res.data.results[0]],
+                    date: max_date
                 }
-                if(i == len-1){
-                    app.list.push(data_group);
-                    break;
+                for (var i = 1, len = res.data.results.length; i < len; i++) {
+                    var item = res.data.results[i];
+                    var datetime = new Date(item.create_time.$date);
+                    var date = datetime.getFullYear().toString() + "-" + (datetime.getMonth() + 1).toString() + "-" + datetime.getDate().toString();
+                    if (date < data_group['date']) {
+                        app.list.push(data_group);
+                        var data_group = {
+                            results: [item],
+                            date: date
+                        }
+                        if (i == len - 1) {
+                            app.list.push(data_group);
+                            break;
+                        }
+                        continue;
+                    }
+                    data_group.results.push(item);
                 }
-                continue;
+
+                showChart(document.querySelector('.project-activity-graphs'),
+                    [['success', '成功'], ['failures', '失败'], ['errors', '错误']]
+                        .reduce((a, b) => (a[b[1]] = RawData.data.results.map(x => x[b[0]]), a), {}))
+
+            })
+        });
+        var app = new Vue({
+            data: {
+                list: [],
+                //dates:[]
             }
-            data_group.results.push(item);
+        });
+        app.$mount('.project-activity-page')
+
+        function getTime(ts) {
+            var date = new Date(ts);
+            var h = date.getHours();
+            var m = date.getMinutes();
+            return (h.toString() + ":" + m.toString());
         }
-    })
-});
-var app=new Vue({
-data:{
-    list:[],
-    //dates:[]
-}});
-app.$mount('.project-activity-page')
 
-function getTime(ts){
-    var date = new Date(ts);
-    var h = date.getHours();
-    var m = date.getMinutes();
-    return (h.toString() + ":" + m.toString());
-}
-
-</script>
-{% endblock %}
+    </script> {% endblock %}
 </body>
-</html>
 
+</html>
