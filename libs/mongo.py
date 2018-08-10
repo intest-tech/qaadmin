@@ -43,7 +43,16 @@ def get_latest_result_list(db) -> list:
 
 def get_test_result_page(db, pro_id, page_index: int, page_size: int):
     find_condition = {'is_del': False, 'project': pro_id}
-    filter_condition = {'_id': 1, 'was_successful': 1, 'version': 1, 'create_time': 1}
+    filter_condition = {
+        '_id': 1,
+        'was_successful': 1,
+        'version': 1,
+        'create_time': 1,
+        'failures': 1,
+        'errors': 1,
+        'success': 1,
+        'run_time': 1
+    }
     count = db['TestResult'].count_documents(find_condition)
     # todo: 使用查询过滤后再分页, 提高性能
     # last_id = kwargs.get('last_id', '')
