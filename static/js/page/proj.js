@@ -3,6 +3,7 @@ function showChart(el, data) {
         title: {
             text: '折线图堆叠'
         },
+        color: ['#61a0a8', '#d48265', '#c23531'],
         tooltip: {
             trigger: 'axis'
         },
