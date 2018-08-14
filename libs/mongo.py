@@ -51,7 +51,9 @@ def get_test_result_page(db, pro_id, page_index: int, page_size: int):
         'failures': 1,
         'errors': 1,
         'success': 1,
-        'run_time': 1
+        'run_time': 1,
+        'details': 1,
+        'tag': 1
     }
     count = db['TestResult'].count_documents(find_condition)
     # todo: 使用查询过滤后再分页, 提高性能
