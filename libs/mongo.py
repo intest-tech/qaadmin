@@ -15,11 +15,17 @@ def get_project_list(db):
     return list(cur)
 
 
+def get_project_info(db, project):
+    result = db['Project'].find_one({'_id': project})
+    return result
+
+
 def get_test_result(db, id):
     find_condition = {'_id': ObjectId(id), 'is_del': False}
     filter_condition = {'is_del': 0, '_id': 0}
     result = db['TestResult'].find_one(find_condition, filter_condition)
     return result
+
 
 def get_latest_result_list(db) -> list:
     """
@@ -40,6 +46,7 @@ def get_latest_result_list(db) -> list:
         else:
             latest_result_list.append({'project': item['_id']})
     return latest_result_list
+
 
 def get_test_result_page(db, pro_id, page_index: int, page_size: int):
     find_condition = {'is_del': False, 'project': pro_id}
@@ -78,4 +85,4 @@ def get_test_result_page(db, pro_id, page_index: int, page_size: int):
 qa_db = conn_mongo()
 
 if __name__ == '__main__':
-    get_test_result_page(qa_db, '124565', 1)
+    get_project_info(qa_db, 'gt-server')

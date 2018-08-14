@@ -2,7 +2,8 @@ import uuid
 
 from apps.api.project.basehandler import ProjectHandler
 from apps.basehandler import BaseHandler
-from libs.mongo import get_project_list
+from libs.mongo import get_project_list, get_project_info
+from bson import json_util
 
 
 class ListProjectHandler(BaseHandler):
@@ -75,3 +76,17 @@ class GenTokenHandler(ProjectHandler):
                                                    {'$set': {'token': new_token}})
             print(result)
             return self.json_response({'token': new_token})
+
+class ProjectInfoHandler(ProjectHandler):
+    def get(self):
+        project = self.get_argument('id')
+        if not project:
+            return self.json_response(status='fail', error_msg='error project id')
+        else:
+            project_info = self.project_exist(project)
+            if not project_info:
+                return self.json_response(status='fail', error_msg='project not exist')
+            result = get_project_info(self.mongo, project)
+            print(result)
+            result = json_util._json_convert(result)
+            return self.json_response(result)
