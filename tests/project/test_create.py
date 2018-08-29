@@ -1,5 +1,4 @@
 from tests.base_testcase import BaseTestCase
-from unittest import mock
 
 
 class TestProjectCreate(BaseTestCase):

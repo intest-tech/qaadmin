@@ -1,6 +1,5 @@
 import uuid
 from apps.basehandler import BaseHandler
-# from libs.mongo import get_project_list, get_project_info
 from bson import json_util
 
 
