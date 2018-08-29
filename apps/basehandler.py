@@ -4,6 +4,8 @@ from flask import make_response, request
 from flask_restful import Resource
 import json
 import datetime
+
+
 # import time
 
 
@@ -30,6 +32,16 @@ class BaseHandler(Resource):
     def mongo(self):
         from libs.mongo import qa_db
         return qa_db
+
+    @property
+    def Project(self):
+        from libs.mongo import Project
+        return Project()
+
+    @property
+    def Result(self):
+        from libs.mongo import Result
+        return Result()
 
     def get_argument(self, args, default=None):
         """

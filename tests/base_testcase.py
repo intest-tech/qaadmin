@@ -38,3 +38,9 @@ class BaseTestCase(TestCase):
         self._patcher.append(patcher)
         mock_obj = patcher.start()
         mock_obj.return_value = result
+
+    def mock_project_exist(self, result=True):
+        patcher = mock.patch('apps.basehandler.BaseHandler.Project')
+        self._patcher.append(patcher)
+        mock_obj = patcher.start()
+        mock_obj.exist.return_value = result

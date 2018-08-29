@@ -1,12 +1,8 @@
 from tests.base_testcase import BaseTestCase
+from unittest import mock
 
 
 class TestProjectCreate(BaseTestCase):
-    def mock_project_exist(self, result=True):
-        self._patch_method(
-            'apps.api.project.handlers.CreateProjectHandler.project_exist',
-            result)
-
     def mock_create_project(self):
         self._patch_method(
             'apps.api.project.handlers.CreateProjectHandler.create_project',

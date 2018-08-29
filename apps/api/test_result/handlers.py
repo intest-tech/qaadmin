@@ -1,5 +1,5 @@
 from apps.basehandler import BaseHandler
-from libs.mongo import get_test_result_page, get_test_result, get_latest_result_list
+# from libs.mongo import get_test_result_page, get_test_result, get_latest_result_list
 from bson import json_util, ObjectId
 import bson.errors
 
@@ -15,16 +15,14 @@ class ListResultHandler(BaseHandler):
         page_index = int(self.get_argument('p', 1))
         page_size = int(self.get_argument('ps', 30))
         if result_id:
-            result_data = get_test_result(self.mongo, result_id)
+            result_data = self.Result(result_id)
         elif not project_id:
             return self.json_response(status='fail', error_msg='id required')
         else:
-            result_data = get_test_result_page(self.mongo,
-                                               project_id,
-                                               page_index,
-                                               page_size)
+            result_data = self.Result.get_page(project_id, page_index, page_size)
         result_data = json_util._json_convert(result_data)
         return self.json_response(result_data)
+
 
 class LatestResultHandler(BaseHandler):
     """
@@ -32,7 +30,7 @@ class LatestResultHandler(BaseHandler):
     """
 
     def get(self):
-        result_data = get_latest_result_list(self.mongo)
+        result_data = self.Result.list_detail()
         result_data = json_util._json_convert(result_data)
         return self.json_response(result_data)
 
