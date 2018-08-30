@@ -5,89 +5,91 @@
 </head>
 
 <body>
-    <div>
-        {% block content %}
-        <!--<div id="project-activity" class="page-limited">-->
-        <!--<div id="project-activity-page">-->
-        <!--<ul id="project-activity-list"></ul>-->
-        <!--</div>-->
-        <!--<div id="result-graph">这是折线图</div>-->
-        <!--</div>-->
-        {% raw %}
-        <div class="layout-page project-activity-page">
-            <div class="layout-page-side-outer project-activity-page-side-outer boxed-group">
-                <ul class="project-activity-versions-list boxed-group-inner" style="padding-top: 52px;">
-                    <li>
-                        <div class="project-activity-version-badge first">
-                            <span class="badge">no</span>
-                        </div>
-                        <ul class="project-activity-days-list">
-                            <li class="project-activity-day" :data-day="d.date" v-for="d in list">
-                                <div class="project-activity-date">
-                                    <span>{{d.date}}</span>
-                                </div>
-                                <ul class="project-activity-analyses-list">
-                                    <li class="project-activity-analysis clearfix" :data-date="result.create_time.$date" role="listitem" tabindex="0" v-for="result in d.results">
-                                        <div class="project-activity-time spacer-right">
-                                            <time class="text-middle" datetime="2018-07-25T08:13:42.000Z">
-                                                {{getTime(result.create_time.$date)}}
-                                            </time>
-                                        </div>
-                                        <div class="project-activity-events">
-                                            <div class="project-activity-event">
-                                                <div class="project-activity-event-inner">
-                                                    <div class="project-activity-event-inner-icon little-spacer-right">
-                                                        <svg class="project-activity-event-icon margin-align VERSION" width="14" height="14" viewBox="0 0 16 16" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+<div>
+    {% block content %}
+    {% raw %}
+    <div class="layout-page project-activity-page">
+        <div class="layout-page-side-outer project-activity-page-side-outer boxed-group">
+            <ul class="project-activity-versions-list boxed-group-inner" style="padding-top: 52px;">
+                <li>
+                    <div class="project-activity-version-badge first">
+                        <span class="badge">no</span>
+                        <select v-model="tag" @change="changeTag">
+                            <option v-for="x in tags" :value="x">{{x||'-- 全部 --'}}</option>
+                        </select>
+                    </div>
+
+                    <ul class="project-activity-days-list">
+                        <li class="project-activity-day" :data-day="d.date" v-for="d in list">
+                            <div class="project-activity-date">
+                                <span>{{d.date}}</span>
+                            </div>
+                            <ul class="project-activity-analyses-list">
+                                <li class="project-activity-analysis clearfix" :data-date="result.create_time.$date"
+                                    role="listitem" tabindex="0" v-for="result in d.results">
+                                    <div class="project-activity-time spacer-right">
+                                        <time class="text-middle" datetime="2018-07-25T08:13:42.000Z">
+                                            {{getTime(result.create_time.$date)}}
+                                        </time>
+                                    </div>
+                                    <div class="project-activity-events">
+                                        <div class="project-activity-event">
+                                            <div class="project-activity-event-inner">
+                                                <div class="project-activity-event-inner-icon little-spacer-right">
+                                                    <svg class="project-activity-event-icon margin-align VERSION" width="14" height="14" viewBox="0 0 16 16" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                                                             xml:space="preserve">
                                                             <path d="M8 2 L14 8 L8 14 L2 8 L8 2 L14 8" style="fill: rgb(255, 255, 255); stroke: currentcolor; stroke-width: 2px;"></path>
                                                         </svg>
-                                                    </div>
-                                                    <span class="project-activity-event-inner-text">
+                                                </div>
+                                                <span class="project-activity-event-inner-text">
                                                         <span class="note">Version:</span>
                                                         <strong>{{result.version}}</strong>
                                                     </span>
-                                                </div>
-                                                <div class="project-activity-event-actions spacer-left">
-                                                    <button class="button js-change-event button-small button-icon" type="button" style="color: rgb(35, 106, 151);">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+                                            </div>
+                                            <div class="project-activity-event-actions spacer-left">
+                                                <button class="button js-change-event button-small button-icon"
+                                                        type="button" style="color: rgb(35, 106, 151);">
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
                                                             <path d="M4.875 12.986l.721-.72-1.861-1.862-.721.72v.848h1.014v1.014h.847zm4.143-7.35c0-.117-.058-.175-.174-.175a.183.183 0 0 0-.135.056L4.416 9.81a.183.183 0 0 0-.056.135c0 .116.058.174.175.174a.183.183 0 0 0 .134-.056L8.962 5.77a.183.183 0 0 0 .056-.134zM8.59 4.115l3.295 3.295L5.295 14H2v-3.295l6.59-6.59zm5.41.76a.97.97 0 0 1-.293.713l-1.315 1.315-3.295-3.295L10.412 2.3c.19-.2.428-.301.713-.301.28 0 .52.1.72.301l1.862 1.853c.195.206.293.447.293.721z"
                                                                 style="fill: currentcolor;"></path>
                                                         </svg>
-                                                    </button>
-                                                </div>
+                                                </button>
                                             </div>
                                         </div>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="project-activity-layout-page-main">
-                <div class="project-activity-layout-page-main-inner boxed-group boxed-group-inner">
-                    <header class="page-header">
-                        <div class="Select pull-left input-medium has-value">
-                            <div>
-                                <select v-model="tag" @change="changeTag">
-                                    <option v-for="x in tags" :value="x">{{x||'-- 全部 --'}}</option>
-                                </select>
-                            </div>
-                    </header>
-                    <div class="project-activity-graphs" style="height: 600px;">
-
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="project-activity-layout-page-main">
+            <div class="project-activity-layout-page-main-inner boxed-group boxed-group-inner">
+                <header class="page-header">
+                    <div class="Select pull-left input-medium has-value">
                     </div>
-                    </div>
+                </header>
+                <div class="project-activity-graphs" style="height: 600px;">
 
                 </div>
             </div>
+
         </div>
+        <div class="project-activity-layout-page-main-inner boxed-group">
 
-        {% endraw %} {% endblock %}
+            <!--<div class="">-->
+                <!--test-->
+            <!--</div>-->
+        </div>
     </div>
+</div>
 
-    {% block sctipt %}
-    <script>
+{% endraw %} {% endblock %}
+</div>
+
+{% block sctipt %}
+<script>
         var app = new Vue({
             data: {
                 pro_id: '{{ id }}',
@@ -160,7 +162,8 @@
             return (h.toString() + ":" + m.toString());
         }
 
-    </script> {% endblock %}
+</script>
+{% endblock %}
 </body>
 
 </html>
