@@ -7,4 +7,5 @@ url = [
     # (r"/project/list", UpdateProjectHandler),
     ("/project/delete", DeleteProjectHandler),
     ("/project/gen-token", GenTokenHandler),
+    ("/api/project/get-tags", ProjectTagsHandler),
 ]

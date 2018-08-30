@@ -5,7 +5,7 @@ import bson.errors
 
 class ListResultHandler(BaseHandler):
     """
-    列出某项目下的所有测试数据
+    列出某项目下的所有测试数据, 可选tag
     """
 
     def get(self):
@@ -13,12 +13,13 @@ class ListResultHandler(BaseHandler):
         result_id = self.get_argument('id', '')
         page_index = int(self.get_argument('p', 1))
         page_size = int(self.get_argument('ps', 30))
+        tag = self.get_argument('tag', None)
         if result_id:
             result_data = self.Result(result_id)
         elif not project_id:
             return self.json_response(status='fail', error_msg='id required')
         else:
-            result_data = self.Result.get_page(project_id, page_index, page_size)
+            result_data = self.Result.get_page(project_id, tag, page_index, page_size)
         result_data = json_util._json_convert(result_data)
         return self.json_response(result_data)
 
@@ -35,6 +36,9 @@ class LatestResultHandler(BaseHandler):
 
 
 class UploadResultHandler(BaseHandler):
+    """
+    上传测试数据
+    """
     def post(self, *args, **kwargs):
         token = self.get_argument('token')
         result = self.mongo.Project.find_one({'token': token})
