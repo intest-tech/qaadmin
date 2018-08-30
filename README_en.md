@@ -18,7 +18,7 @@ pipenv install
 
 2. Run server:
 ```
-python index.py
+python manager.py runserver
 ```
 
 ## Testing
