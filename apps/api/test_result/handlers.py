@@ -15,7 +15,7 @@ class ListResultHandler(BaseHandler):
         page_size = int(self.get_argument('ps', 30))
         tag = self.get_argument('tag', None)
         if result_id:
-            result_data = self.Result(result_id)
+            result_data = self.Result.get(result_id)
         elif not project_id:
             return self.json_response(status='fail', error_msg='id required')
         else:
@@ -39,6 +39,7 @@ class UploadResultHandler(BaseHandler):
     """
     上传测试数据
     """
+
     def post(self, *args, **kwargs):
         token = self.get_argument('token')
         result = self.mongo.Project.find_one({'token': token})
