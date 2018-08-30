@@ -21,6 +21,7 @@ def set_result(test_results: unittest.TestResult, **kwargs):
 
     run_time = kwargs.get('run_time', 0)
     version = kwargs.get('version', '0.0.0.0')
+    tag = kwargs.get('tag', 'default')
 
     total = test_results.testsRun
     failures = len(test_results.failures)
@@ -37,7 +38,8 @@ def set_result(test_results: unittest.TestResult, **kwargs):
         success=success,
         skipped=skipped,
         run_time=run_time,
-        version=version
+        version=version,
+        tag=tag
     )
 
     # traceback

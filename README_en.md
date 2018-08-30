@@ -32,3 +32,20 @@ pipenv install --dev
 ```
 nosetests tests
 ```
+
+## SDK
+
+Choose the SDK you need to upload your test result:
+
+- Python unittest: [qaa-sdk-pyunit](https://github.com/intest-tech/qaa-sdk-pyunit)
+- Python pyunit: TODO
+- Java TestNG: TODO
+- Java Junit: TODO
+
+> [Contact me](mailto:ityoung@foxmail.com)to contribute your SDK!
+
+## About
+
+Designer and Backend Developer: Shin | HomePage: [Shin's Blog](https://intest.tech)
+
+Frontend Developer: [CroveWang](https://github.com/orgs/intest-tech/people/MinistryWJW)
