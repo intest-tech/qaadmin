@@ -44,7 +44,7 @@ class Project(object):
         :return: 
         """
         result = self.db['Project'].find_one({'_id': name}, {'tags': 1})
-        return result['tags']
+        return result.get('tags', [])
 
     def list(self) -> list:
         """
