@@ -15,7 +15,7 @@ def index():
 
 @app.route('/project')
 def project():
-    return render_template('project.html')
+    return render_template('project-list.html')
 
 
 @app.route('/project/<pro_id>')
