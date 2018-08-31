@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+import os
+from flask import Flask, render_template, send_from_directory
 from flask_restful import Api
 from flask_script import Manager, Server
 from apps.route import urls
@@ -13,6 +14,12 @@ for url in urls:
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 @app.route('/project')
