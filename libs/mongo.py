@@ -1,11 +1,16 @@
+import os
 from pymongo import MongoClient
 from libs.myconfigparser import config
 from bson import ObjectId
 
 
 def conn_mongo():
-    conn = MongoClient(config['mongo']['host'], int(config['mongo']['port']))
-    # conn = MongoClient('localhost', 27017)
+    DOCKER_FLAG = os.environ.get('DOCKER', False)
+    if DOCKER_FLAG:
+        conn = MongoClient('mongo', 27017)
+    else:
+        conn = MongoClient(config['mongo']['host'], int(config['mongo']['port']))
+        # conn = MongoClient('localhost', 27017)
     db = conn.qaadmin
     return db
 
