@@ -19,7 +19,7 @@ pipenv install
 
 2. 启动服务：
 ```
-python manager.py runserver
+python manage.py runserver
 ```
 
 ## 测试
