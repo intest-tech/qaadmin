@@ -1,4 +1,6 @@
-## 项目描述
+## QA Admin
+
+[![Build Status](https://travis-ci.org/intest-tech/qaadmin.svg?branch=master)](https://travis-ci.org/intest-tech/qaadmin)
 
 测试报告归档与分享平台，服务端使用[Flask](https://github.com/pallets/flask)驱动。
 

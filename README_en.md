@@ -1,4 +1,6 @@
-## Description
+## QA Admin
+
+[![Build Status](https://travis-ci.org/intest-tech/qaadmin.svg?branch=master)](https://travis-ci.org/intest-tech/qaadmin)
 
 Platform used for collecting and sharing testing result. Powered by [Flask](https://github.com/pallets/flask).
 
