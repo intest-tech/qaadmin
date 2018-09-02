@@ -29,7 +29,7 @@ class TestProjectInfo(BaseTestCase):
         return BaseTestCase._create_api(self)
 
     def test_no_project_id(self):
-        response = self.client.get('/project/info')
+        response = self.client.get('/api/project/info')
         response_dict = response.get_json()
         print(response_dict)
         self.assertEqual(response_dict['status'], 'fail', msg='请求状态异常')
@@ -37,7 +37,7 @@ class TestProjectInfo(BaseTestCase):
 
     def test_project_not_exist(self):
         self.mock_project_exist(False)
-        response = self.client.get('/project/info?id=notexist')
+        response = self.client.get('/api/project/info?id=notexist')
         response_dict = response.get_json()
         print(response_dict)
         self.assertEqual(response_dict['status'], 'fail', msg='请求状态异常')
@@ -47,7 +47,7 @@ class TestProjectInfo(BaseTestCase):
         self.mock_mongo()
         self.mock_project_exist(True)
         self.mock_get_project_info()
-        response = self.client.get('/project/info?id=exist')
+        response = self.client.get('/api/project/info?id=exist')
         response_dict = response.get_json()
         print(response_dict)
         self.assertEqual(response_dict['status'], 'success', msg='请求状态异常')
