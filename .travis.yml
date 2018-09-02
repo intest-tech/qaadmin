@@ -2,12 +2,15 @@ os: linux
 sudo: false
 language: python
 
+python:
+  - "3.6"
+
 install:
   - pip install -r requirements.txt
   - pip install -r requirements_test.txt
 
 script:
-  - nosetest tests
+  - nosetests tests
 
 cache:
   - pip
