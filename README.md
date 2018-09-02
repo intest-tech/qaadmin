@@ -10,6 +10,8 @@
 
 ## 使用
 
+### 方法一: 本地安装
+
 1. 安装依赖：
 
 ```
@@ -18,9 +20,14 @@ pipenv install
 ```
 
 2. 启动服务：
+
 ```
 python manage.py runserver
 ```
+
+### 方法二: Docker 安装
+
+使用项目: [qaadmin-docker](https://github.com/intest-tech/qaadmin-docker)
 
 ## 测试
 

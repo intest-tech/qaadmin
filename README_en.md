@@ -10,6 +10,8 @@ Platform used for collecting and sharing testing result. Powered by [Flask](http
 
 ## How to
 
+### Deploy locally
+
 1. Install requirement:
 ```
 pip install pipenv
@@ -20,6 +22,10 @@ pipenv install
 ```
 python manage.py runserver
 ```
+
+### Deploy with Docker
+
+See: [qaadmin-docker](https://github.com/intest-tech/qaadmin-docker)
 
 ## Testing
 
