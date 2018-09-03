@@ -48,7 +48,7 @@ nosetests tests
 使用下列SDK实现测试结果上传：
 
 - Python unittest: [qaa-sdk-pyunit](https://github.com/intest-tech/qaa-sdk-pyunit)
-- Python pyunit: TODO
+- Python pytest: TODO
 - Java TestNG: TODO
 - Java Junit: TODO
 
