@@ -46,7 +46,7 @@ nosetests tests
 Choose the SDK you need to upload your test result:
 
 - Python unittest: [qaa-sdk-pyunit](https://github.com/intest-tech/qaa-sdk-pyunit)
-- Python pyunit: TODO
+- Python pytest: TODO
 - Java TestNG: TODO
 - Java Junit: TODO
 
