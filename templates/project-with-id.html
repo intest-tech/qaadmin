@@ -14,7 +14,7 @@
     {% block content %}
     {% raw %}
     <div class="layout-page project-activity-page">
-        <div class="layout-page-side-outer project-activity-page-side-outer boxed-group">
+        <div class="project-activity-page-side-outer boxed-group">
             <ul class="project-activity-versions-list boxed-group-inner" style="padding-top: 52px;">
                 <li>
                     <div class="project-activity-version-badge first">
@@ -31,7 +31,8 @@
                             </div>
                             <ul class="project-activity-analyses-list">
                                 <li class="project-activity-analysis" :data-date="result.create_time.$date"
-                                    v-for="result in d.results" @click="getResultDetail(result.was_successful, result._id.$oid)">
+                                    v-for="result in d.results"
+                                    @click="getResultDetail(result.was_successful, result._id.$oid)">
                                     <div class="project-activity-time">
                                         <time class="text-middle" datetime="2018-07-25T08:13:42.000Z">
                                             {{getTime(result.create_time.$date)}}
@@ -70,32 +71,39 @@
             </div>
 
         </div>
-        <div class="project-detail boxed-group">
-            <div class="box boxed-group-inner">
-                <label>Access Token：</label>
-                <input type="password" name="password"/>
-                <button id="copy_button">复制</button>
-                <button id="update_button">更新</button>
-            </div>
-            <div class="boxed-group project-traceback-list">
-                <div class="panel-group" id="accordion">
-                    <div class="panel panel-default" v-for="(x, index) in tracebacks">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion"
-                                   :href="'#collapse'+index">
-                                    {{x.test_case}}
-                                </a>
-                            </h4>
-                        </div>
-                        <div :id="'collapse'+index" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                {{x.note}}
+
+        <div class="project-activity-page-side-outer boxed-group">
+            <ul class="project-activity-versions-list boxed-group-inner" style="padding-top: 52px;">
+                <li>
+                    <div class="project-activity-version-badge">
+                        <label>Access Token：</label>
+                        <input type="password" name="password"/>
+                        <button id="copy_button">复制</button>
+                        <button id="update_button">更新</button>
+                    </div>
+                </li>
+                <li>
+                    <!--<div class="boxed-group project-traceback-list">-->
+                        <div class="panel-group project-traceback-list" id="accordion">
+                            <div class="panel panel-default" v-for="(x, index) in tracebacks">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion"
+                                           :href="'#collapse'+index">
+                                            {{x.test_case}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div :id="'collapse'+index" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        {{x.note}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    <!--</div>-->
+                </li>
+            </ul>
         </div>
     </div>
 </div>
@@ -132,6 +140,7 @@
                             date: max_date
                         }
                         var list = [];
+                        console.info(res.data.results);
                         for (var i = 1, len = res.data.results.length; i < len; i++) {
                             var item = res.data.results[i];
                             var datetime = new Date(item.create_time.$date);
@@ -151,6 +160,7 @@
                             data_group.results.push(item);
                         }
                         vm.list = list;
+                        console.info(list);
                         showChart(document.querySelector('.project-activity-graphs'),
                             [['success', '成功'], ['failures', '失败'], ['errors', '错误']]
                                 .reduce((a, b) => (a[b[1]] = RawData.data.results.map(x => x[b[0]]), a), {}))

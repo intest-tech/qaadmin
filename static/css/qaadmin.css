@@ -1,0 +1,83 @@
+/* Common */
+.display-inline{display:inline-block!important}
+
+/* NAV(tab)*/
+
+#repository-nav{
+    padding:0 1em;
+    border-bottom:2px solid #f1f1f1
+}
+
+.qaadmin-nav{
+    padding:0 1em;
+    border-bottom:2px solid #f1f1f1
+}
+.qaadmin-nav ul{
+    padding:0;
+    margin:0;
+    list-style:none
+}
+.qaadmin-nav li{
+    display:inline-block;
+    vertical-align:bottom
+}
+.qaadmin-nav li.active,.qaadmin-nav li.active a{
+    color:#3eaaaf
+}
+.qaadmin-nav li.active a:after{
+    content:"";
+    position:absolute;
+    bottom:-2px;
+    display:block;
+    width:100%;
+    height:2px;
+    background-color:#3eaaaf
+}
+.qaadmin-nav a{
+    position:relative;
+    display:block;
+    padding:.5em 0
+}
+
+.qaadmin-nav ul,.qaadmin-nav--secondary ul{padding:0;margin:0;list-style:none}
+.qaadmin-nav li,.qaadmin-nav--secondary li{display:inline-block;vertical-align:bottom}
+.switch .label,.switch .switch-inner{vertical-align:middle;display:inline-block}
+.qaadmin-nav li.active a:after,.qaadmin-nav--secondary li.active a:after{content:"";position:absolute;bottom:-2px;display:block;width:100%;height:2px;background-color:#3eaaaf}
+.qaadmin-nav a,.qaadmin-nav--secondary a{position:relative;display:block;padding:.5em 0}
+.qaadmin-nav a.active:after,.qaadmin-nav a:active:after,.qaadmin-nav a:hover:after,.qaadmin-nav--secondary a.active:after,.qaadmin-nav--secondary a:active:after,.qaadmin-nav--secondary a:hover:after{content:"";position:absolute;bottom:-2px;display:block;width:100%;height:2px;background-color:#3eaaaf}
+.qaadmin{margin-top:2em}
+.qaadmin-nav li:not(:last-of-type){margin-right:1.5em}
+.qaadmin-nav--secondary{margin-bottom:1.2rem}
+.qaadmin-nav--secondary li{width:25%;text-align:center;padding-right:1em}
+.qaadmin-nav--secondary a.active:after,.qaadmin-nav--secondary a:active:after,.qaadmin-nav--secondary a:hover:after{background-color:#b6d6d9}
+.qaadmin-nav #tab_build,.qaadmin-nav #tab_caches,.qaadmin-nav #tab_job,.qaadmin-nav #tab_request,.qaadmin-nav #tab_requests,.qaadmin-nav #tab_settings{display:none}
+.qaadmin-nav #tab_build.active,.qaadmin-nav #tab_caches.active,.qaadmin-nav #tab_job.active,.qaadmin-nav #tab_request.active,.qaadmin-nav #tab_requests.active,.qaadmin-nav #tab_settings.active{display:inline-block}#tab_build{position:relative}#tab_build .tab-arrow{display:inline-block;position:absolute;top:8px;left:-22px;width:1.2em;height:1.4em}
+
+/* Project List */
+.project-item{
+    overflow:hidden;
+    position:relative;
+    content:"";
+    display:block;
+    background:linear-gradient(-90deg,#fff 0,rgba(255,255,255,0) 100%)
+}
+
+/* Tile */
+.tile{height:auto;padding:.8em .5em .8em 1.5em;margin-bottom:.46rem;background-color:#fff;border-radius:0}
+.tile.passed{background:linear-gradient(to right,#39aa56 0,#39aa56 8px,#fff 8px,#fff 100%) no-repeat}
+.tile.errored,.tile.failed{background:linear-gradient(to right,#db4545 0,#db4545 8px,#fff 8px,#fff 100%) no-repeat}
+.tile .passed,.tile .passed a{color:#39aa56}
+.tile .errored,.tile .errored a,.tile .failed,.tile .failed a{color:#db4545}
+.tile .request-icon.passed circle,.tile .request-icon.passed ellipse,.tile .request-icon.passed line,.tile .request-icon.passed path,.tile .request-icon.passed polygon,.tile .request-icon.passed polyline,.tile .request-icon.passed rect,.tile .status-icon.passed circle,.tile .status-icon.passed ellipse,.tile .status-icon.passed line,.tile .status-icon.passed path,.tile .status-icon.passed polygon,.tile .status-icon.passed polyline,.tile .status-icon.passed rect{fill:none;stroke:#39aa56}
+.tile .request-icon.errored circle,.tile .request-icon.errored ellipse,.tile .request-icon.errored line,.tile .request-icon.errored path,.tile .request-icon.errored polygon,.tile .request-icon.errored polyline,.tile .request-icon.errored rect,.tile .request-icon.failed circle,.tile .request-icon.failed ellipse,.tile .request-icon.failed line,.tile .request-icon.failed path,.tile .request-icon.failed polygon,.tile .request-icon.failed polyline,.tile .request-icon.failed rect,.tile .status-icon.errored circle,.tile .status-icon.errored ellipse,.tile .status-icon.errored line,.tile .status-icon.errored path,.tile .status-icon.errored polygon,.tile .status-icon.errored polyline,.tile .status-icon.errored rect,.tile .status-icon.failed circle,.tile .status-icon.failed ellipse,.tile .status-icon.failed line,.tile .status-icon.failed path,.tile .status-icon.failed polygon,.tile .status-icon.failed polyline,.tile .status-icon.failed rect{stroke:#db4545;fill:none}
+.tile.canceled{background:linear-gradient(to right,#9d9d9d 0,#9d9d9d 8px,#fff 8px,#fff 100%) no-repeat}
+.tile.booting,.tile.created,.tile.queued,.tile.received,.tile.started{background:linear-gradient(to right,#edde3f 0,#edde3f 8px,#fff 8px,#fff 100%) no-repeat}
+.tile .canceled,.tile .canceled a{color:#9d9d9d}
+.tile .booting,.tile .booting a,.tile .created,.tile .created a,.tile .queued,.tile .queued a,.tile .received,.tile .received a,.tile .started,.tile .started a{color:#cdb62c}
+.tile .request-icon.canceled circle,.tile .request-icon.canceled ellipse,.tile .request-icon.canceled line,.tile .request-icon.canceled path,.tile .request-icon.canceled polygon,.tile .request-icon.canceled polyline,.tile .request-icon.canceled rect,.tile .status-icon.canceled circle,.tile .status-icon.canceled ellipse,.tile .status-icon.canceled line,.tile .status-icon.canceled path,.tile .status-icon.canceled polygon,.tile .status-icon.canceled polyline,.tile .status-icon.canceled rect{fill:none;stroke:#9d9d9d}
+.tile .request-icon.booting circle,.tile .request-icon.booting ellipse,.tile .request-icon.booting line,.tile .request-icon.booting path,.tile .request-icon.booting polygon,.tile .request-icon.booting polyline,.tile .request-icon.booting rect,.tile .request-icon.created circle,.tile .request-icon.created ellipse,.tile .request-icon.created line,.tile .request-icon.created path,.tile .request-icon.created polygon,.tile .request-icon.created polyline,.tile .request-icon.created rect,.tile .request-icon.queued circle,.tile .request-icon.queued ellipse,.tile .request-icon.queued line,.tile .request-icon.queued path,.tile .request-icon.queued polygon,.tile .request-icon.queued polyline,.tile .request-icon.queued rect,.tile .request-icon.received circle,.tile .request-icon.received ellipse,.tile .request-icon.received line,.tile .request-icon.received path,.tile .request-icon.received polygon,.tile .request-icon.received polyline,.tile .request-icon.received rect,.tile .request-icon.started circle,.tile .request-icon.started ellipse,.tile .request-icon.started line,.tile .request-icon.started path,.tile .request-icon.started polygon,.tile .request-icon.started polyline,.tile .request-icon.started rect,.tile .status-icon.booting circle,.tile .status-icon.booting ellipse,.tile .status-icon.booting line,.tile .status-icon.booting path,.tile .status-icon.booting polygon,.tile .status-icon.booting polyline,.tile .status-icon.booting rect,.tile .status-icon.created circle,.tile .status-icon.created ellipse,.tile .status-icon.created line,.tile .status-icon.created path,.tile .status-icon.created polygon,.tile .status-icon.created polyline,.tile .status-icon.created rect,.tile .status-icon.queued circle,.tile .status-icon.queued ellipse,.tile .status-icon.queued line,.tile .status-icon.queued path,.tile .status-icon.queued polygon,.tile .status-icon.queued polyline,.tile .status-icon.queued rect,.tile .status-icon.received circle,.tile .status-icon.received ellipse,.tile .status-icon.received line,.tile .status-icon.received path,.tile .status-icon.received polygon,.tile .status-icon.received polyline,.tile .status-icon.received rect,.tile .status-icon.started circle,.tile .status-icon.started ellipse,.tile .status-icon.started line,.tile .status-icon.started path,.tile .status-icon.started polygon,.tile .status-icon.started polyline,.tile .status-icon.started rect{stroke:#cdb62c;fill:none}li:last-child .tile{margin-bottom:0}
+.tile h2,.tile p{margin:0;font-size:inherit}
+.tile h2{display:inline-block;margin-bottom:.7em;padding-left:1px}@media only screen and (min-width:50.063em){.tile h2{width:72%;white-space:nowrap;overflow:hidden}
+.tile h2:after{content:"";display:block;position:absolute;top:0;right:0;width:2em;height:100%;background:linear-gradient(-90deg,#fff 0,rgba(255,255,255,0) 100%)}}
+.tile p.tile-title{width:10%}@media only screen and (min-width:50.063em){.tile p.tile-title{width:27%;white-space:nowrap;overflow:hidden}}
+.tile a:hover{text-decoration:underline}
