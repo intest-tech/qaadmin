@@ -10,7 +10,7 @@ api = Api(app)
 
 @app.route('/')
 def index():
-    return render_template('test-travis-new.html')
+    return render_template('index.html')
 
 
 @app.route('/project')

@@ -39,6 +39,8 @@ class CreateProjectHandler(BaseHandler):
 #         pass
 #
 
+# todo: update project pipeline
+
 class DeleteProjectHandler(BaseHandler):
     # todo: bulk delete
     def post(self, *args, **kwargs):

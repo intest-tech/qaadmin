@@ -1,57 +1,424 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-    {% block title %}A bolder title{% endblock %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>intest-tech/qaadmin - QA Admin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <script type="text/javascript" async="" src="https://ssl.google-analytics.com/ga.js"></script>
+    <script src="https://cdn.travis-ci.org/check-browser-support-8a0bf1375fd86cf03c407ac6a9a5fba1.js" async=""></script>
+    <script src="/static/js/opensource/jquery.min.js"></script>
+    <script src="/static/js/opensource/vue.js"></script>
+    <link rel="stylesheet" href="../static/css/travis-fonts.css">
+    <link rel="stylesheet" href="../static/css/travis.css">
+    <link rel="stylesheet" href="../static/css/qaadmin.css">
+    <link rel="mask-icon" href="https://cdn.travis-ci.org/images/favicon-c566132d45ab1a9bcae64d8d90e4378a.svg"
+          color="black">
+
 </head>
+{% raw %}
 <body>
-<style>
-#header {
-    background-color:black;
-    color:white;
-    text-align:center;
-    padding:5px;
-}
-#nav {
-    line-height:30px;
-    background-color:#eeeeee;
-    height:300px;
-    width:100px;
-    float:left;
-    padding:5px;
-}
-#section {
-    width:350px;
-    float:left;
-    padding:10px;
-}
-#footer {
-    background-color:black;
-    color:white;
-    clear:both;
-    text-align:center;
-    padding:5px;
-    position:absolute;
-    bottom:0px;
-    width: 100%;
-}
+<div class="wrapper">
+    <!--导航栏-->
+    <header class="top">
+        <div class="topbar  ">
+            <h1 id="logo" class="logo"><a href="/" id="ember365" class="ember-view">QA Admin</a></h1>
+            <div id="ember366" class="ember-view">
+                <div class="navigation-toggle">
+                    <button class="tofuburger no-button" type="button" data-ember-action=""
+                            data-ember-action-367="367">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-503.7 379.2 17 10">
+                            <path d="M-487.3 380.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6zm0 4.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6zm0 4.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="ember368" class="ember-view">
+                <div id="ember369" class="broadcast ember-view"><span class="icon-broadcast  "
+                                                                      title="broadcasts" data-ember-action=""
+                                                                      data-ember-action-370="370">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 21.625"><g class="tower-path"><circle class="path" cx="7.503"
+                                                                                                cy="6.733"
+                                                                                                r="1.775"></circle><path
+          class="path" d="M8.303 8.508l5.324 12.698-8.899-6.765"></path><path class="path"
+                                                                              d="M6.828 8.508l-5.3 12.698 8.899-6.765M7.5 8.508v12.165"></path></g><g
+          class="radio-wave--outer"><path class="path"
+                                          d="M2.454 11.81A6.936 6.936 0 0 1 .5 6.981C.5 4.045 2.312 1.54 4.875.5m7.793 11.168A6.919 6.919 0 0 0 14.5 6.981c0-2.936-1.812-5.441-4.375-6.481"></path></g><g
+          class="radio-wave--inner"><path class="path"
+                                          d="M3.751 9.161a4.318 4.318 0 0 1-.628-2.239A4.373 4.373 0 0 1 5.858 2.87m5.481 6.116a4.285 4.285 0 0 0 .537-2.064A4.373 4.373 0 0 0 9.141 2.87"></path></g></svg>
+                    <!---->
+</span>
+                </div>
 
-</style>
-<div>
-    <p>
-        {% block content %}
-        {% if project_list %}
-        {% for project in project_list %}
-        <a href="/project/list?pro_id={{ escape(project['name']) }}">{{ project['name'] }}</a><br>
-        {% endfor %}
-        {% elif report %}
-        <a href="/data/list?pro_id=5a7fb0cd47de9d5cf3d13a44">{{ report['name'] }}</a><br>
-        {% else %}
-        <a class="init-project" href="/project/create"> 新建项目 </a>
-        {% endif %}
-        {% endblock %}
-    </p>
+                <ul class="broadcasts ">
+                    <li><p>There are no broadcasts</p></li>
+                </ul>
+
+            </div>
+            <nav id="navigation" class="navigation ">
+                <ul>
+                    <li>
+                        <a href="https://changelog.travis-ci.com" title="Travis CI Changelog"
+                           class="navigation-anchor">Changelog</a>
+                    </li>
+                    <li>
+                        <a href="https://docs.travis-ci.com" title="Travis CI Documentation"
+                           class="navigation-anchor">Documentation</a>
+                    </li>
+
+                    <!---->
+                    <!---->
+                    <li id="profile-menu-link" class="profile menu signed-in">
+                        <!----><a href="/profile/ityoung" id="ember372"
+                                  class="navigation-anchor navigation-profile-link signed-in ember-view">          <span
+                            id="ember373" class="avatar-wrapper ember-view"><span class="avatar">
+  <span class="pseudo-avatar" aria-hidden="true" data-initials="SY"></span>
+    <img class="real-avatar" src="https://avatars0.githubusercontent.com/u/12296804?v=4?v=3&amp;s=40"
+         srcset="https://avatars0.githubusercontent.com/u/12296804?v=4?v=3&amp;s=40 1x, https://avatars0.githubusercontent.com/u/12296804?v=4?v=3&amp;s=80 2x"
+         alt="Shin Yang avatar">
+</span>
+                        <!----></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 8.59" class="icon">
+                            <path d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5" fill="none" stroke="#686b6e"
+                                  stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></path>
+                        </svg>
+                    </a><!---->
+                        <div class="menu-separator"></div>
+                        <ul class="navigation-nested">
+                            <li class="username"><span>Shin Yang</span></li>
+                            <a title="Your profile" href="/profile/ityoung" id="ember374"
+                               class="signed-in topbar-menu-item ember-view">
+                                <li>
+                                    <svg viewBox="0 0 15 15" class="icon">
+                                        <path d="M13.709 8.91l-1.13-.659c.037-.247.076-.494.076-.751a5.03 5.03 0 0 0-.083-.82l1.117-.672c.48-.289.636-.917.348-1.397l-.863-1.436a1.021 1.021 0 0 0-1.397-.348l-1.121.674s-.76-.515-1.193-.686V1.518A1.02 1.02 0 0 0 8.445.5H6.769a1.02 1.02 0 0 0-1.018 1.018v1.296c-.454.18-.866.432-1.245.729l-1.132-.66a1.02 1.02 0 0 0-1.392.367l-.844 1.447a1.022 1.022 0 0 0 .366 1.393l1.13.659c-.037.247-.076.494-.076.751 0 .281.039.552.083.82l-1.117.672c-.48.289-.636.917-.348 1.397l.864 1.436c.289.48.917.636 1.397.348l1.121-.674c.365.279.76.515 1.193.686v1.296c0 .56.458 1.018 1.018 1.018h1.676a1.02 1.02 0 0 0 1.018-1.018v-1.296s.866-.432 1.245-.729l1.132.66a1.02 1.02 0 0 0 1.392-.367l.844-1.448a1.02 1.02 0 0 0-.367-1.391zm-6.102.669a2.08 2.08 0 1 1 0-4.159 2.08 2.08 0 0 1 0 4.159z"></path>
+                                    </svg>
+                                    Settings
+                                </li>
+                            </a>
+                            <div class="nav-nested"></div>
+                            <!---->
+                            <div class="nav-nested"></div>
+                            <a href="/" title="Sign out of Travis CI" class="topbar-menu-item"
+                               data-ember-action="" data-ember-action-375="375">
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.49 13.78"
+                                         class="icon">
+                                        <g fill="none" stroke="#686b6e" stroke-linecap="round"
+                                           stroke-linejoin="round" stroke-miterlimit="10">
+                                            <path d="M10.99 10.78l2.45-4.87c0-.01.01-.02.01-.03M14.99 6.5c0 .01-.01.02-.01.03L13.64 9.2M11.21 4.07a1.039 1.039 0 0 0-.78-.06l.27-.58c.25-.52.05-1.16-.44-1.42a.96.96 0 0 0-.78-.05c.2-.51 0-1.09-.47-1.34A.987.987 0 0 0 8.55.5c-.39 0-.75.24-.93.6-.1-.19-.25-.36-.45-.46-.14-.07-.3-.11-.46-.11-.39 0-.76.24-.94.61L3.01 6.5l-.48-1.97c0-.01-.01-.03-.01-.04-.11-.49-.51-.83-.98-.83-.06 0-.12.01-.18.02-.44.08-.8.47-.86.94 0 .05-.12 5.31 1.61 7.17.37.4.77.71 1.22.95.01 0 .01.01.02.01.64.35 1.33.53 2.02.53h.14c.5-.02.98-.13 1.44-.33.4-.18.97-.5 1.41-1.02.2-.24.33-.5.45-.75l.07-.14c.11-.21.31-.64.31-.64l2.44-4.86c.27-.57.07-1.21-.42-1.47zM5.83 5.15L7.79.84M9.48 1.96L7.61 5.91M10.43 4.01L9.01 6.89"></path>
+                                        </g>
+                                    </svg>
+                                    Sign Out
+                                </li>
+                            </a>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <!--主面板-->
+    <div class="wrapper-main">
+        <div id="main" class="main" role="main">
+            <article class="repo-header">
+                <header class="name">
+                    <div id="ember378"
+                         class="ember-view ember-tooltip-or-popover-target ember-tooltip-or-popover-element-attached-bottom ember-tooltip-or-popover-element-attached-center ember-tooltip-or-popover-target-attached-top ember-tooltip-or-popover-target-attached-center"
+                         aria-describedby="ember380" tabindex="0">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" alt="Public repository"
+                             class="icon public">
+                            <g fill="none" stroke="#9ea3a8" stroke-linecap="round" stroke-linejoin="round"
+                               stroke-miterlimit="10">
+                                <path d="M7.089 13.343h6.434L13.524 1H2.176v12.343H4.46M2.176 10.543h11.348"></path>
+                                <path d="M4.46 12.239v2.756l1.394-1.285 1.235 1.236v-2.707zM4.199 1v9.543M5.635 8.737h.63M5.635 6.782h.63M5.635 4.828h.63M5.635 2.873h.63"></path>
+                            </g>
+                        </svg>
+
+
+                    </div>
+                    <h1 class="repo-title">
+                        <a href="/intest-tech" id="ember381" class="ember-view">intest-tech</a> / <a
+                            href="/intest-tech/qaadmin" id="ember382" class="active ember-view">qaadmin</a>
+                    </h1>
+                </header>
+                <main class="repo-main">
+                    <div class="repo-navigation">
+                        <nav id="testtype_nav" class="qaadmin-nav ">
+                            <ul>
+                                <li id="tab_current" class="active">
+                                    <a href="/intest-tech/qaadmin" id="ember386" class="active">
+                                        Current
+                                    </a></li>
+                                <li id="tab_branches">
+                                    <a href="/intest-tech/qaadmin/branches" id="ember387"
+                                       class="ember-view"> Branches
+                                    </a></li>
+                                <li id="tab_builds">
+                                    <a href="/intest-tech/qaadmin/builds" id="ember388" class="ember-view">
+                                        Build History
+                                    </a></li>
+                                <li id="tab_pull_requests">
+                                    <a href="/intest-tech/qaadmin/pull_requests" id="ember389"
+                                       class="ember-view"> Pull Requests
+                                    </a></li>
+                                <li id="tab_build" class="">
+                                    <svg viewBox="0 0 15 15" class="tab-arrow">
+                                        <path fill="none" stroke="#9d9d9d"
+                                              d="M4.32.5l6.247 6.942L4.32 14.5"></path>
+                                    </svg>
+                                    <a href="/intest-tech/qaadmin/builds/431048533" id="ember390"
+                                       class="ember-view"> Build #9
+                                    </a></li>
+                                <li id="tab_job">
+                                    <a href="/intest-tech/qaadmin/jobs/431048534" id="ember391"
+                                       class="ember-view"> Job #9.1
+                                    </a></li>
+                                <li id="tab_settings">
+                                    <a href="/intest-tech/qaadmin/settings" id="ember392"
+                                       class="ember-view"> Settings
+                                    </a></li>
+                                <li id="tab_requests">
+                                    <a href="/intest-tech/qaadmin/requests" id="ember393"
+                                       class="ember-view"> Requests
+                                    </a></li>
+                                <li id="tab_caches">
+                                    <a href="/intest-tech/qaadmin/caches" id="ember394" class="ember-view">
+                                        Caches
+                                    </a></li>
+                            </ul>
+                        </nav>
+                        <nav id="ember395" class="option-button ember-view">
+                            <button class="option-display" title="Show more options" type="button">
+                                <span class="label-align">More options</span>
+                                <span class="option-tofu"><svg xmlns="http://www.w3.org/2000/svg"
+                                                               viewBox="-503.7 379.2 17 10"
+                                                               class="icon-tofu"><path
+                                        d="M-487.3 380.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6zm0 4.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6zm0 4.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6z"></path></svg></span>
+                            </button>
+                            <ul class="option-dropdown">
+                                <li>
+                                    <a href="/intest-tech/qaadmin/settings" id="ember396"
+                                       class="ember-view">Settings</a>
+                                </li>
+                                <li>
+                                    <a href="/intest-tech/qaadmin/requests" id="ember397"
+                                       class="ember-view">Requests</a>
+                                </li>
+                                <li>
+                                    <a href="/intest-tech/qaadmin/caches" id="ember398"
+                                       class="ember-view">Caches</a>
+                                </li>
+                                <li>
+                                    <button class="trigger-build-anchor" type="button" data-ember-action=""
+                                            data-ember-action-399="399">Trigger build
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <!--test record-->
+                    <div class="test-result-list">
+                        <li id="ember736" :class="'branch-row row-li '+item.status" v-for="item in list">
+                            <div class="two-line fade-out">
+                                <h2 class="row-item">
+                                    <span :title="'Job '+item.status" :aria-label="'Job '+item.status"
+                                          :class="'status-icon icon '+item.status">
+                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" v-if="item.success">
+                                          <path d="M14.5 1.5L6.499 13.716.5 8.78"></path>
+                                      </svg>
+                                      <svg viewBox="0 0 15 15" v-else>
+                                          <path d="M.5.5l14 14m0-14l-14 14" fill="none" stroke="#9d9d9d" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></path>
+                                      </svg>
+                                    </span>
+                                    <span :class="'label-align '+item.status">{{item.version}}</span>
+                                </h2>
+                              <div class="row-builds">
+                                <div class="row-item">
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" class="icon">
+                                      <path class="st0" d="M11.553 11.153c0 .663.589 1.216 1.289 1.105.442-.074.811-.442.884-.884.111-.553-.221-1.032-.663-1.216-.258-.111-.405-.368-.405-.663v-3.26M.868 5.867C.647 5.867.5 4.117.5 4.117c0-.221.147-.442.332-.479l2.616-.958h3.193l7.491 1.032c.221.036.368.22.368.404 0 0-.184 1.75-.368 1.75L.868 5.867zm5.767 8.602V1.206c0-.221-1.161-.405-1.345-.442L3.816.506c-.184-.037-.369.11-.369.294v13.632h2.211l.977.037zm2.21 0H1.237h7.608z"></path>
+                                  </svg>
+                                <span class="label-align">
+                                    {{item.count}} builds
+                                </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="two-line fade-out">
+                              <div class="row-item">
+                                <div>
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" class="icon"><circle class="st0" cx="7.5" cy="7.5" r="7"></circle><path class="st1" d="M7.275 3.208V7.5L9.98 9.254"></path></svg>
+                                  <time class="label-align" datetime="PT49S">{{item.duration}} sec</time>
+                                </div>
+
+                              <div class="row-item row-calendar">
+                                <div title="Finished September 21, 2018 17:56:00">
+                                  <svg viewBox="0 0 15 15" class="icon"><path class="st0" d="M.861.5H14.22v14H.861zm13.252 4.061H1.182"></path><path class="st0" d="M4.639 7.913c.178-.166.475-.359.893-.359.734 0 2.093 1.164-.906 3.906h2.297m1.295-3.905h2.425s-1.4 1.693-1.4 3.906"></path></svg>
+                                  <time class="label-align" datetime="2018-09-21T09:56:38Z">a day ago</time>
+                                </div>
+                              </div>
+                            </div></div>
+                            <!--pipeline result-->
+                            <div class="one-line ">
+                              <ul class="build-tiles">
+                                  <li title="Build #9 passed" :class="item[p].success ? 'passed': 'failed'" v-for="p in pipeline" v-if="item[p]">
+                                      <a :href="'/'+item[p].id">
+                                          <span title="Job passed" aria-label="Job passed" class="status-icon icon passed">
+                                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" v-if="item[p].success">
+                                                  <path d="M14.5 1.5L6.499 13.716.5 8.78"></path>
+                                              </svg>
+                                              <svg viewBox="0 0 15 15" v-else>
+                                                  <path d="M.5.5l14 14m0-14l-14 14" fill="none" stroke="#9d9d9d" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></path>
+                                              </svg>
+                                          </span>
+                                          <span class="build-tile-number">{{p}}</span>
+                                      </a>
+                                  </li>
+                              </ul>
+                            </div>
+                        </li>
+                    </div>
+                    <!--end test record-->
+
+                </main>
+            </article>
+        </div>
+    </div>
+
+    <!--侧边栏-->
+    <aside id="left">
+        <div id="ember423" class="dupa ember-view">
+            <div class="search search--sidebar">
+                <div class="search-inner">
+                    <input placeholder="Search all repositories" id="travis-search"
+                           class="ember-text-field ember-view" type="text">
+                    <label for="travis-search">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" class="icon">
+                            <g fill="none" stroke="#9d9d9d" stroke-linecap="round" stroke-linejoin="round"
+                               stroke-miterlimit="10">
+                                <circle cx="6.055" cy="5.805" r="5.305"></circle>
+                                <path d="M9.847 9.727l4.166 4.773"></path>
+                            </g>
+                        </svg>
+                    </label>
+                </div>
+            </div>
+
+            <nav id="repository-nav" class="qaadmin-nav">
+                <ul>
+                    <li id="tab_owned" class="active display-inline">
+                        <a href="#">测试项目</a>
+                    </li>
+
+                    <li id="tab_new" class="display-inline">
+                        <a title="新增项目" href="/profile/ityoung" id="ember426" class="ember-view">
+                            <span class="icon icon--plus"></span>
+                        </a></li>
+                </ul>
+            </nav>
+
+            <div class="qaadmin-body sidebar-list">
+                <ul class="project-list">
+                    <!--项目列表-->
+                    <li class="project-item" v-for="x in list">
+                        <div :class="'tile '+x.status">
+                            <h2 :class="'tile-title '+x.status">
+                                <a href="/intest-tech/qaadmin" class="active">
+                                    <span title="Job passed" aria-label="Job passed"
+                                          class="status-icon icon passed"  v-if="x.success">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15">
+                                            <path d="M14.5 1.5L6.499 13.716.5 8.78"></path>
+                                        </svg>
+                                    </span>
+
+                                    <span title="Job failed" aria-label="Job failed"
+                                          class="status-icon icon failed" v-if="!x.success">
+                                        <svg viewBox="0 0 15 15">
+                                            <path d="M.5.5l14 14m0-14l-14 14" fill="none" stroke="#9d9d9d" stroke-linecap="round"
+                                   stroke-linejoin="round" stroke-miterlimit="10"></path></svg>
+                                    </span>
+
+                                    <span class="label-align inner-underline">{{x.project}}</span>
+                                </a></h2>
+
+                            <p :class="'tile-title float-right '+x.status">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" class="icon">
+                                    <title>Hash</title>
+                                    <path d="M10.379.756L9.363 14.078M5.637.5L4.621 13.823M14.5 5.046l-13.323.083m12.646 4.32L.5 9.532"></path>
+                                </svg>
+                                <a href="/intest-tech/qaadmin/builds/431048533" id="ember431"
+                                   class="ember-view"> <span class="label-align inner-underline">9</span>
+                                </a></p>
+
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" class="icon">
+                                    <circle class="st0" cx="7.5" cy="7.5" r="7"></circle>
+                                    <path class="st1" d="M7.275 3.208V7.5L9.98 9.254"></path>
+                                </svg>
+                                <span class="label-align">Duration:
+       <time class="duration" datetime="PT35S" title="Started September 20, 2018 22:13:27">35 sec</time>
+    </span>
+                            </p>
+
+                            <p>
+                                <!--<svg viewBox="0 0 15 15" class="icon"><path class="st0" d="M.861.5H14.22v14H.861zm13.252 4.061H1.182"></path><path class="st0" d="M4.639 7.913c.178-.166.475-.359.893-.359.734 0 2.093 1.164-.906 3.906h2.297m1.295-3.905h2.425s-1.4 1.693-1.4 3.906"></path></svg>-->
+                                <!--<span class="label-align">Finished:-->
+                                <!--<time class="finished_at timeago" datetime="2018-09-20T14:14:02Z" title="Finished September 20, 2018 22:14:02">-->
+                                <!--about 15 hours ago-->
+                                <!--</time></span>-->
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </aside>
 </div>
-
-
 </body>
-</html>
 
+<script>
+
+$(function(){
+    $.get('/api/test-result/latest',function(res){
+        if(!res){return alert('异常')}
+            res.data.map(x=>x.success?x.status="passed":x.status="errored")
+            app.list=res.data
+    })
+});
+var app=new Vue({
+data:{
+    list:[]
+}});
+app.$mount('.project-list')
+
+var test_list_app = new Vue({
+    data: {
+        pro_id: 'gt-server',
+        list: [],
+        pipeline:['单元测试', '接口测试']
+    },
+    methods: {
+        getResultList() {
+            var vm = this, pro_id = vm.pro_id;
+            $.get('/api/test-result/get-version?project=' + pro_id, function (res) {
+                if (!res || !res.data) { return alert('异常') }
+                res.data.map(x=>x.success?x.status="passed":x.status="errored")
+                vm.list = res.data
+                console.info(vm.list)
+            })
+        }
+    },
+    created: function () {
+        this.getResultList()
+    }
+});
+test_list_app.$mount('.test-result-list')
+
+</script>
+{% endraw %}
+</html>

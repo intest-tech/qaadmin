@@ -24,6 +24,18 @@ class ListResultHandler(BaseHandler):
         return self.json_response(result_data)
 
 
+class ListResultVersionsHandler(BaseHandler):
+    """
+    列出某项目下所有版本
+    """
+    def get(self):
+        project_id = self.get_argument('project', "")
+        if not project_id:
+            return self.json_response(status='fail', error_msg='project required')
+        result_data = self.Result.list_version(project_id)
+        return self.json_response(result_data)
+
+
 class LatestResultHandler(BaseHandler):
     """
     列出所有项目的最新测试数据

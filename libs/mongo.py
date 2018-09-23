@@ -1,5 +1,5 @@
 import os
-from pymongo import MongoClient
+from pymongo import MongoClient, DESCENDING, ASCENDING
 from libs.myconfigparser import config
 from bson import ObjectId
 
@@ -117,19 +117,75 @@ class Result(object):
         获取project中最新的测试记录, 用于展示project列表
         :return: 
         """
-        filter_condition = {'is_del': 0, '_id': 0, 'details': 0, 'run_time': 0}
-        latest_result_list = []
-        cur = self.db['Project'].find({'is_del': False}, {'_id': 1, 'latest_test': 1})
+        project_list = []
+        cur = self.db['Project'].find({'is_del': False}, {'_id': 1, 'pipeline': 1})
         result = list(cur)
+        print(result)
         for item in result:
-            latest_test = item.get('latest_test')
-            if latest_test:
-                find_condition = {'_id': latest_test}
-                result = self.db['TestResult'].find_one(find_condition, filter_condition)
-                latest_result_list.append(result)
+            project = item.get('_id')
+            pipeline = item.get('pipeline')
+            print(pipeline)
+            project_info = dict(
+                project=project,
+                has_record=False,
+                success=True,
+                version=""
+            )
+
+            latest_result = self.db['TestResult'].find_one({'project':project}, sort=[('_id', DESCENDING)])
+            project_info['version'] = version = latest_result.get('version')
+
+            for stage in pipeline:
+                find_condition = {'stage': stage, 'project':project, 'version':version}
+                filter_condition = {'_id': 0, 'was_successful': 1}
+                test_result = self.db['TestResult'].find_one(find_condition, filter_condition)
+                if test_result:
+                    project_info['has_record'] = True
+                    if test_result.get('was_successful') is False:
+                        project_info['success'] = False
+            project_list.append(project_info)
+        return project_list
+
+    def list_version(self, project_id):
+        """
+        获取某项目下所有版本与对应的id
+        :param project_id:
+        :return:
+        """
+        versions_list = []
+        versions_dict = []
+        result = self.db['TestResult'].find({'project': project_id}, {'version':1, 'stage': 1, 'was_successful': 1, "run_time": 1}, sort=[('_id', DESCENDING)])
+        for item in result:
+            now_version = item['version'].replace("\n", "")
+            if now_version in versions_list:
+                version_index = versions_list.index(now_version)
+                # stage = versions_dict[version_index].get(item['stage'], None)
+                if not versions_dict[version_index].get(item['stage'], None):
+                    versions_dict[version_index][item['stage']] = dict(
+                        id=str(item['_id']),
+                        success=item['was_successful'],
+                        duration=item['run_time']
+                    )
+                    versions_dict[version_index]['duration'] += versions_dict[version_index][item['stage']]['duration']
+                    versions_dict[version_index]['success'] = versions_dict[version_index]['success'] and item['was_successful']
+                    versions_dict[version_index]['count'] += 1
             else:
-                latest_result_list.append({'project': item['_id']})
-        return latest_result_list
+                versions_list.append(now_version)
+                # todo: get pipeline from project documents.
+                new_dict = dict(
+                    version=now_version,
+                    success=item['was_successful'],
+                    count=1,
+                    duration=item['run_time']
+                )
+                # todo: change run_time to duration
+                new_dict[item['stage']] = dict(
+                    id=str(item['_id']),
+                    success=item['was_successful'],
+                    duration=item['run_time']
+                )
+                versions_dict.append(new_dict)
+        return versions_dict
 
 
 if __name__ == '__main__':
