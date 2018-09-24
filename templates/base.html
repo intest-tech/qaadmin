@@ -8,15 +8,14 @@
     <script src="/static/js/opensource/echarts.js"></script>
     <script type="text/javascript" async="" src="/static/js/opensource/ga.js"></script>
     <script src="/static/js/opensource/travis-check-browser-support.js" async=""></script>
-
+    {% block script %}
+        {{script}}
+    {% endblock %}
     <link rel="stylesheet" href="/static/css/opensource/travis-fonts.css">
     <link rel="stylesheet" href="/static/css/travis.css">
     <link rel="stylesheet" href="/static/css/qaadmin.css">
     <link rel="mask-icon" href="https://cdn.travis-ci.org/images/favicon-c566132d45ab1a9bcae64d8d90e4378a.svg"
           color="black">
-    {% block script %}
-        {{script}}
-    {% endblock %}
 </head>
 <body class="modal-open">
 
