@@ -1,63 +1,42 @@
 function showChart(el, data) {
+
     var option = {
-        legend: {},
-        tooltip: {
+        tooltip : {
             trigger: 'axis',
-            showContent: false
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'
+            }
         },
-        dataset: {
+        color: ['green', '#d48265', '#c23531', 'gray'],
+        dataset:{
             source: [
-                ['product'].concat(data[Object.keys(data)[0]].map((x, i) => (101 + i).toString())),
-                [Object.keys(data)[0]].concat(data[Object.keys(data)[0]]),
-                [Object.keys(data)[1]].concat(data[Object.keys(data)[1]]),
-                [Object.keys(data)[2]].concat(data[Object.keys(data)[2]])
+                 ['测试结果','成功', '失败','错误','跳过'],
+                 ['测试结果' ,data[0], data[1], data[2], data[3]]
             ]
         },
-        color: ['#61a0a8', '#d48265', '#c23531'],
-        xAxis: {type: 'category'},
-        yAxis: {gridIndex: 0},
-        grid: {top: '55%'},
+        grid: {
+            height: 60,
+            top:1,
+            left:1,
+            containLabel: true
+        },
+        xAxis:  {
+            show: false,
+            type: 'value'
+        },
+        yAxis: {
+            show: false,
+            type: 'category',
+        },
         series: [
-            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-            {
-                type: 'pie',
-                id: 'pie',
-                radius: '30%',
-                center: ['50%', '25%'],
-                label: {
-                    formatter: '{b}: {@101} ({d}%)'
-                },
-                encode: {
-                    itemName: 'product',
-                    value: '101',
-                    tooltip: '101'
-                }
-            }
+            {type: 'bar',stack: '数量',label: {show: true}},
+            {type: 'bar',stack: '数量',label: {show: true}},
+            {type: 'bar',stack: '数量',label: {show: true}},
+            {type: 'bar',stack: '数量',label: {show: true}}
         ]
     };
 
-    var myChart = echarts.init(el);
-    myChart.on('updateAxisPointer', function (event) {
-        var xAxisInfo = event.axesInfo[0];
-        if (xAxisInfo) {
-            var dimension = xAxisInfo.value + 1;
-            myChart.setOption({
-                series: {
-                    id: 'pie',
-                    label: {
-                        formatter: '{b}: {@[' + dimension + ']} ({d}%)'
-                    },
-                    encode: {
-                        value: dimension,
-                        tooltip: dimension
-                    }
-                }
-            });
-        }
-    });
+    console.info("aaaa");
 
-    myChart.setOption(option);
-
+    return echarts.init(el).setOption(option);
 }
