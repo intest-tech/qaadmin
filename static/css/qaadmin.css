@@ -112,6 +112,9 @@
 .build-tiles>.errored:hover{background-color:#db4545}
 .build-tiles>.errored:hover .status-icon circle,.build-tiles>.errored:hover .status-icon ellipse,.build-tiles>.errored:hover .status-icon line,.build-tiles>.errored:hover .status-icon path,.build-tiles>.errored:hover .status-icon polygon,.build-tiles>.errored:hover .status-icon polyline,.build-tiles>.errored:hover .status-icon rect{fill:none;stroke:#fff}
 .build-tiles>.errored:hover .status-icon *{stroke-width:2px}
+.build-header.passed{background:linear-gradient(to right,#39aa56 0,#39aa56 10px,#fff 10px,#fff 100%) no-repeat}
+.build-header .passed,.build-header .passed a{color:#39aa56}
+.build-header .request-icon.passed circle,.build-header .request-icon.passed ellipse,.build-header .request-icon.passed line,.build-header .request-icon.passed path,.build-header .request-icon.passed polygon,.build-header .request-icon.passed polyline,.build-header .request-icon.passed rect,.build-header .status-icon.passed circle,.build-header .status-icon.passed ellipse,.build-header .status-icon.passed line,.build-header .status-icon.passed path,.build-header .status-icon.passed polygon,.build-header .status-icon.passed polyline,.build-header .status-icon.passed rect{fill:none;stroke:#39aa56}
 
 .bar-graph {
     height: 50px;
