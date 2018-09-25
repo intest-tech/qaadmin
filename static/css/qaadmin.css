@@ -119,3 +119,15 @@
 .bar-graph {
     height: 50px;
 }
+
+/* Icon */
+
+/* icon-check */
+.fa-check {
+    color: #39aa56;
+}
+
+/* icon-times */
+.fa-times {
+    color: #db4545;
+}

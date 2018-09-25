@@ -109,16 +109,10 @@
                                 <li id="ember736" :class="'branch-row row-li '+item.status" v-for="item in list">
                                     <div class="two-line fade-out">
                                         <h2 class="row-item">
-                                            <span :title="'Job '+item.status" :aria-label="'Job '+item.status"
-                                                  :class="'status-icon icon '+item.status">
-                                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" v-if="item.success">
-                                                  <path d="M14.5 1.5L6.499 13.716.5 8.78"></path>
-                                              </svg>
-                                              <svg viewBox="0 0 15 15" v-else>
-                                                  <path d="M.5.5l14 14m0-14l-14 14" fill="none" stroke="#9d9d9d" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></path>
-                                              </svg>
-                                            </span>
-                                            <span :class="'label-align '+item.status">{{item.version}}</span>
+                                          <span :class="'label-align '+item.status">
+                                          <i class="fas fa-check" style="font-size: 16px;" v-if="item.success"></i>
+                                          <i class="fas fa-times" style="font-size: 16px; width: 16px; padding-left: 2px;" v-else></i>
+                                          {{item.version}}</span>
                                         </h2>
                                       <div class="row-builds">
                                         <div class="row-item">

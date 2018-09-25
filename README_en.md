@@ -49,11 +49,10 @@ Choose the SDK you need to upload your test result:
 - Python pytest: TODO
 - Java TestNG: TODO
 - Java Junit: TODO
+- JavaScript Mocha: TODO
 
 > [Contact me](mailto:ityoung@foxmail.com)to contribute your SDK!
 
 ## About
 
-Designer and Backend Developer: Shin | HomePage: [Shin's Blog](https://intest.tech)
-
-Frontend Developer: [CroveWang](https://github.com/orgs/intest-tech/people/MinistryWJW)
+Author: Shin | HomePage: [Shin's Blog](https://intest.tech)

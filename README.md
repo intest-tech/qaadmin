@@ -51,11 +51,10 @@ nosetests tests
 - Python pytest: TODO
 - Java TestNG: TODO
 - Java Junit: TODO
+- JavaScript Mocha: TODO
 
 > 欢迎[联系我](mailto:ityoung@foxmail.com)贡献您的SDK!
 
 ## 关于
 
-设计&后端开发：严北 | 博客主页：[Shin's Blog](https://intest.tech) | 简书专题：[测试开发实践](https://www.jianshu.com/c/b4b2bd0cb60d)
-
-前端开发：[CroveWang](https://github.com/orgs/intest-tech/people/MinistryWJW)
+作者：严北 | 博客主页：[Shin's Blog](https://intest.tech) | 简书专题：[测试开发实践](https://www.jianshu.com/c/b4b2bd0cb60d)
