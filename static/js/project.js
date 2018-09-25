@@ -11,18 +11,21 @@ function showChart(el, data) {
         dataset:{
             source: [
                  ['测试结果','成功', '失败','错误','跳过'],
-                 ['测试结果' ,data[0], data[1], data[2], data[3]]
+                 ['测试结果'].concat(data)
             ]
         },
         grid: {
+            x:1,
+            y:1,
             height: 60,
             top:1,
-            left:1,
-            containLabel: true
+            left:-54,
+            containLabel: true,
+            borderWidth:1
         },
         xAxis:  {
             show: false,
-            type: 'value'
+            type: 'value',
         },
         yAxis: {
             show: false,
@@ -35,8 +38,6 @@ function showChart(el, data) {
             {type: 'bar',stack: '数量',label: {show: true}}
         ]
     };
-
-    console.info("aaaa");
 
     return echarts.init(el).setOption(option);
 }
