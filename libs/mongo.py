@@ -95,7 +95,7 @@ class Result(object):
             'failures': 1,
             'errors': 1,
             'success': 1,
-            'run_time': 1,
+            'duration': 1,
             'details': 1,
             'tag': 1
         }
@@ -154,7 +154,7 @@ class Result(object):
         """
         versions_list = []
         versions_dict = []
-        result = self.db['xUnitResult'].find({'project': project_id}, {'version':1, 'stage': 1, 'was_successful': 1, "run_time": 1}, sort=[('_id', DESCENDING)])
+        result = self.db['xUnitResult'].find({'project': project_id}, {'version':1, 'stage': 1, 'was_successful': 1, "duration": 1}, sort=[('_id', DESCENDING)])
         for item in result:
             now_version = item['version'].replace("\n", "")
             if now_version in versions_list:
@@ -164,7 +164,7 @@ class Result(object):
                     versions_dict[version_index][item['stage']] = dict(
                         id=str(item['_id']),
                         success=item['was_successful'],
-                        duration=item['run_time']
+                        duration=item['duration']
                     )
                     versions_dict[version_index]['duration'] += versions_dict[version_index][item['stage']]['duration']
                     versions_dict[version_index]['success'] = versions_dict[version_index]['success'] and item['was_successful']
@@ -176,13 +176,13 @@ class Result(object):
                     version=now_version,
                     success=item['was_successful'],
                     count=1,
-                    duration=item['run_time']
+                    duration=item['duration']
                 )
-                # todo: change run_time to duration
+                # todo: change duration to duration
                 new_dict[item['stage']] = dict(
                     id=str(item['_id']),
                     success=item['was_successful'],
-                    duration=item['run_time']
+                    duration=item['duration']
                 )
                 versions_dict.append(new_dict)
         return versions_dict

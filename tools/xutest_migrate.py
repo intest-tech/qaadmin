@@ -67,7 +67,7 @@ def migrate_result(xu_db, qa_db):
             "errors": errors,
             "success": success,
             "skipped": skipped,
-            "run_time": item['run_time'],
+            "duration": item['run_time'],
             "version": item['pro_version'],
             "project": item['pro_name'],
             "create_time": item['rc_time'],

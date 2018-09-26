@@ -113,7 +113,7 @@
                       <path d="M6.982 8.256v3.834l2.542 1.708" class="st0"></path>
                     </svg>
                     <span class="label-align">
-                      Ran for <time datetime="PT53S">{{data.run_time}} sec</time>
+                      Ran for <time datetime="PT53S">{{data.duration}} sec</time>
                     </span>
                   </li>
                 </ul>
@@ -169,18 +169,8 @@
             <!--line-->
             <div class="travistab">
               <nav class="qaadmin-nav">
-                <ul>
-                  <li><a title="Look at this job's log"
-                       href="/intest-tech/qaadmin/jobs/431048534" id="tab_log"
-                       class="ember-view active">结果图表</a></li>
-                  <li><a title="查看测试结果图表"
-                       href="/intest-tech/qaadmin/jobs/431048534/config" id="tab_config"
-                       class="ember-view">运行日志</a></li>
-                </ul>
+                <a id="tab_log" style="font-size: 18px; color: #3eaaaf">Tracebacks:</a>
               </nav>
-              <div class="travistab-body">
-
-              </div>
             </div>
             <section id="log-container" class="log">
               <div class="panel-group" id="accordion">
@@ -188,7 +178,8 @@
                   <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
                        :href="'#collapse'+index">
                     <h4 class="panel-title">
-                      {{x.test_case}}
+                      <!--todo:use case_name-->
+                      {{x.case_name || x.test_case}}
                     </h4>
                   </div>
                   <div :id="'collapse'+index" class="panel-collapse collapse">
