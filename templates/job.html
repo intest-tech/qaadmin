@@ -97,22 +97,14 @@
               <div class="commit-info">
                 <ul class="list-icon">
                   <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17" class="icon">
-                      <circle cx="4.94" cy="2.83" r="1.83" fill="none" stroke="#9d9d9d" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></circle>
-                      <circle cx="11.78" cy="5.15" r="1.83" fill="none" stroke="#9d9d9d" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></circle>
-                      <circle cx="4.98" cy="14.17" r="1.83" fill="none" stroke="#9d9d9d" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></circle>
-                      <path d="M11.78 6.99s.09 2.68-1.9 3.38c-1.76.62-2.92-.04-4.93 1.97V4.66" fill="none" stroke="#9d9d9d" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></path>
-                    </svg>
-                    <span class="label-align inner-underline">Total {{data.total}} cases</span>
+                    <span class="label-align inner-underline">
+                      <i class="fal fa-tasks icon-info"></i>
+                      Total {{data.total}} cases
+                    </span>
                   </li>
                   <li title="Started September 24, 2018 19:58:48" class="commit-stopwatch">
-                    <svg viewBox="0 0 17.5 19.5" class="icon--m">
-                      <circle cx="7.369" cy="2.173" r="1.583" class="st0"></circle>
-                      <path d="M15.356 9.393c-.005.003-.011.001-.014-.004l-1.269-2.407c-.003-.005-.001-.011.004-.013l1.534-.799c.005-.003.011-.001.014.004l1.269 2.407c.003.005.001.011-.004.013l-1.534.799z" class="st0"></path>
-                      <circle cx="7.369" cy="12.146" r="6.757" class="st0"></circle>
-                      <path d="M6.982 8.256v3.834l2.542 1.708" class="st0"></path>
-                    </svg>
                     <span class="label-align">
+                      <i class="fal fa-alarm-clock icon-info"></i>
                       Ran for <time datetime="PT53S">{{data.duration}} sec</time>
                     </span>
                   </li>
@@ -125,28 +117,18 @@
                 <!--bar graph-->
                 <ul class="list-icon">
                   <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17" class="icon">
-                      <circle cx="8.51" cy="8.5" r="3.5" fill="none" stroke="#9d9d9d" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></circle>
-                      <path d="M16.5 8.5h-4.49m-7 0H.5" fill="none" stroke="#9d9d9d" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></path>
-                    </svg>
-                    <span class="label-align inner-underline commit-commit">Stage {{data.stage}}</span>
+                    <span class="label-align inner-underline commit-commit">
+                      <!--<i class="fal fa-sitemap icon-info fa-fw"></i>-->
+                      <i class="fal fa-map-signs icon-info"></i>
+                      Stage {{data.stage}}</span>
                   </li>
                   <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17" class="icon">
-                      <circle cx="3.8" cy="3.2" r="1.7" fill="none" stroke="#9d9d9d" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></circle>
-                      <path d="M6.75 15.5s1.95-1.95 1.95-1.98H6.3s-2.48.15-2.48-2.46V4.92m2.93 6.64s1.95 1.95 1.95 1.97" fill="none" stroke="#9d9d9d" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></path>
-                      <g fill="none" stroke="#9d9d9d" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
-                        <circle cx="13.2" cy="13.8" r="1.7"></circle>
-                        <path d="M10.25 1.5S8.3 3.45 8.3 3.47h2.4s2.48-.15 2.48 2.46v6.14m-2.93-6.63S8.3 3.49 8.3 3.47"></path>
-                      </g>
-                    </svg>
-                    <span class="label-align inner-underline commit-compare">Tag {{data.tag}}</span>
+                    <span class="label-align inner-underline commit-compare">
+                      <i class="fal fa-tag icon-info"></i>
+                      Tag {{data.tag}}</span>
                   </li>
                   <li title="Finished September 24, 2018 19:59:41" class="commit-calendar">
-                    <svg viewBox="0 0 15 15" class="icon">
-                      <path d="M.861.5H14.22v14H.861zm13.252 4.061H1.182" class="st0"></path>
-                      <path d="M4.639 7.913c.178-.166.475-.359.893-.359.734 0 2.093 1.164-.906 3.906h2.297m1.295-3.905h2.425s-1.4 1.693-1.4 3.906" class="st0"></path>
-                    </svg>
+                    <i class="fal fa-calendar-alt icon-info"></i>
                     <time datetime="September 24, 2018 19:59:41" class="label-align">11 minutes ago</time>
                   </li>
                 </ul>

@@ -132,6 +132,13 @@
     color: #db4545;
 }
 
+/* icon-infomation */
+.icon-info {
+    font-size: 15px;
+    width: 15px;
+    color: #9d9d9d;
+}
+
 .logo {
     width: 150px;
     vertical-align:middle;
