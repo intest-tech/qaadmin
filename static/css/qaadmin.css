@@ -131,3 +131,14 @@
 .fa-times {
     color: #db4545;
 }
+
+.logo {
+    width: 150px;
+    vertical-align:middle;
+    display:block;
+    height:55px;
+    outline:0;
+    position:relative;
+    margin:.3rem .1rem 0 .5rem;
+    float:left;
+}

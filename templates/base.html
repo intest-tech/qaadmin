@@ -24,62 +24,42 @@
     <!--导航栏-->
     <header class="top">
         <div class="topbar">
-            <!--<h1>QA Admin</h1>-->
-            <h1 id="logo" class="logo"><a href="/">QA Admin</a></h1>
-                <div class="navigation-toggle">
-                    <button class="tofuburger no-button" type="button" data-ember-action=""
-                            data-ember-action-367="367">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-503.7 379.2 17 10">
-                            <path d="M-487.3 380.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6zm0 4.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6zm0 4.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6z"></path>
-                        </svg>
-                    </button>
-                </div>
-                <div class="broadcast"><span class="icon-broadcast  "
-                                                                      title="broadcasts" data-ember-action=""
-                                                                      data-ember-action-370="370">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 21.625"><g class="tower-path"><circle class="path" cx="7.503"
-                                                                                                cy="6.733"
-                                                                                                r="1.775"></circle><path
-          class="path" d="M8.303 8.508l5.324 12.698-8.899-6.765"></path><path class="path"
-                                                                              d="M6.828 8.508l-5.3 12.698 8.899-6.765M7.5 8.508v12.165"></path></g><g
-          class="radio-wave--outer"><path class="path"
-                                          d="M2.454 11.81A6.936 6.936 0 0 1 .5 6.981C.5 4.045 2.312 1.54 4.875.5m7.793 11.168A6.919 6.919 0 0 0 14.5 6.981c0-2.936-1.812-5.441-4.375-6.481"></path></g><g
-          class="radio-wave--inner"><path class="path"
-                                          d="M3.751 9.161a4.318 4.318 0 0 1-.628-2.239A4.373 4.373 0 0 1 5.858 2.87m5.481 6.116a4.285 4.285 0 0 0 .537-2.064A4.373 4.373 0 0 0 9.141 2.87"></path></g></svg>
-                    <!---->
-</span>
-                </div>
-                <ul class="broadcasts ">
-                    <li><p>There are no broadcasts</p></li>
-                </ul>
+            <h1 class="logo">
+                <a href="/">QA Admin</a>
+            </h1>
+            <div class="broadcast">
+                <a href="https://github.com/intest-tech/qaadmin">
+                    <i class="fab fa-github" title="Get github source code" style="font-size: 20px; line-height:2.9;"></i>
+                </a>
+            </div>
             <nav id="navigation" class="navigation ">
                 <ul>
+                    <!--<li>-->
+                        <!--<a href="https://changelog.travis-ci.com" title="Travis CI Changelog"-->
+                           <!--class="navigation-anchor">Changelog</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="https://docs.travis-ci.com" title="Travis CI Documentation"-->
+                           <!--class="navigation-anchor">Documentation</a>-->
+                    <!--</li>-->
                     <li>
-                        <a href="https://changelog.travis-ci.com" title="Travis CI Changelog"
-                           class="navigation-anchor">Changelog</a>
+                        <a title="Travis CI Documentation" class="navigation-anchor">[TODO:]Documentation</a>
                     </li>
-                    <li>
-                        <a href="https://docs.travis-ci.com" title="Travis CI Documentation"
-                           class="navigation-anchor">Documentation</a>
-                    </li>
-
-                    <!---->
-                    <!---->
                     <li id="profile-menu-link" class="profile menu signed-in">
-                        <!----><a href="/profile/ityoung" id="ember372"
-                                  class="navigation-anchor navigation-profile-link signed-in ember-view">          <span
-                            id="ember373" class="avatar-wrapper ember-view"><span class="avatar">
-  <span class="pseudo-avatar" aria-hidden="true" data-initials="SY"></span>
-    <img class="real-avatar" src="https://avatars0.githubusercontent.com/u/12296804?v=4?v=3&amp;s=40"
-         srcset="https://avatars0.githubusercontent.com/u/12296804?v=4?v=3&amp;s=40 1x, https://avatars0.githubusercontent.com/u/12296804?v=4?v=3&amp;s=80 2x"
-         alt="Shin Yang avatar">
-</span>
-                        <!----></span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 8.59" class="icon">
-                            <path d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5" fill="none" stroke="#686b6e"
-                                  stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></path>
-                        </svg>
-                    </a><!---->
+                        <a href="/profile/ityoung" class="navigation-anchor navigation-profile-link signed-in">
+                            <span class="avatar-wrapper">
+                                <span class="avatar">
+                                    <span class="pseudo-avatar" aria-hidden="true" data-initials="SY"></span>
+                                    <img class="real-avatar" src="https://avatars0.githubusercontent.com/u/12296804?v=4?v=3&amp;s=40"
+                                         srcset="https://avatars0.githubusercontent.com/u/12296804?v=4?v=3&amp;s=40 1x, https://avatars0.githubusercontent.com/u/12296804?v=4?v=3&amp;s=80 2x"
+                                         alt="Shin Yang avatar">
+                                </span>
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 8.59" class="icon">
+                                <path d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5" fill="none" stroke="#686b6e"
+                                      stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></path>
+                            </svg>
+                        </a>
                         <div class="menu-separator"></div>
                         <ul class="navigation-nested">
                             <li class="username"><span>Shin Yang</span></li>
@@ -160,23 +140,13 @@
                         <div :class="'tile '+x.status">
                             <h2 :class="'tile-title '+x.status">
                                 <a :href="'/project/'+x.project" class="active">
-                                    <span title="Job passed" aria-label="Job passed"
-                                          class="status-icon icon passed"  v-if="x.success">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15">
-                                            <path d="M14.5 1.5L6.499 13.716.5 8.78"></path>
-                                        </svg>
+                                    <span class="label-align inner-underline">
+                                        <i class="fas fa-check" style="font-size: 14px;" v-if="x.success"></i>
+                                        <i class="fas fa-times" style="font-size: 14px; width: 14px; padding-left: 1px;" v-else></i>
+                                        {{x.project}}
                                     </span>
-
-                                    <span title="Job failed" aria-label="Job failed"
-                                          class="status-icon icon failed" v-if="!x.success">
-                                        <svg viewBox="0 0 15 15">
-                                            <path d="M.5.5l14 14m0-14l-14 14" fill="none" stroke="#9d9d9d" stroke-linecap="round"
-                                   stroke-linejoin="round" stroke-miterlimit="10"></path></svg>
-                                    </span>
-
-                                    <span class="label-align inner-underline">{{x.project}}</span>
-                                </a></h2>
-
+                                </a>
+                            </h2>
                             <p :class="'tile-title float-right '+x.status">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" class="icon">
                                     <title>Hash</title>

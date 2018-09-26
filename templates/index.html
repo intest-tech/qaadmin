@@ -145,6 +145,8 @@
                                           <li title="Build #9 passed" :class="item[p].success ? 'passed': 'failed'" v-for="p in pipeline" v-if="item[p]">
                                               <a :href="'/project/'+pro_id+'/job/'+item[p].id">
                                                   <span title="Job passed" aria-label="Job passed" class="status-icon icon passed">
+                                                  <!--<i class="fas fa-check" style="font-size: 20px;" v-if="item[p].success"></i>-->
+                                                  <!--<i class="fas fa-times" style="font-size: 20px; width: 20px;" v-else></i>-->
                                                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" v-if="item[p].success">
                                                           <path d="M14.5 1.5L6.499 13.716.5 8.78"></path>
                                                       </svg>
