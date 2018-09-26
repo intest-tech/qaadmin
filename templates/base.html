@@ -141,29 +141,26 @@
                             <h2 :class="'tile-title '+x.status">
                                 <a :href="'/project/'+x.project" class="active">
                                     <span class="label-align inner-underline">
-                                        <i class="fas fa-check" style="font-size: 14px;" v-if="x.success"></i>
-                                        <i class="fas fa-times" style="font-size: 14px; width: 14px; padding-left: 1px;" v-else></i>
+                                        <i class="fal fa-check" style="font-size: 14px;" v-if="x.success"></i>
+                                        <i class="fal fa-times" style="font-size: 14px; width: 14px; padding-left: 1px;" v-else></i>
                                         {{x.project}}
                                     </span>
                                 </a>
                             </h2>
                             <p :class="'tile-title float-right '+x.status">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" class="icon">
-                                    <title>Hash</title>
-                                    <path d="M10.379.756L9.363 14.078M5.637.5L4.621 13.823M14.5 5.046l-13.323.083m12.646 4.32L.5 9.532"></path>
-                                </svg>
-                                <a href="/intest-tech/qaadmin/builds/431048533" id="ember431"
-                                   class="ember-view"> <span class="label-align inner-underline">9</span>
-                                </a></p>
-
+                                <a :href="'/project/'+x.project+'/job/'">
+                                    <span class="label-align inner-underline">
+                                        <i class="fal fa-hashtag"></i>
+                                        9
+                                    </span>
+                                </a>
+                            </p>
                             <p>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" class="icon">
-                                    <circle class="st0" cx="7.5" cy="7.5" r="7"></circle>
-                                    <path class="st1" d="M7.275 3.208V7.5L9.98 9.254"></path>
-                                </svg>
-                                <span class="label-align">Duration:
-       <time class="duration" datetime="PT35S" title="Started September 20, 2018 22:13:27">35 sec</time>
-    </span>
+                                <span class="label-align">
+                                    <i class="fal fa-alarm-clock icon-info"></i>
+                                    Duration:
+                                    <time class="duration" datetime="PT35S" title="Started September 20, 2018 22:13:27">35 sec</time>
+                                </span>
                             </p>
 
                             <p>
