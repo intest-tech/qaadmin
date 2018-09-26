@@ -62,14 +62,15 @@ class UploadResultHandler(BaseHandler):
         # []
         new_result['project'] = result['_id']
         new_result = self.update_doc_info(new_result)
-        insert_result = self.mongo.TestResult.insert_one(new_result)
-        self.mongo.Project.update({'_id': result['_id']}, {"$set": {"latest_test": insert_result.inserted_id}})
+        insert_result = self.mongo.xUnitResult.insert_one(new_result)
+        # todo: update pipeline of project when some stage first created.
+        self.mongo.Project.update({'_id': result['_id']}, {"$addToSet": {"pipeline": new_result['stage']}})
         return self.json_response({'inserted_id': str(insert_result.inserted_id)})
 
 
 class DeleteResultHandler(BaseHandler):
     def delete(self, id):
-        return self.mongo['TestResult'].delete_one({'_id': ObjectId(id)})
+        return self.mongo['xUnitResult'].delete_one({'_id': ObjectId(id)})
 
     def post(self, *args, **kwargs):
         id = self.get_argument('id')

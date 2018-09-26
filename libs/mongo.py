@@ -80,7 +80,7 @@ class Result(object):
         """
         find_condition = {'_id': ObjectId(id), 'is_del': False}
         filter_condition = {'is_del': 0, '_id': 0}
-        result = self.db['TestResult'].find_one(find_condition, filter_condition)
+        result = self.db['xUnitResult'].find_one(find_condition, filter_condition)
         return result
 
     def get_page(self, pro_id, tag, page_index: int, page_size: int) -> dict:
@@ -99,8 +99,8 @@ class Result(object):
             'details': 1,
             'tag': 1
         }
-        count = self.db['TestResult'].count_documents(find_condition)
-        result = self.db['TestResult'].find(find_condition, filter_condition) \
+        count = self.db['xUnitResult'].count_documents(find_condition)
+        result = self.db['xUnitResult'].find(find_condition, filter_condition) \
             .sort('_id', -1) \
             .skip((page_index - 1) * page_size) \
             .limit(page_size)
@@ -132,13 +132,13 @@ class Result(object):
                 version=""
             )
 
-            latest_result = self.db['TestResult'].find_one({'project':project}, sort=[('_id', DESCENDING)])
+            latest_result = self.db['xUnitResult'].find_one({'project':project}, sort=[('_id', DESCENDING)])
             project_info['version'] = version = latest_result.get('version')
 
             for stage in pipeline:
                 find_condition = {'stage': stage, 'project':project, 'version':version}
                 filter_condition = {'_id': 0, 'was_successful': 1}
-                test_result = self.db['TestResult'].find_one(find_condition, filter_condition)
+                test_result = self.db['xUnitResult'].find_one(find_condition, filter_condition)
                 if test_result:
                     project_info['has_record'] = True
                     if test_result.get('was_successful') is False:
@@ -154,7 +154,7 @@ class Result(object):
         """
         versions_list = []
         versions_dict = []
-        result = self.db['TestResult'].find({'project': project_id}, {'version':1, 'stage': 1, 'was_successful': 1, "run_time": 1}, sort=[('_id', DESCENDING)])
+        result = self.db['xUnitResult'].find({'project': project_id}, {'version':1, 'stage': 1, 'was_successful': 1, "run_time": 1}, sort=[('_id', DESCENDING)])
         for item in result:
             now_version = item['version'].replace("\n", "")
             if now_version in versions_list:

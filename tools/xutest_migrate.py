@@ -76,7 +76,7 @@ def migrate_result(xu_db, qa_db):
             "details": item.get('details', [])
         }
         print(new_result)
-        qa_db.TestResult.insert(new_result)
+        qa_db.xUnitResult.insert(new_result)
 
 
 if __name__ == '__main__':
