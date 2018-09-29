@@ -7,7 +7,7 @@ from bson import ObjectId
 def conn_mongo():
     DOCKER_FLAG = os.environ.get('DOCKER', False)
     if DOCKER_FLAG:
-        conn = MongoClient('mongo', 27017)
+        conn = MongoClient('mongo-test', 27017)
     else:
         conn = MongoClient(config['mongo']['host'], int(config['mongo']['port']))
         # conn = MongoClient('localhost', 27017)
