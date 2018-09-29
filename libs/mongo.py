@@ -73,7 +73,7 @@ class Project(object):
         cur = self.col.find({'is_del': False}, {'_id': 1})
         return list(cur)
 
-    def exist(self, name: str) -> bool:
+    def is_exist(self, name: str) -> bool:
         """
         Check project existence
         :param name:

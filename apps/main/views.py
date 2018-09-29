@@ -21,3 +21,8 @@ def project_setting(pro_id):
 def job_with_id(pro_id, job_id):
     print(pro_id, job_id)
     return render_template('job.html', pro_id=pro_id, job_id=job_id)
+
+
+@main.route('/project/create', methods=['GET'])
+def create_project():
+    return render_template('create-project.html')
