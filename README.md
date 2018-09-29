@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/intest-tech/qaadmin.svg?branch=master)](https://travis-ci.org/intest-tech/qaadmin)
 
+[ 中文 | [EN](https://github.com/intest-tech/qaadmin/blob/master/README_en.md) ]
+
 测试报告归档与分享平台，服务端使用[Flask](https://github.com/pallets/flask)驱动。
 
 ## 环境
@@ -47,11 +49,13 @@ nosetests tests
 
 使用下列SDK实现测试结果上传：
 
-- Python unittest: [qaa-sdk-pyunit](https://github.com/intest-tech/qaa-sdk-pyunit)
-- Python pytest: TODO
-- Java TestNG: TODO
-- Java Junit: TODO
-- JavaScript Mocha: TODO
+语言|框架|链接
+---|---|---
+Python|unittest|[qaa-sdk-pyunit](https://github.com/intest-tech/qaa-sdk-pyunit)
+Python|pytest|TODO
+Java|TestNG|TODO
+Java|Junit|TODO
+JavaScript|Mocha|TODO
 
 > 欢迎[联系我](mailto:ityoung@foxmail.com)贡献您的SDK!
 

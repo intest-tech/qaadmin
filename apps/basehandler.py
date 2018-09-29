@@ -34,6 +34,11 @@ class BaseHandler(Resource):
         return qa_db
 
     @property
+    def User(self):
+        from libs.mongo import User
+        return User()
+
+    @property
     def Project(self):
         from libs.mongo import Project
         return Project()
@@ -69,32 +74,3 @@ class BaseHandler(Resource):
         # req = request.form
         # json_args = request.get_json()
         return request.get_json()
-
-    def json_response(self, data={}, status='success', error_msg='', **kwargs):
-        """
-        构建易处理的HTTP输出
-        :param status: 
-        :param error_msg: 
-        :param data: 
-        :param kwargs: 
-        :return: 
-        """
-        if isinstance(data, dict):
-            data.update(kwargs)
-        response = dict(
-            data=data,
-            status=status,
-            message=error_msg
-        )
-        return response
-
-    def update_doc_info(self, document: dict) -> dict:
-        """
-        为document字典添加create_time, is_del 
-        :param document: 插入mongo前的document
-        :return: 
-        """
-        document['create_time'] = datetime.datetime.utcnow()
-        # document['create_time'] = time.time()
-        document['is_del'] = False
-        return document

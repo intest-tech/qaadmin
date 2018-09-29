@@ -19,7 +19,7 @@ function showChart(el, data) {
             y:1,
             height: 60,
             top:1,
-            left:-54,
+            left:-58,
             containLabel: true,
             borderWidth:1
         },

@@ -4,19 +4,19 @@ from unittest import mock
 
 class BaseTestCase(TestCase):
     def create_app(self):
-        from index import app
+        from manage import app
         return app
 
-    def _create_api(self):
-        from flask import Flask
-        from flask_restful import Api
-        from apps.route import urls
-
-        app = Flask(__name__)
-        api = Api(app)
-        for url in urls:
-            api.add_resource(url[1], url[0])
-        return app
+    # def _create_api(self):
+    #     from flask import Flask
+    #     from flask_restful import Api
+    #     from apps.route import urls
+    #
+    #     app = Flask(__name__)
+    #     api = Api(app)
+    #     for url in urls:
+    #         api.add_resource(url[1], url[0])
+    #     return app
 
     def setUp(self):
         super(BaseTestCase, self).setUp()

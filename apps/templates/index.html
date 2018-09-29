@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+<body>
+<div class="wrapper">
+    {% block content %}
+        {% raw %}
+            <!--主面板-->
+            <div class="wrapper-main test-result-list">
+                <div id="main" class="main" role="main">
+                    <article class="repo-header">
+                        <header class="name">
+                            <h1 class="repo-title">
+                                <i class="fal fa-book fa-xs" style="color:#9d9d9d;"></i>
+                                [todo:Group] /
+                                <a :href="'/project/'+pro_id" class="active">{{pro_id}}</a>
+                            </h1>
+                        </header>
+                        <main class="repo-main">
+                            <div class="repo-navigation">
+                                <nav id="testtype_nav" class="qaadmin-nav ">
+                                    <ul>
+                                        <li id="tab_current" class="active">
+                                            <a :href="'/project/'+pro_id" class="active">
+                                                Current
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <nav class="option-button">
+                                    <button class="option-display" title="Show more options" type="button">
+                                        <span class="label-align">More options</span>
+                                        <span class="option-tofu">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 viewBox="-503.7 379.2 17 10"
+                                                 class="icon-tofu">
+                                                <path d="M-487.3 380.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6zm0 4.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6zm0 4.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6z"></path>
+                                            </svg>
+                                        </span>
+                                    </button>
+                                    <!--<ul class="option-dropdown">-->
+                                        <!--<li>-->
+                                            <!--<a href="/intest-tech/qaadmin/settings">Settings</a>-->
+                                        <!--</li>-->
+                                        <!--<li>-->
+                                            <!--<a href="/intest-tech/qaadmin/requests">Requests</a>-->
+                                        <!--</li>-->
+                                        <!--<li>-->
+                                            <!--<a href="/intest-tech/qaadmin/caches">Caches</a>-->
+                                        <!--</li>-->
+                                        <!--<li>-->
+                                            <!--<button class="trigger-build-anchor" type="button">-->
+                                                <!--Trigger build-->
+                                            <!--</button>-->
+                                        <!--</li>-->
+                                    <!--</ul>-->
+                                </nav>
+                            </div>
+
+                            <!--test record-->
+                            <div class="test-result-list">
+                                <li :class="'branch-row row-li '+item.status" v-for="item in list">
+                                    <div class="two-line fade-out">
+                                        <h2 class="row-item">
+                                          <span :class="'label-align '+item.status">
+                                          <i class="fal fa-check" style="font-size: 16px;" v-if="item.success"></i>
+                                          <i class="fal fa-times" style="font-size: 16px; width: 16px; padding-left: 2px;" v-else></i>
+                                          {{item.version}}</span>
+                                        </h2>
+                                      <div class="row-builds">
+                                        <div class="row-item">
+                                            <span class="label-align">
+                                                <i class="fal fa-tasks icon-info"></i>
+                                                {{item.count}} builds
+                                            </span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="two-line fade-out">
+                                      <div class="row-item">
+                                        <div>
+                                            <time class="label-align" datetime="PT49S">
+                                                <i class="fal fa-alarm-clock icon-info"></i>
+                                                {{item.duration}} sec
+                                            </time>
+                                        </div>
+
+                                      <div class="row-item row-calendar">
+                                        <div title="Finished September 21, 2018 17:56:00">
+                                            <time class="label-align" datetime="2018-09-21T09:56:38Z">
+                                                <i class="fal fa-calendar-alt icon-info"></i>
+                                                a day ago
+                                            </time>
+                                        </div>
+                                      </div>
+                                    </div></div>
+                                    <!--pipeline result-->
+                                    <div class="one-line ">
+                                      <ul class="build-tiles">
+                                          <li title="Build #9 passed" :class="item[p].success ? 'passed': 'failed'" v-for="p in pipeline" v-if="item[p]">
+                                              <a :href="'/project/'+pro_id+'/job/'+item[p].id">
+                                                  <span title="Job passed" aria-label="Job passed" class="status-icon icon passed">
+                                                      <i class="fal fa-check" style="font-size: 20px;" v-if="item[p].success"></i>
+                                                      <i class="fal fa-times" style="font-size: 20px; width: 20px;" v-else></i>
+                                                  </span>
+                                                  <span class="build-tile-number">{{p}}</span>
+                                              </a>
+                                          </li>
+                                      </ul>
+                                    </div>
+                                </li>
+                            </div>
+                            <!--end test record-->
+
+                        </main>
+                    </article>
+                </div>
+            </div>
+        {% endraw %}
+    {% endblock %}
+
+</div>
+</body>
+
+{% block sctipt %}
+
+var test_list_app = new Vue({
+    data: {
+        pro_id: '{{ id }}' || 'gt-server',
+        list: [],
+        pipeline:['单元测试', '接口测试']
+    },
+    methods: {
+        getResultList() {
+            var vm = this, pro_id = vm.pro_id;
+            $.get('/api/test-result/get-version?project=' + pro_id, function (res) {
+                if (!res || !res.data) { return alert('异常') }
+                res.data.map(x=>x.success?x.status="passed":x.status="errored")
+                vm.list = res.data
+                console.info(vm.list)
+            })
+        }
+    },
+    created: function () {
+        this.getResultList()
+    }
+});
+test_list_app.$mount('.test-result-list')
+
+{% endblock %}

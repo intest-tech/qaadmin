@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+  {% block script %}
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="/static/js/project.js"></script>
+  <script src="/static/js/opensource/echarts.js"></script>
+  <link rel="stylesheet" href="/static/css/job.css">
+  {% endblock %}
+
+<body>
+{% block content %}
+{% raw %}
+<!--主面板-->
+<div class="wrapper-main">
+  <div id="main" class="main" role="main">
+    <article class="repo-header">
+      <header class="name">
+        <h1 class="repo-title">
+          <i class="fal fa-book fa-xs" style="color:#9d9d9d;"></i>
+          [todo:Group] /
+          <a :href="'/project/'+pro_id" class="active">{{pro_id}}</a>
+        </h1>
+      </header>
+      <main class="repo-main">
+        <div class="repo-navigation">
+          <nav id="testtype_nav" class="qaadmin-nav">
+            <ul>
+              <li id="tab_current" class="active">
+                <a :href="'/project/'+pro_id+'/job/'+job_id" class="active">
+                  Current
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <nav class="option-button">
+            <button class="option-display" title="Show more options" type="button">
+              <span class="label-align">More options</span>
+              <span class="option-tofu">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-503.7 379.2 17 10" class="icon-tofu">
+                  <path d="M-487.3 380.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6zm0 4.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6zm0 4.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6z"></path>
+                </svg>
+              </span>
+            </button>
+          </nav>
+        </div>
+        <div class="travistab-body repo-body">
+          <!--job card-->
+          <section data-job-id="432817794" :class="'build-header '+status">
+            <div class="build-commit">
+              <h2 :class="'build-title '+status">
+                <span title="Job passed" aria-label="Job passed" class="status-icon icon passed" v-if="data.was_successful">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15">
+                    <path d="M14.5 1.5L6.499 13.716.5 8.78"></path>
+                  </svg>
+                </span>
+                <span title="Job failed" aria-label="Job failed" class="status-icon icon failed" v-if="!data.was_successful">
+                  <svg viewBox="0 0 15 15">
+                    <path d="M.5.5l14 14m0-14l-14 14" fill="none" stroke="#9d9d9d" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></path>
+                  </svg>
+                </span>
+                <small class="commit-branch" title="master">{{data.version}}</small>
+                {{status}}
+              </h2>
+              <div class="commit-info">
+                <ul class="list-icon">
+                  <li>
+                    <span class="label-align inner-underline">
+                      <i class="fal fa-tasks icon-info"></i>
+                      Total {{data.total}} cases
+                    </span>
+                  </li>
+                  <li title="Started September 24, 2018 19:58:48" class="commit-stopwatch">
+                    <span class="label-align">
+                      <i class="fal fa-alarm-clock icon-info"></i>
+                      Ran for <time datetime="PT53S">{{data.duration}} sec</time>
+                    </span>
+                  </li>
+                </ul>
+                <div class="bar-graph"></div>
+              </div>
+            </div>
+
+            <div class="build-info">
+              <!--bar graph-->
+              <ul class="list-icon">
+                <li>
+                  <span class="label-align inner-underline commit-commit">
+                    <i class="fal fa-map-signs icon-info"></i>
+                    Stage {{data.stage}}</span>
+                </li>
+                <li>
+                  <span class="label-align inner-underline commit-compare">
+                    <i class="fal fa-tag icon-info"></i>
+                    Tag {{data.tag}}</span>
+                </li>
+                <li title="Finished September 24, 2018 19:59:41" class="commit-calendar">
+                  <i class="fal fa-calendar-alt icon-info"></i>
+                  <time datetime="September 24, 2018 19:59:41" class="label-align">11 minutes ago</time>
+                </li>
+              </ul>
+            </div>
+
+            <div class="build-tools repo-main-tools action-button-container">
+              <button class="action-button--restart" aria-label="Restart build" type="button">
+                <svg viewBox="0 0 15 15" class="icon">
+                  <path d="M14.5 5.768l-2.07 2.506M9.549 6.451l2.881 1.823m-.016-.395c0-3.873-2.705-6.379-5.981-6.379a5.933 5.933 0 1 0 4.446 9.861"></path>
+                </svg>
+                <span class="label-align">Restart build</span>
+              </button>
+            </div>
+          </section>
+
+          <!--line-->
+          <div class="travistab">
+            <nav class="qaadmin-nav">
+              <a id="tab_log" style="font-size: 18px; color: #3eaaaf">Tracebacks:</a>
+            </nav>
+          </div>
+          <section id="log-container" class="log">
+            <div class="panel-group" id="accordion">
+              <div class="panel panel-default" v-for="(x, index) in tracebacks">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                     :href="'#collapse'+index">
+                  <h4 class="panel-title">
+                    <!--todo:use case_name-->
+                    {{x.case_name || x.test_case}}
+                  </h4>
+                </div>
+                <div :id="'collapse'+index" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre>{{x.note}}</pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </article>
+  </div>
+</div>
+  {% endraw %}
+{% endblock %}
+
+</body>
+
+{% block sctipt %}
+
+$(function(){
+  $.get('/api/test-result?id='+app.job_id,function(res){
+    if(!res){return alert('异常')}
+    app.data=res.data
+    app.status = res.data.was_successful?"passed":"failed"
+    app.tracebacks = res.data.details
+    showChart(
+      document.querySelector('.bar-graph'),
+      [app.data.success || '-',
+      app.data.failures || '-',
+      app.data.errors || '-',
+      app.data.skipped || '-']
+    )
+  })
+});
+
+var app=new Vue({
+  data:{
+    pro_id: '{{ pro_id }}',
+    job_id: '{{ job_id }}',
+    data: {},
+    status: 'failed',
+    tracebacks: []
+  }
+});
+app.$mount('.wrapper-main')
+
+{% endblock %}
