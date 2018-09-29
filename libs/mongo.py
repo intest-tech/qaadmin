@@ -1,7 +1,9 @@
 import os
-from pymongo import MongoClient, DESCENDING, ASCENDING
+from pymongo import MongoClient, DESCENDING
 from libs.myconfigparser import config
+from libs.crypto import encrypt_password
 from bson import ObjectId
+import datetime
 
 
 def conn_mongo():
@@ -30,8 +32,20 @@ qa_db = conn_mongo()
 
 
 @singleton
+class User(object):
+    db = qa_db
+
+    def check(self, username: str, password: str) -> bool:
+        user_info = self.db['User'].find_one({'username': username, 'is_del': False})
+        if user_info and encrypt_password(password, user_info.get('salt', 0)) == user_info.get('password'):
+            return True
+        return False
+
+
+@singleton
 class Project(object):
     db = qa_db
+    col = db['Project']
 
     def get(self, name: str) -> dict:
         """
@@ -39,7 +53,7 @@ class Project(object):
         :param name: project name
         :return: 
         """
-        result = self.db['Project'].find_one({'_id': name})
+        result = self.col.find_one({'_id': name})
         return result
 
     def get_tags(self, name: str) -> list:
@@ -48,7 +62,7 @@ class Project(object):
         :param name: project name
         :return: 
         """
-        result = self.db['Project'].find_one({'_id': name}, {'tags': 1})
+        result = self.col.find_one({'_id': name}, {'tags': 1})
         return result.get('tags', [])
 
     def list(self) -> list:
@@ -56,7 +70,7 @@ class Project(object):
         获取 project 列表.
         :return: 
         """
-        cur = self.db['Project'].find({'is_del': False}, {'_id': 1})
+        cur = self.col.find({'is_del': False}, {'_id': 1})
         return list(cur)
 
     def exist(self, name: str) -> bool:
@@ -71,6 +85,10 @@ class Project(object):
 @singleton
 class Result(object):
     db = qa_db
+    col = qa_db['xUnitResult']
+
+    def insert(self, new_result):
+        return self.col.insert_one(new_result)
 
     def get(self, id):
         """
@@ -80,7 +98,7 @@ class Result(object):
         """
         find_condition = {'_id': ObjectId(id), 'is_del': False}
         filter_condition = {'is_del': 0, '_id': 0}
-        result = self.db['xUnitResult'].find_one(find_condition, filter_condition)
+        result = self.col.find_one(find_condition, filter_condition)
         return result
 
     def get_page(self, pro_id, tag, page_index: int, page_size: int) -> dict:
@@ -99,8 +117,8 @@ class Result(object):
             'details': 1,
             'tag': 1
         }
-        count = self.db['xUnitResult'].count_documents(find_condition)
-        result = self.db['xUnitResult'].find(find_condition, filter_condition) \
+        count = self.col.count_documents(find_condition)
+        result = self.col.find(find_condition, filter_condition) \
             .sort('_id', -1) \
             .skip((page_index - 1) * page_size) \
             .limit(page_size)
@@ -132,13 +150,13 @@ class Result(object):
                 version=""
             )
 
-            latest_result = self.db['xUnitResult'].find_one({'project':project}, sort=[('_id', DESCENDING)])
+            latest_result = self.col.find_one({'project': project}, sort=[('_id', DESCENDING)])
             project_info['version'] = version = latest_result.get('version')
 
             for stage in pipeline:
-                find_condition = {'stage': stage, 'project':project, 'version':version}
+                find_condition = {'stage': stage, 'project': project, 'version': version}
                 filter_condition = {'_id': 0, 'was_successful': 1}
-                test_result = self.db['xUnitResult'].find_one(find_condition, filter_condition)
+                test_result = self.col.find_one(find_condition, filter_condition)
                 if test_result:
                     project_info['has_record'] = True
                     if test_result.get('was_successful') is False:
@@ -154,7 +172,9 @@ class Result(object):
         """
         versions_list = []
         versions_dict = []
-        result = self.db['xUnitResult'].find({'project': project_id}, {'version':1, 'stage': 1, 'was_successful': 1, "duration": 1}, sort=[('_id', DESCENDING)])
+        result = self.col.find({'project': project_id},
+                               {'version': 1, 'stage': 1, 'was_successful': 1, "duration": 1},
+                               sort=[('_id', DESCENDING)])
         for item in result:
             now_version = item['version'].replace("\n", "")
             if now_version in versions_list:
@@ -167,7 +187,8 @@ class Result(object):
                         duration=item['duration']
                     )
                     versions_dict[version_index]['duration'] += versions_dict[version_index][item['stage']]['duration']
-                    versions_dict[version_index]['success'] = versions_dict[version_index]['success'] and item['was_successful']
+                    versions_dict[version_index]['success'] = versions_dict[version_index]['success'] and item[
+                        'was_successful']
                     versions_dict[version_index]['count'] += 1
             else:
                 versions_list.append(now_version)
@@ -186,6 +207,20 @@ class Result(object):
                 )
                 versions_dict.append(new_dict)
         return versions_dict
+
+    def delete(self, id):
+        return self.col.delete_one({'_id': ObjectId(id)}).raw_result
+
+
+def init_document(document: dict) -> dict:
+    """
+    为document字典添加create_time, is_del 
+    :param document: 插入mongo前的document
+    :return: 
+    """
+    document['create_time'] = datetime.datetime.utcnow()
+    document['is_del'] = False
+    return document
 
 
 if __name__ == '__main__':
