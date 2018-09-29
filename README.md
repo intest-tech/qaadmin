@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/intest-tech/qaadmin.svg?branch=master)](https://travis-ci.org/intest-tech/qaadmin)
 
+[ 中文 | [EN](https://github.com/intest-tech/qaadmin/blob/master/README_en.md) ]
+
 测试报告归档与分享平台，服务端使用[Flask](https://github.com/pallets/flask)驱动。
 
 ## 环境

@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/intest-tech/qaadmin.svg?branch=master)](https://travis-ci.org/intest-tech/qaadmin)
 
+[ EN | [中文](https://github.com/intest-tech/qaadmin/blob/master/README.md) ]
+
 Platform used for collecting and sharing testing result. Powered by [Flask](https://github.com/pallets/flask).
 
 ## Environment
