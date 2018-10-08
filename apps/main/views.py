@@ -1,5 +1,7 @@
+from flask import render_template, request, flash, redirect
+from libs.response import json_response
+from libs.mongo import Project, init_document
 from . import main
-from flask import render_template
 
 
 @main.route('/', methods=['GET'])
@@ -23,6 +25,28 @@ def job_with_id(pro_id, job_id):
     return render_template('job.html', pro_id=pro_id, job_id=job_id)
 
 
-@main.route('/project/create', methods=['GET'])
+@main.route('/project/create', methods=['GET', 'POST'])
 def create_project():
+    if request.method == 'POST':
+        # todo: create with token
+        project_name = request.form.get('name')
+        project_detail = request.form.get('detail')
+        error = None
+        if not project_name:
+            error='error project name'
+        else:
+            project_info = Project().is_exist(project_name)
+            if project_info:
+                error='project exist'
+        if error is None:
+            new_project = {
+                '_id': project_name,
+                "detail": project_detail
+            }
+            new_project = init_document(new_project)
+            # todo: update Project class
+            new_project_id = Project().col.insert_one(new_project).inserted_id
+            # return json_response({'inserted_id': str(new_project_id)})
+            return redirect('/project/'+project_name, code=302)
+        flash(error)
     return render_template('create-project.html')

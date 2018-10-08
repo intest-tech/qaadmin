@@ -14,27 +14,27 @@ def list_project():
     return jsonify(project_list)
 
 
-@api.route('/project/create', methods=['POST'])
-def create_project():
-    # todo: create with token
-    project_name = request.form.get('name')
-    project_detail = request.form.get('detail')
-    if not project_name:
-        return json_response("", status='fail', error_msg='error project name')
-    else:
-        project_info = Project().is_exist(project_name)
-        if project_info:
-            return json_response("", status='fail', error_msg='project exist')
-
-        new_project = {
-            '_id': project_name,
-            "detail": project_detail
-        }
-        new_project = init_document(new_project)
-        # todo: update Project class
-        new_project_id = Project().col.insert_one(new_project).inserted_id
-        return json_response({'inserted_id': str(new_project_id)})
-        # return redirect('/project/'+project_name, code=302)
+# @api.route('/project/create', methods=['POST'])
+# def create_project():
+#     # todo: create with token
+#     project_name = request.form.get('name')
+#     project_detail = request.form.get('detail')
+#     if not project_name:
+#         return json_response("", status='fail', error_msg='error project name')
+#     else:
+#         project_info = Project().is_exist(project_name)
+#         if project_info:
+#             return json_response("", status='fail', error_msg='project exist')
+#
+#         new_project = {
+#             '_id': project_name,
+#             "detail": project_detail
+#         }
+#         new_project = init_document(new_project)
+#         # todo: update Project class
+#         new_project_id = Project().col.insert_one(new_project).inserted_id
+#         return json_response({'inserted_id': str(new_project_id)})
+#         # return redirect('/project/'+project_name, code=302)
 
 # class CreateProjectHandler(BaseHandler):
 #     def create_project(self, document):

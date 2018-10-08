@@ -151,6 +151,8 @@ class Result(object):
             )
 
             latest_result = self.col.find_one({'project': project}, sort=[('_id', DESCENDING)])
+            if not latest_result:
+                continue
             project_info['version'] = version = latest_result.get('version')
 
             for stage in pipeline:
