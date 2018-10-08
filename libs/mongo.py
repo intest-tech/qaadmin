@@ -151,18 +151,18 @@ class Result(object):
             )
 
             latest_result = self.col.find_one({'project': project}, sort=[('_id', DESCENDING)])
-            if not latest_result:
-                continue
-            project_info['version'] = version = latest_result.get('version')
 
-            for stage in pipeline:
-                find_condition = {'stage': stage, 'project': project, 'version': version}
-                filter_condition = {'_id': 0, 'was_successful': 1}
-                test_result = self.col.find_one(find_condition, filter_condition)
-                if test_result:
-                    project_info['has_record'] = True
-                    if test_result.get('was_successful') is False:
-                        project_info['success'] = False
+            if latest_result:
+                project_info['version'] = version = latest_result.get('version')
+                for stage in pipeline:
+                    find_condition = {'stage': stage, 'project': project, 'version': version}
+                    filter_condition = {'_id': 0, 'was_successful': 1}
+                    test_result = self.col.find_one(find_condition, filter_condition)
+                    if test_result:
+                        project_info['has_record'] = True
+                        if test_result.get('was_successful') is False:
+                            project_info['success'] = False
+
             project_list.append(project_info)
         return project_list
 
