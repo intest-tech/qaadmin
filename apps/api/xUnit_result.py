@@ -44,7 +44,7 @@ def upload_result():
     token = request.args.get('token')
     result = Project().col.find_one({'token': token})
     if not token or not result:
-        return json_response(status='forbidden', error_msg='token error')
+        return json_response("", status='forbidden', error_msg='token error')
     new_result = request.get_json()
     # todo: check arguments
     # []

@@ -73,7 +73,7 @@ class Project(object):
         cur = self.col.find({'is_del': False}, {'_id': 1})
         return list(cur)
 
-    def exist(self, name: str) -> bool:
+    def is_exist(self, name: str) -> bool:
         """
         Check project existence
         :param name:
@@ -151,16 +151,18 @@ class Result(object):
             )
 
             latest_result = self.col.find_one({'project': project}, sort=[('_id', DESCENDING)])
-            project_info['version'] = version = latest_result.get('version')
 
-            for stage in pipeline:
-                find_condition = {'stage': stage, 'project': project, 'version': version}
-                filter_condition = {'_id': 0, 'was_successful': 1}
-                test_result = self.col.find_one(find_condition, filter_condition)
-                if test_result:
-                    project_info['has_record'] = True
-                    if test_result.get('was_successful') is False:
-                        project_info['success'] = False
+            if latest_result:
+                project_info['version'] = version = latest_result.get('version')
+                for stage in pipeline:
+                    find_condition = {'stage': stage, 'project': project, 'version': version}
+                    filter_condition = {'_id': 0, 'was_successful': 1}
+                    test_result = self.col.find_one(find_condition, filter_condition)
+                    if test_result:
+                        project_info['has_record'] = True
+                        if test_result.get('was_successful') is False:
+                            project_info['success'] = False
+
             project_list.append(project_info)
         return project_list
 
@@ -172,14 +174,14 @@ class Result(object):
         """
         versions_list = []
         versions_dict = []
-        result = self.col.find({'project': project_id},
-                               {'version': 1, 'stage': 1, 'was_successful': 1, "duration": 1},
-                               sort=[('_id', DESCENDING)])
+        result = self.col.find(
+            {'project': project_id},
+            {'version': 1, 'stage': 1, 'was_successful': 1, "duration": 1, 'create_time': 1},
+            sort=[('_id', DESCENDING)])
         for item in result:
             now_version = item['version'].replace("\n", "")
             if now_version in versions_list:
                 version_index = versions_list.index(now_version)
-                # stage = versions_dict[version_index].get(item['stage'], None)
                 if not versions_dict[version_index].get(item['stage'], None):
                     versions_dict[version_index][item['stage']] = dict(
                         id=str(item['_id']),
@@ -197,9 +199,9 @@ class Result(object):
                     version=now_version,
                     success=item['was_successful'],
                     count=1,
-                    duration=item['duration']
+                    duration=item['duration'],
+                    create_time=int(datetime.datetime.timestamp(item['create_time'])*1000)
                 )
-                # todo: change duration to duration
                 new_dict[item['stage']] = dict(
                     id=str(item['_id']),
                     success=item['was_successful'],

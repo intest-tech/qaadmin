@@ -1,5 +1,6 @@
-from flask import jsonify, render_template
-from libs.mongo import Project
+from flask import jsonify, request
+from libs.mongo import Project, init_document
+from libs.response import json_response
 from . import api
 
 # import uuid
@@ -12,6 +13,29 @@ def list_project():
     project_list = Project().list()
     return jsonify(project_list)
 
+
+# @api.route('/project/create', methods=['POST'])
+# def create_project():
+#     # todo: create with token
+#     project_name = request.form.get('name')
+#     project_detail = request.form.get('detail')
+#     if not project_name:
+#         return json_response("", status='fail', error_msg='error project name')
+#     else:
+#         project_info = Project().is_exist(project_name)
+#         if project_info:
+#             return json_response("", status='fail', error_msg='project exist')
+#
+#         new_project = {
+#             '_id': project_name,
+#             "detail": project_detail
+#         }
+#         new_project = init_document(new_project)
+#         # todo: update Project class
+#         new_project_id = Project().col.insert_one(new_project).inserted_id
+#         return json_response({'inserted_id': str(new_project_id)})
+#         # return redirect('/project/'+project_name, code=302)
+
 # class CreateProjectHandler(BaseHandler):
 #     def create_project(self, document):
 #         return self.mongo.Project.insert_one(document).inserted_id
@@ -23,7 +47,7 @@ def list_project():
 #         if not project_name:
 #             return self.json_response(status='fail', error_msg='error project name')
 #         else:
-#             project_info = self.Project.exist(project_name)
+#             project_info = self.Project.is_exist(project_name)
 #             if project_info:
 #                 return self.json_response(status='fail', error_msg='project exist')
 #
@@ -35,7 +59,7 @@ def list_project():
 #             new_project_id = self.create_project(new_project)
 #             return self.json_response({'inserted_id': str(new_project_id)})
 #
-#
+
 # # todo: update project info
 # # class UpdateBaseHandler(BaseHandler):
 # #     def post(self, *args, **kwargs):
@@ -51,7 +75,7 @@ def list_project():
 #         if not project_name:
 #             return self.json_response(status='fail', error_msg='error project name')
 #         else:
-#             project_info = self.Project.exist(project_name)
+#             project_info = self.Project.is_exist(project_name)
 #             if not project_info:
 #                 return self.json_response(status='fail', error_msg='project not exist')
 #             result = self.mongo.Project.delete_one({'_id': project_name})
@@ -69,7 +93,7 @@ def list_project():
 #         if not project_name:
 #             return self.json_response(status='fail', error_msg='error project name')
 #         else:
-#             project_info = self.Project.exist(project_name)
+#             project_info = self.Project.is_exist(project_name)
 #             if not project_info:
 #                 return self.json_response(status='fail', error_msg='project not exist')
 #             new_token = uuid.uuid4().hex
@@ -85,7 +109,7 @@ def list_project():
 #         if not project:
 #             return self.json_response(status='fail', error_msg='error project id')
 #         else:
-#             project_info = self.Project.exist(project)
+#             project_info = self.Project.is_exist(project)
 #             if not project_info:
 #                 return self.json_response(status='fail', error_msg='project not exist')
 #             result = self.Project.get(project)
@@ -103,7 +127,7 @@ def list_project():
 #         if not project:
 #             return self.json_response(status='fail', error_msg='error project id')
 #         else:
-#             project_info = self.Project.exist(project)
+#             project_info = self.Project.is_exist(project)
 #             if not project_info:
 #                 return self.json_response(status='fail', error_msg='project not exist')
 #             result = self.Project.get_tags(project)
