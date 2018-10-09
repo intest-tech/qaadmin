@@ -78,18 +78,14 @@
                                     <div class="two-line fade-out">
                                       <div class="row-item">
                                         <div>
-                                            <time class="label-align" datetime="PT49S">
-                                                <i class="fal fa-alarm-clock icon-info"></i>
-                                                {{item.duration.toFixed(3)}} sec
-                                            </time>
+                                            <i class="fal fa-alarm-clock icon-info"></i>
+                                            {{item.duration}} sec
                                         </div>
 
                                       <div class="row-item row-calendar">
-                                        <div title="Finished September 21, 2018 17:56:00">
-                                            <time class="label-align" datetime="2018-09-21T09:56:38Z">
-                                                <i class="fal fa-calendar-alt icon-info"></i>
-                                                a day ago
-                                            </time>
+                                        <div :title="'Finished '+ new Date(item.create_time)">
+                                            <i class="fal fa-calendar-alt icon-info"></i>
+                                            <timeago :datetime="item.create_time"></timeago>
                                         </div>
                                       </div>
                                     </div></div>
@@ -122,6 +118,11 @@
 </body>
 
 {% block sctipt %}
+
+Vue.use(VueTimeago, {
+  name: 'Timeago', // Component name, `Timeago` by default
+  locale: 'en', // Default locale
+})
 
 var test_list_app = new Vue({
     data: {
