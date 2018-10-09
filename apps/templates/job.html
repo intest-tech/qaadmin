@@ -72,7 +72,7 @@
                   <li title="Started September 24, 2018 19:58:48" class="commit-stopwatch">
                     <span class="label-align">
                       <i class="fal fa-alarm-clock icon-info"></i>
-                      Ran for <time datetime="PT53S">{{data.duration.toFixed(3)}} sec</time>
+                      Ran for {{data.duration}} sec
                     </span>
                   </li>
                 </ul>
@@ -93,21 +93,21 @@
                     <i class="fal fa-tag icon-info"></i>
                     Tag {{data.tag}}</span>
                 </li>
-                <li title="Finished September 24, 2018 19:59:41" class="commit-calendar">
+                <li :title="'Finished '+ new Date(data.create_time.$date)" class="commit-calendar" v-if="data.create_time">
                   <i class="fal fa-calendar-alt icon-info"></i>
-                  <time datetime="September 24, 2018 19:59:41" class="label-align">11 minutes ago</time>
+                  <timeago :datetime="data.create_time.$date"></timeago>
                 </li>
               </ul>
             </div>
 
-            <div class="build-tools repo-main-tools action-button-container">
-              <button class="action-button--restart" aria-label="Restart build" type="button">
-                <svg viewBox="0 0 15 15" class="icon">
-                  <path d="M14.5 5.768l-2.07 2.506M9.549 6.451l2.881 1.823m-.016-.395c0-3.873-2.705-6.379-5.981-6.379a5.933 5.933 0 1 0 4.446 9.861"></path>
-                </svg>
-                <span class="label-align">Restart build</span>
-              </button>
-            </div>
+            <!--<div class="build-tools repo-main-tools action-button-container">-->
+              <!--<button class="action-button&#45;&#45;restart" aria-label="Restart build" type="button">-->
+                <!--<svg viewBox="0 0 15 15" class="icon">-->
+                  <!--<path d="M14.5 5.768l-2.07 2.506M9.549 6.451l2.881 1.823m-.016-.395c0-3.873-2.705-6.379-5.981-6.379a5.933 5.933 0 1 0 4.446 9.861"></path>-->
+                <!--</svg>-->
+                <!--<span class="label-align">Restart build</span>-->
+              <!--</button>-->
+            <!--</div>-->
           </section>
 
           <!--line-->
@@ -161,6 +161,11 @@ $(function(){
     )
   })
 });
+
+Vue.use(VueTimeago, {
+  name: 'Timeago', // Component name, `Timeago` by default
+  locale: 'en', // Default locale
+})
 
 var app=new Vue({
   data:{
