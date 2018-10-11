@@ -47,13 +47,14 @@ class Project(object):
     db = qa_db
     col = db['Project']
 
-    def get(self, name: str) -> dict:
+    def get(self, name: str, **kwargs) -> dict:
         """
         获取某个 project 信息.
         :param name: project name
         :return: 
         """
-        result = self.col.find_one({'_id': name})
+        filter_condition = kwargs.get('filter', None)
+        result = self.col.find_one({'_id': name, 'is_del': False}, filter_condition)
         return result
 
     def get_tags(self, name: str) -> list:

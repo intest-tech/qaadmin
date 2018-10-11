@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block script %}
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/static/js/project.js"></script>
+<!--<link rel="stylesheet" href="/static/css/travis-bak.css">-->
+<link rel="stylesheet" href="/static/css/job.css">
+{% endblock %}
+
+<body>
+{% block content %}
+{% raw %}
+<!--主面板-->
+<div class="wrapper-main">
+    <div id="main" class="main" role="main">
+        <div id="ember219" class="ember-view">
+            <article class="repo-header">
+                <header class="name">
+                    <h1 class="repo-title">
+                        <i class="fal fa-book fa-xs" style="color:#9d9d9d;"></i>
+                        <!--[todo:Group] /-->
+                        <a :href="'/project/'+pro_id" class="active">{{pro_id}}</a>
+                    </h1>
+                </header>
+                <main class="repo-main">
+                    <div class="repo-navigation">
+                        <nav id="testtype_nav" class="qaadmin-nav ">
+                            <ul>
+                                <li id="tab_current">
+                                    <a :href="'/project/'+pro_id">
+                                        Current
+                                    </a>
+                                </li>
+                                <li id="tab_setting" class="active">
+                                    <a :href="'/project/'+pro_id+'/setting'" class="active">
+                                        Setting
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <nav class="option-button">
+                            <button class="option-display" title="Show more options" type="button">
+                                <span class="label-align">More options</span>
+                                <span class="option-tofu">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="-503.7 379.2 17 10"
+                                         class="icon-tofu">
+                                        <path d="M-487.3 380.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6zm0 4.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6zm0 4.4H-503c-.4 0-.6-.3-.6-.6s.3-.6.6-.6h15.7c.4 0 .6.3.6.6s-.3.6-.6.6z"></path>
+                                    </svg>
+                                </span>
+                            </button>
+                        </nav>
+                    </div>
+
+                    <!--content-->
+                    <div class="travistab-body repo-body">
+                        <div class="settings">
+
+                            <section class="settings-section auto-cancellation">
+                                <h2 class="small-title display-inline">项目描述</h2>
+                                <p>
+                                    {{data.detail}}
+                                </p>
+                            </section>
+
+                            <section class="settings-section">
+                                <h2 class="small-title">Access Token</h2>
+
+                                <div id="env-var-secrecy">
+                                    <p>
+                                        <i class="fal fa-bullhorn" style="font-size: 18px; padding-right: 5px"></i>
+                                        Access token 用于上传测试报告, 请注意保密 !
+                                    </p>
+                                </div>
+                                <div class="form-elem">
+                                    <input placeholder="Token" class="env-name" type="text" :value="data.token">
+                                </div>
+                            </section>
+
+                            <section class="settings-section">
+                                <h2 class="small-title display-inline">Pipeline</h2>
+                                <p>
+                                    配置项目的测试阶段, 如"接口测试", "单元测试"等, 用英文半角逗号","分隔每个阶段.
+                                </p>
+                                <ul class="settings-list--crons"></ul>
+
+                                <div class="form-elem">
+                                    <input placeholder="Pipeline" class="env-name" type="text"
+                                           :value="data.pipeline.join(', ')" v-if="data.pipeline">
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </main>
+            </article>
+        </div>
+    </div>
+</div>
+{% endraw %}
+{% endblock %}
+
+</body>
+
+{% block sctipt %}
+
+var setting_app = new Vue({
+    data: {
+        pro_id: '{{ id }}',
+        data: {},
+    },
+    methods: {
+        getProjectInfo() {
+            var vm = this, pro_id = vm.pro_id;
+            $.get('/api/project/info?id=' + pro_id, function (res) {
+                if (!res || !res.data) { return alert('异常') }
+                vm.data = res.data
+            })
+        }
+    },
+    created: function () {
+        this.getProjectInfo()
+    }
+});
+setting_app.$mount('.wrapper-main')
+
+{% endblock %}

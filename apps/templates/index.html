@@ -11,7 +11,7 @@
                         <header class="name">
                             <h1 class="repo-title">
                                 <i class="fal fa-book fa-xs" style="color:#9d9d9d;"></i>
-                                [todo:Group] /
+                                <!--[todo:Group] /-->
                                 <a :href="'/project/'+pro_id" class="active">{{pro_id}}</a>
                             </h1>
                         </header>
@@ -22,6 +22,11 @@
                                         <li id="tab_current" class="active">
                                             <a :href="'/project/'+pro_id" class="active">
                                                 Current
+                                            </a>
+                                        </li>
+                                        <li id="tab_setting">
+                                            <a :href="'/project/'+pro_id+'/setting'">
+                                                Setting
                                             </a>
                                         </li>
                                     </ul>
