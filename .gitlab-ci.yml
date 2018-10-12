@@ -1,0 +1,20 @@
+image: yuyang0/kae-cli:v0.0.1-alpha8
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - kae app:register --force
+    - kae app:build
+  only:
+    - tags
+
+deploy:
+  stage: deploy
+  script:
+    - kae app:deploy qaadmin $CI_COMMIT_TAG --cluster baidu
+  only:
+    - tags
