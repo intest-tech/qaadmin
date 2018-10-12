@@ -57,6 +57,16 @@ class Project(object):
         result = self.col.find_one({'_id': name, 'is_del': False}, filter_condition)
         return result
 
+    def update(self, name: str, **kwargs) -> dict:
+        """
+        更新某个 Project 信息
+        :param name: project name
+        :param kwargs: 
+        :return: 
+        """
+        result = self.col.update({'_id': name}, {'$set': kwargs})
+        return result
+
     def get_tags(self, name: str) -> list:
         """
         获取某个 project 信息.
@@ -201,7 +211,7 @@ class Result(object):
                     success=item['was_successful'],
                     count=1,
                     duration=item['duration'],
-                    create_time=int(datetime.datetime.timestamp(item['create_time'])*1000)
+                    create_time=int(datetime.datetime.timestamp(item['create_time']) * 1000)
                 )
                 new_dict[item['stage']] = dict(
                     id=str(item['_id']),

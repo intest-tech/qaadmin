@@ -1,5 +1,6 @@
 from flask import render_template, request, flash, redirect
-from libs.response import json_response
+# from libs.response import json_response
+import uuid
 from libs.mongo import Project, init_document
 from . import main
 
@@ -28,7 +29,6 @@ def job_with_id(pro_id, job_id):
 @main.route('/project/create', methods=['GET', 'POST'])
 def create_project():
     if request.method == 'POST':
-        # todo: create with token
         project_name = request.form.get('name')
         project_detail = request.form.get('detail')
         error = None
@@ -41,7 +41,8 @@ def create_project():
         if error is None:
             new_project = {
                 '_id': project_name,
-                "detail": project_detail
+                "detail": project_detail,
+                "token": uuid.uuid4().hex
             }
             new_project = init_document(new_project)
             # todo: update Project class

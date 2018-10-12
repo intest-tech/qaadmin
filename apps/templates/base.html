@@ -2,15 +2,6 @@
 <html class="no-js" lang="zh-CN">
 <head>
     <title>{% block title %}Default title{% endblock %}</title>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul class=flashes>
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
     <meta charset="utf-8">
     <script src="/static/js/opensource/jquery.min.js"></script>
     <script src="/static/js/opensource/vue.js"></script>

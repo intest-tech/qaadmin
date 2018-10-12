@@ -17,6 +17,15 @@
                 <label>描　述：</label>
                 <input type="text" name="detail"/>
             </div>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class=flashes>
+                {% for message in messages %}
+                  <a>{{ message }}</a>
+                {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
             <div class="box">
                 <button id="cancel_button" type="button" onclick="javascript:history.back(-1);">取消</button>
                 <button id="submit_button" type="submit">提交</button>

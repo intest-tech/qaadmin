@@ -1,5 +1,5 @@
-from flask import request
-from libs.mongo import Project, init_document
+from flask import request, flash, render_template
+from libs.mongo import Project
 from libs.response import json_response
 from . import api
 
@@ -15,14 +15,18 @@ def get_project_info():
     return json_response(project_info)
 
 
-# # todo: update project info
-# # class UpdateBaseHandler(BaseHandler):
-# #     def post(self, *args, **kwargs):
-# #         pass
-# #
-#
-# # todo: update project pipeline
-#
+@api.route("/project/pipeline/update", methods=['POST'])
+def update_project_pipeline():
+    # todo: judge logged in.
+    new_pipeline = request.form.get('pipeline')
+    new_pipeline = new_pipeline.replace(' ', '').split(',') if new_pipeline else []
+    id = request.args.get('id', '')
+    project_info = Project().update(id, pipeline=new_pipeline)
+    if not project_info:
+        return json_response("", status='fail', error_msg='id invalid')
+    return json_response("updated")
+
+
 # class DeleteProjectHandler(BaseHandler):
 #     # todo: bulk delete
 #     def post(self, *args, **kwargs):

@@ -564,7 +564,7 @@ code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shad
 .form--cron .form-elem,.form--envvar .form-elem{display:inline-block;vertical-align:top;width:100%;margin-bottom:1em}@media only screen and (min-width:50.063em){.form--cron .form-elem,.form--envvar .form-elem{margin-bottom:0}
     .form--cron .form-elem:first-of-type,.form--cron .form-elem:nth-of-type(2),.form--envvar .form-elem:first-of-type,.form--envvar .form-elem:nth-of-type(2){margin-right:1em}
     .form--cron .form-elem:last-of-type,.form--envvar .form-elem:last-of-type{float:right;text-align:right}}
-.form--envvar .switch .label{font-size:12px;width:7rem;line-height:1.2;text-align:left}@media only screen and (min-width:50.063em){.form--envvar .form-elem:first-of-type,.form--envvar .form-elem:nth-of-type(2){width:31.5%}
+.form--envvar .switch .label{font-size:12px;width:7rem;line-height:1.2;text-align:left}@media only screen and (min-width:50.063em){.form--envvar .form-elem:first-of-type,.form--envvar .form-elem:nth-of-type(2){width:85.5%}
     .form--envvar .form-elem:nth-of-type(3){width:24%}
     .form--envvar .form-elem:last-of-type{width:6%}}
 .form--cron{padding:.4em 0}

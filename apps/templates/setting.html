@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block script %}
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 <script src="/static/js/project.js"></script>
 <!--<link rel="stylesheet" href="/static/css/travis-bak.css">-->
 <link rel="stylesheet" href="/static/css/job.css">
@@ -73,7 +73,7 @@
                                     </p>
                                 </div>
                                 <div class="form-elem">
-                                    <input placeholder="Token" class="env-name" type="text" :value="data.token">
+                                    <input placeholder="Token" class="setting-input" type="text" :value="data.token">
                                 </div>
                             </section>
 
@@ -83,10 +83,20 @@
                                     配置项目的测试阶段, 如"接口测试", "单元测试"等, 用英文半角逗号","分隔每个阶段.
                                 </p>
                                 <ul class="settings-list--crons"></ul>
-
-                                <div class="form-elem">
-                                    <input placeholder="Pipeline" class="env-name" type="text"
-                                           :value="data.pipeline.join(', ')" v-if="data.pipeline">
+                                <div class="form--envvar">
+                                <!--<form :action="'/api/project/pipeline/update?id='+pro_id" method="post">-->
+                                    <!--<div class="form-elem" v-if="data.pipeline">-->
+                                        <!--<input placeholder="Pipeline" v-model="form.pipeline" type="text"-->
+                                               <!--:value="form.pipeline.join(', ')">-->
+                                    <!--</div>-->
+                                    <div class="form-elem">
+                                        <input placeholder="Pipeline" v-model="form.pipeline" type="text"
+                                               :value="form.pipeline">
+                                    </div>
+                                    <div class="form-elem" @click="updatePipeline">
+                                        <input value="更新" class="form-submit" type="submit">
+                                    </div>
+                                <!--</form>-->
                                 </div>
                             </section>
                         </div>
@@ -107,14 +117,21 @@ var setting_app = new Vue({
     data: {
         pro_id: '{{ id }}',
         data: {},
+        form: {}
     },
     methods: {
         getProjectInfo() {
             var vm = this, pro_id = vm.pro_id;
             $.get('/api/project/info?id=' + pro_id, function (res) {
                 if (!res || !res.data) { return alert('异常') }
-                vm.data = res.data
+                vm.data = res.data;
+                vm.form = {'pipeline': vm.data.pipeline}
             })
+        },
+        updatePipeline() {
+            var vm = this,
+                f = vm.form;
+            $.post(`/api/project/pipeline/update?id=${vm.pro_id}`, f);
         }
     },
     created: function () {
