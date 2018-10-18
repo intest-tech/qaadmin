@@ -1,7 +1,9 @@
-from flask import render_template, request, flash, redirect
 # from libs.response import json_response
 import uuid
-from libs.mongo import Project, init_document
+
+from flask import render_template, request, flash, redirect
+
+from apps.libs.mongo import Project, init_document
 from . import main
 
 

@@ -1,10 +1,10 @@
-from flask import request
-from libs.mongo import Project, Result, init_document
-from libs.response import json_response
-from . import api
-from bson import json_util
 import bson.errors
+from bson import json_util
+from flask import request
+from apps.libs.response import json_response
 
+from apps.libs.mongo import Project, Result, init_document
+from . import api
 
 
 @api.route('/test-result/get-version')
@@ -39,6 +39,7 @@ def get_test_result():
     result_data = json_util._json_convert(result_data)
     return json_response(result_data)
 
+
 @api.route('/test-result/upload', methods=['POST'])
 def upload_result():
     token = request.args.get('token')
@@ -55,6 +56,7 @@ def upload_result():
     Project().col.update({'_id': result['_id']}, {"$addToSet": {"pipeline": new_result['stage']}})
     return json_response({'inserted_id': str(insert_result.inserted_id)})
 
+
 @api.route('/test-result/delete')
 def delete_result():
     id = request.args.get('id')
@@ -67,4 +69,3 @@ def delete_result():
         return json_response(result)
     except bson.errors.InvalidId:
         return json_response("", status='fail', error_msg='id invalid')
-

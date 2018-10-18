@@ -1,9 +1,7 @@
 # import tornado.web
 # import flask.views
-from flask import make_response, request
+from flask import request
 from flask_restful import Resource
-import json
-import datetime
 
 
 # import time
@@ -30,22 +28,22 @@ class BaseHandler(Resource):
 
     @property
     def mongo(self):
-        from libs.mongo import qa_db
+        from apps.libs.mongo import qa_db
         return qa_db
 
     @property
     def User(self):
-        from libs.mongo import User
+        from apps.libs.mongo import User
         return User()
 
     @property
     def Project(self):
-        from libs.mongo import Project
+        from apps.libs.mongo import Project
         return Project()
 
     @property
     def Result(self):
-        from libs.mongo import Result
+        from apps.libs.mongo import Result
         return Result()
 
     def get_argument(self, args, default=None):

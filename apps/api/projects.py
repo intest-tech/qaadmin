@@ -1,6 +1,7 @@
-from flask import request, flash, render_template
-from libs.mongo import Project
-from libs.response import json_response
+from flask import request
+from apps.libs.response import json_response
+
+from apps.libs.mongo import Project
 from . import api
 
 
