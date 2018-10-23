@@ -307,25 +307,8 @@ code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shad
 .username{color:#9d9d9d;padding-left:20px;background-color:#F7F7F7;overflow:hidden;white-space:nowrap}
 .menu-separator{border-bottom:1px #666 solid;padding-top:10px}@media only screen and (min-width:50.063em){.username span:after{content:"";display:block;position:absolute;top:0;right:0;width:4.75em;height:30px;background:linear-gradient(-90deg,#F7F7F7 20%,rgba(255,255,255,0) 100%)}
     .menu-separator{display:none}}
-.navigation-nested{padding:10px 0 0}
-.navigation-nested svg{display:none}
-.navigation-nested a:not(:first-child){line-height:35px}@media only screen and (min-width:50.063em){.navigation-nested{width:200px;margin:0;padding:0;list-style:none;line-height:35px;background-color:#FFF;border:1px solid #F7F7F7;border-radius:2px;box-shadow:0 0 5px 2px rgba(0,0,0,.15)}
-    .navigation-nested svg{display:inline-block;margin-left:20px;vertical-align:sub}
-    .navigation-nested a{display:block;text-align:left}
-    .navigation-nested a:not(:first-child){line-height:55px}
-    .navigation-nested a svg.icon path{stroke:#686B6E}
-    .navigation-nested a.active:hover svg circle,.navigation-nested a.active:hover svg ellipse,.navigation-nested a.active:hover svg line,.navigation-nested a.active:hover svg path,.navigation-nested a.active:hover svg polygon,.navigation-nested a.active:hover svg polyline,.navigation-nested a.active:hover svg rect,.navigation-nested a:hover svg circle,.navigation-nested a:hover svg ellipse,.navigation-nested a:hover svg line,.navigation-nested a:hover svg path,.navigation-nested a:hover svg polygon,.navigation-nested a:hover svg polyline,.navigation-nested a:hover svg rect{fill:none;stroke:#3eaaaf}
-    .navigation-nested a li.active:hover,.navigation-nested a li:hover{background-color:#f2fafa}
-    .navigation-nested a:hover{text-decoration:none;color:#3eaaaf}
-    .navigation-nested a.active:hover{text-decoration:none;background-color:#f2fafa}
-    .navigation-nested a.active:hover a{color:#3eaaaf}
-    .navigation-nested .topbar-menu-item:hover{text-decoration:none}}
 .label-align,.row-li .one-line,.row-li .one-line .row-item,.row-li .two-line,.row-li .two-line .row-item{vertical-align:middle}
-.navigation-nested .username{display:none}@media only screen and (min-width:50.063em){.navigation-nested .username{display:block}}
-.navigation-nested .nav-nested{display:none}@media only screen and (min-width:50.063em){.navigation-nested .nav-nested{display:block;height:1px;background-color:#EFF0EC;margin:0 20px}
-    .navigation-nested{display:none;position:absolute;padding:0;margin:-1px 0 0 -103px;z-index:40}
-    .fade-out{white-space:nowrap;overflow:hidden}
-    .fade-out:after{content:"";display:block;position:absolute;top:0;right:0;width:2em;height:100%;background:linear-gradient(-90deg,#fff 30%,rgba(255,255,255,0) 100%)}}ul #profile-menu-link ul:hover,ul #profile-menu-link:focus-within>ul,ul #profile-menu-link:hover>ul{display:block}nav.navigation-anchor:hover{text-decoration:underline}
+ul #profile-menu-link ul:hover,ul #profile-menu-link:focus-within>ul,ul #profile-menu-link:hover>ul{display:block}nav.navigation-anchor:hover{text-decoration:underline}
 .loader-large,.loader-medium,.loader-small,.row-li{position:relative}
 .label-align{line-height:1.5}
 .rows{border-radius:2px;border:1px solid #eaeaea;display:flex;flex-flow:column wrap;margin-bottom:1rem}
@@ -1408,13 +1391,10 @@ code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shad
 .landing .hero br.mobile-break,.landing .oss-testing br.mobile-break{display:none}
 .dashboard-section:not(:last-of-type){margin-bottom:4rem}
 .starred-empty{border:1px dotted #9d9d9d;border-radius:2px;padding:2rem 0;font-size:18px;color:#9d9d9d}
-.travis-pride .navigation-anchor,.travis-pride .navigation-nested a{color:#fff}
 .starred-empty span{padding-left:2em;background-size:24px 24px;background-repeat:no-repeat}
 .layout-features{background:#fff}
 .features-hero{padding-top:2em;margin-bottom:3em}
 .travis-pride .top{background:linear-gradient(to bottom,#e2453c 0,#e07e39 16%,#e5d667 32%,#51b95b 48%,#1e72b7 66%,#6f5ba7 86%) no-repeat}
-.travis-pride .navigation-nested{background:linear-gradient(to top,#e2453c 0,#e07e39 16%,#e5d667 32%,#51b95b 48%,#1e72b7 66%,#6f5ba7 86%) no-repeat}
-.travis-pride .navigation-nested a:active,.travis-pride .navigation-nested a:hover{background-color:rgba(255,255,255,.3)}
 .travis-pride .icon-broadcast:not(.warning):not(.announcement) circle,.travis-pride .icon-broadcast:not(.warning):not(.announcement) ellipse,.travis-pride .icon-broadcast:not(.warning):not(.announcement) line,.travis-pride .icon-broadcast:not(.warning):not(.announcement) path,.travis-pride .icon-broadcast:not(.warning):not(.announcement) polygon,.travis-pride .icon-broadcast:not(.warning):not(.announcement) polyline,.travis-pride .icon-broadcast:not(.warning):not(.announcement) rect{fill:none;stroke:#fff}
 .travis-pride{width:70px}
 .travis-pride a{background-image:url(/images/logos/TravisCI-Mascot-pride.svg);background-repeat:no-repeat;background-size:50px;background-position:center;background-color:transparent;transition:transform .2s ease}
@@ -1561,10 +1541,6 @@ code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shad
     .landing .build-flows .branch-bf .bf p{font-size:1.5em}
     .landing .build-flows .branch-bf .divider-line-horizontal{display:none}
     .landing .build-flows .branch-bf .divider-line-vertical{width:3px;height:40px;background:#f1f1f1;display:inline-block;margin-bottom:10px}}
-.landing,.landing-page .navigation-nested,.landing-pro{background-color:#fff}@media (max-width:797px){.landing .customers .left{text-align:center;padding:20px 0 0}
-    .landing .private-repos h2,.landing .private-repos p,.landing .recent-builds-text h2,.landing .recent-builds-text p,.landing .user-testimonials h2,.landing .user-testimonials p{text-align:center}
-    .landing .free-for-oss br.mobile-no-break,.landing .private-repos .desktop-envelope{display:none}
-    .landing .private-repos .mobile-envelope{display:inline-block;margin-bottom:40px}}@media (max-width:608px){.landing br.mobile-break{display:inline-break}}
 .landing,.landing-pro{margin-bottom:0}
 .landing-pro .footer{background:#fff}
 .landing-pro h1,.landing-pro h2,.landing-pro h3{margin:0}

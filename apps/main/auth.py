@@ -1,30 +1,31 @@
-from flask import request, render_template, redirect, flash
+from flask import request, session, render_template, redirect, flash, url_for
 from apps.libs.mongo import User
+from apps.libs.auth import login_required
 from . import main
 
 
 @main.route("/login", methods=['GET', 'POST'])
 def login():
+    next_url = request.args.get('next', "main.index")
     if request.method == 'GET':
+        if 'username' in session:
+            print("ss", session['username'])
+            return redirect('/', code=302)
         return render_template('login.html')
     else:
-        username = request.form.get('username', '')
+        username = request.form.get('username', "")
         password = request.form.get('password', "")
         print(username, password)
         if User().check(username, password):
             # todo: never clear textbox
-            # todo: set session
-            return redirect('/', code=302)
+            session['username'] = username
+            return redirect(url_for(next_url))
         flash("Username or password error!")
         return redirect('/login', code=302)
 
-# @main.route("/logout")
-# def logout():
-#     # todo: remove session
-#     id = request.args.get('id', '')
-#     if not id:
-#         return json_response("", status='fail', error_msg='id required')
-#     project_info = Project().get(id, filter={'detail': 1, 'pipeline': 1, 'token': 1})
-#     if not project_info:
-#         return json_response("", status='fail', error_msg='id invalid')
-#     return json_response(project_info)
+
+@main.route("/logout")
+@login_required
+def logout():
+    session.pop('username', None)
+    return redirect('/login', code=302)

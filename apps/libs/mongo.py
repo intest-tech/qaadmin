@@ -1,6 +1,5 @@
 import datetime
 import os
-
 from bson import ObjectId
 from .crypto import encrypt_password
 from pymongo import MongoClient, DESCENDING
@@ -40,6 +39,12 @@ class User(object):
     def check(self, username: str, password: str) -> bool:
         user_info = self.db['User'].find_one({'username': username, 'is_del': False})
         if user_info and encrypt_password(password, user_info.get('salt', 0)) == user_info.get('password'):
+            return True
+        return False
+
+    def exists(self, username: str) -> bool:
+        user_info = self.db['User'].find_one({'username': username, 'is_del': False})
+        if user_info:
             return True
         return False
 

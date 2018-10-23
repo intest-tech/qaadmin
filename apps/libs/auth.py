@@ -1,17 +1,33 @@
-# todo: login set cookie
-
-# todo: login required decorator
 from functools import wraps
-from flask import g, request, redirect, url_for
+from flask import request, session, redirect, url_for
+from .mongo import User
 
-def login_required(f):
-    @wraps(f)
+
+def login_required(func):
+    @wraps(func)
     def decorated_function(*args, **kwargs):
-        if g.user is None:
-            return redirect(url_for('login', next=request.url))
-        return f(*args, **kwargs)
+        # if current_app.config.get('LOGIN_DISABLED'):
+        #     return func(*args, **kwargs)
+        user = session.get('username')
+        if user and User().exists(user):
+            return func(*args, **kwargs)
+        else:
+            return redirect(url_for('main.login', next=request.endpoint))
+
     return decorated_function
 
-# todo: generate token
 
-# todo: judge token legal
+# todo: admin required
+# todo: permission system
+# def admin_required(func):
+#     @wraps(func)
+#     def decorated_function(*args, **kwargs):
+#         # if current_app.config.get('LOGIN_DISABLED'):
+#         #     return func(*args, **kwargs)
+#         user = session.get('username')
+#         if user and User().exists(user):
+#             return func(*args, **kwargs)
+#         else:
+#             return redirect(url_for('main.login', next=request.endpoint))
+#
+#     return decorated_function

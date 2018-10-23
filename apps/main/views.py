@@ -1,35 +1,38 @@
-# from libs.response import json_response
 import uuid
-
 from flask import render_template, request, flash, redirect
-
 from apps.libs.mongo import Project, init_document
+from apps.libs.auth import login_required
 from . import main
 
 
 @main.route('/', methods=['GET'])
+@login_required
 def index():
     return render_template('index.html')
 
 
 @main.route('/project/<pro_id>')
+@login_required
 def project_with_id(pro_id):
     return render_template('index.html', id=pro_id)
 
 
 @main.route('/project/<pro_id>/setting')
+@login_required
 def project_setting(pro_id):
     return render_template('setting.html', id=pro_id)
 
 
 @main.route('/project/<pro_id>/job/<job_id>')
-def job_with_id(pro_id, job_id):
+@login_required
+def project_job_with_id(pro_id, job_id):
     print(pro_id, job_id)
     return render_template('job.html', pro_id=pro_id, job_id=job_id)
 
 
 @main.route('/project/create', methods=['GET', 'POST'])
-def create_project():
+@login_required
+def project_create():
     if request.method == 'POST':
         project_name = request.form.get('name')
         project_detail = request.form.get('detail')

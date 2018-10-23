@@ -195,3 +195,29 @@
     font-size: 14px;
     color: #FFFFF0;
 }
+
+
+/* navigation */
+.navigation-user a:not(:first-child){line-height:35px}
+@media only screen and (min-width:50.063em){
+    .navigation-user{
+        width:200px;
+        margin:0;
+        padding:0;
+        list-style:none;
+        line-height:35px;
+        background-color:#FFF;
+        border:1px solid #F7F7F7;
+        border-radius:2px;
+        box-shadow:0 0 5px 2px rgba(0,0,0,.15)
+    }
+    .navigation-user a{display:block;text-align:left}
+    .navigation-user a:not(:first-child){line-height:55px}
+    .navigation-user a li.active:hover,.navigation-user a li:hover{background-color:#f2fafa}
+    .navigation-user a:hover{text-decoration:none;color:#3eaaaf}
+    .navigation-user a li i{margin-left: 20px;}
+}
+
+.navigation-user{display:none;position:absolute;padding:0;margin:-1px 0 0 -103px;z-index:40}
+.navigation-user a:active,.travis-pride .navigation-user a:hover{background-color:rgba(255,255,255,.3)}
+/* navigation end */

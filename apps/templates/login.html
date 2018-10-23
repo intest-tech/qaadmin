@@ -48,7 +48,7 @@
 			QA Admin
 		</div>
 		<div class="content">
-			<form method="post" action="/login">
+			<form method="post" action="{{ url_for('main.login', next=request.args.get('next')) }}">
 				<div class="box">
 					<label>用户名：</label>
 					<input type="text" name="username"/>

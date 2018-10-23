@@ -1,11 +1,14 @@
+import uuid
 from flask import request
 from apps.libs.response import json_response
 
 from apps.libs.mongo import Project
+from apps.libs.auth import login_required
 from . import api
 
 
 @api.route("/project/info")
+@login_required
 def get_project_info():
     id = request.args.get('id', '')
     if not id:
@@ -17,6 +20,7 @@ def get_project_info():
 
 
 @api.route("/project/pipeline/update", methods=['POST'])
+@login_required
 def update_project_pipeline():
     # todo: judge logged in.
     new_pipeline = request.form.get('pipeline')
@@ -25,8 +29,18 @@ def update_project_pipeline():
     project_info = Project().update(id, pipeline=new_pipeline)
     if not project_info:
         return json_response("", status='fail', error_msg='id invalid')
-    return json_response("updated")
+    return json_response("pipeline updated.")
 
+
+@api.route("/project/gen-token", methods=['POST'])
+@login_required
+def gen_token():
+    project = request.form.get('project')
+    if Project().is_exist(project):
+        new_token = uuid.uuid4().hex
+        Project().update(project, token=new_token)
+        return json_response("token updated.")
+    return json_response("", status='fail', error_msg='project id invalid')
 
 # class DeleteProjectHandler(BaseHandler):
 #     # todo: bulk delete
@@ -62,3 +76,6 @@ def update_project_pipeline():
 #             print(result)
 #             return self.json_response({'token': new_token})
 #
+# todo: generate token
+
+# todo: judge token legal
