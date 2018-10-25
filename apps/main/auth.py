@@ -4,8 +4,17 @@ from apps.libs.auth import login_required
 from . import main
 
 
+def register():
+    pass
+
 @main.route("/login", methods=['GET', 'POST'])
 def login():
+    """
+    /login接口
+    GET: 获取登录页面
+    POST: 发送登录请求
+    :return: 
+    """
     next_url = request.args.get('next', "main.index")
     if request.method == 'GET':
         if 'username' in session:

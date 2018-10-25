@@ -23,7 +23,11 @@ pip install pipenv
 pipenv install
 ```
 
-2. 启动服务：
+2. 修改配置：
+
+参照`config.ini.example`的内容新建一个`config.ini`, 修改你的自定义配置(不作任何改动亦可).
+
+3. 启动服务：
 
 ```
 python manage.py runserver

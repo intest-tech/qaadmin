@@ -1,0 +1,22 @@
+# QA Admin configurations.
+# @Author: Shin Yang
+# @Data: Oct. 25, 2018
+# @Version: 1.0.0a
+
+# Web port to reach the server.
+[server]
+port=8888
+
+# Security setting of authority. `LOGIN_DISABLED=True` only suggest to use when testing.
+[security]
+LOGIN_DISABLED=False
+
+# MongoDB stores all data about project, test result, users, etc.
+[mongo]
+host=localhost
+port=27017
+db=qaadmin
+
+# For register.
+[admin]
+secret_key=Pa5sW0rd!

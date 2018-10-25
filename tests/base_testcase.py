@@ -4,19 +4,9 @@ from unittest import mock
 
 class BaseTestCase(TestCase):
     def create_app(self):
-        from manage import app
-        return app
+        from apps import create_app
+        return create_app()
 
-    # def _create_api(self):
-    #     from flask import Flask
-    #     from flask_restful import Api
-    #     from apps.route import urls
-    #
-    #     app = Flask(__name__)
-    #     api = Api(app)
-    #     for url in urls:
-    #         api.add_resource(url[1], url[0])
-    #     return app
 
     def setUp(self):
         super(BaseTestCase, self).setUp()
@@ -39,8 +29,8 @@ class BaseTestCase(TestCase):
         mock_obj = patcher.start()
         mock_obj.return_value = result
 
-    def mock_project_exist(self, result=True):
-        patcher = mock.patch('apps.basehandler.BaseHandler.Project')
-        self._patcher.append(patcher)
-        mock_obj = patcher.start()
-        mock_obj.exist.return_value = result
+    # def mock_project_exist(self, result=True):
+    #     patcher = mock.patch('apps.basehandler.BaseHandler.Project')
+    #     self._patcher.append(patcher)
+    #     mock_obj = patcher.start()
+    #     mock_obj.exist.return_value = result

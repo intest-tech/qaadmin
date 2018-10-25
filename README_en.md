@@ -22,7 +22,15 @@ pip install pipenv
 pipenv install
 ```
 
-2. Run server:
+2. Set configure:
+
+Create your configure file `config.ini` refer to `config.ini.example`, or just use the example content with:
+
+```
+mv config.ini.example config.ini
+```
+
+3. Run server:
 ```
 python manage.py runserver
 ```

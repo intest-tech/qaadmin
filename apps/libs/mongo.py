@@ -4,7 +4,9 @@ from bson import ObjectId
 from .crypto import encrypt_password
 from pymongo import MongoClient, DESCENDING
 
-from apps.libs.myconfigparser import config
+from apps.libs.myconfigparser import MyConfig
+
+config = MyConfig.instance()
 
 
 def conn_mongo():
@@ -36,14 +38,17 @@ qa_db = conn_mongo()
 class User(object):
     db = qa_db
 
+    def get(self, username: str) -> dict:
+        return self.db['User'].find_one({'username': username, 'is_del': False})
+
     def check(self, username: str, password: str) -> bool:
-        user_info = self.db['User'].find_one({'username': username, 'is_del': False})
+        user_info = self.get(username)
         if user_info and encrypt_password(password, user_info.get('salt', 0)) == user_info.get('password'):
             return True
         return False
 
     def exists(self, username: str) -> bool:
-        user_info = self.db['User'].find_one({'username': username, 'is_del': False})
+        user_info = self.get(username)
         if user_info:
             return True
         return False

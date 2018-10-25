@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 
 {% block script %}
-<!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 <script src="/static/js/project.js"></script>
-<!--<link rel="stylesheet" href="/static/css/travis-bak.css">-->
 <link rel="stylesheet" href="/static/css/job.css">
 {% endblock %}
 
@@ -122,7 +120,7 @@ var setting_app = new Vue({
     methods: {
         getProjectInfo() {
             var vm = this, pro_id = vm.pro_id;
-            $.get('/api/project/info?id=' + pro_id, function (res) {
+            $.get('/project/info?id=' + pro_id, function (res) {
                 if (!res || !res.data) { return alert('异常') }
                 vm.data = res.data;
                 vm.form = {'pipeline': vm.data.pipeline}
@@ -131,7 +129,7 @@ var setting_app = new Vue({
         updatePipeline() {
             var vm = this,
                 f = vm.form;
-            $.post(`/api/project/pipeline/update?id=${vm.pro_id}`, f);
+            $.post(`/project/pipeline/update?id=${vm.pro_id}`, f);
         }
     },
     created: function () {
