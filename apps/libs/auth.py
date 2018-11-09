@@ -5,6 +5,19 @@ from apps.libs.myconfigparser import MyConfig
 
 config = MyConfig.instance()
 
+def check_sk(secret_key: str) -> bool:
+    """
+    验证secret_key, 用于注册用户与重置其他用户密码
+    :param secret_key: 
+    :return: 
+    """
+    try:
+        if secret_key == config['admin']['secret_key']:
+            return True
+        return False
+    except:
+        return False
+
 
 def login_required(func):
     @wraps(func)
@@ -34,3 +47,5 @@ def login_required(func):
 #             return redirect(url_for('main.login', next=request.endpoint))
 #
 #     return decorated_function
+
+# todo: token required

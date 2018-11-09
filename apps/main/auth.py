@@ -1,11 +1,34 @@
 from flask import request, session, render_template, redirect, flash, url_for
 from apps.libs.mongo import User
-from apps.libs.auth import login_required
+from apps.libs.auth import login_required, check_sk
 from . import main
 
 
+@main.route("/register", methods=["GET", "POST"])
 def register():
-    pass
+    """
+    用户注册接口
+    输入正确的secret_key才能注册用户
+    :return: 
+    """
+    if request.method == "GET":
+        return render_template('register.html')
+    else:
+        secret_key = request.form.get('secret_key', "")
+        username = request.form.get('username', "")
+        password = request.form.get('password', "")
+        if secret_key and check_sk(secret_key):
+            if username and len(password) > 6 and not User().exists(username):
+                User().new(username, password)
+                session['username'] = username
+                return redirect('/', code=302)
+            else:
+                error = "Username or password error!"
+        else:
+            error = "Secret key error!"
+        flash(error)
+        return redirect('/register', code=302)
+
 
 @main.route("/login", methods=['GET', 'POST'])
 def login():
@@ -18,13 +41,11 @@ def login():
     next_url = request.args.get('next', "main.index")
     if request.method == 'GET':
         if 'username' in session:
-            print("ss", session['username'])
             return redirect('/', code=302)
         return render_template('login.html')
     else:
         username = request.form.get('username', "")
         password = request.form.get('password', "")
-        print(username, password)
         if User().check(username, password):
             # todo: never clear textbox
             session['username'] = username

@@ -1,5 +1,6 @@
 import datetime
 import os
+import random
 from bson import ObjectId
 from .crypto import encrypt_password
 from pymongo import MongoClient, DESCENDING
@@ -15,7 +16,6 @@ def conn_mongo():
         conn = MongoClient('mongo-test', 27017)
     else:
         conn = MongoClient(config['mongo']['host'], int(config['mongo']['port']))
-        # conn = MongoClient('localhost', 27017)
     db = conn.qaadmin
     return db
 
@@ -37,6 +37,16 @@ qa_db = conn_mongo()
 @singleton
 class User(object):
     db = qa_db
+
+    def new(self, username: str, password: str):
+        salt = random.randint(0, 100)
+        new_user = {
+            "salt": salt,
+            "username": username,
+            "password": encrypt_password(password, salt)
+        }
+        new_user = init_document(new_user)
+        return self.db['User'].insert_one(new_user)
 
     def get(self, username: str) -> dict:
         return self.db['User'].find_one({'username': username, 'is_del': False})
