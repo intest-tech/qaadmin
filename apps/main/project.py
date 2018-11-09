@@ -21,7 +21,6 @@ def get_project_info():
 @proj.route("/pipeline/update", methods=['POST'])
 @login_required
 def update_project_pipeline():
-    # todo: judge logged in.
     new_pipeline = request.form.get('pipeline')
     new_pipeline = new_pipeline.replace(' ', '').split(',') if new_pipeline else []
     id = request.args.get('id', '')
@@ -74,16 +73,29 @@ def project_create():
             project_info = Project().is_exist(project_name)
             if project_info:
                 error = 'project exist'
-        if error is None:
+        if not error:
             new_project = {
                 '_id': project_name,
                 "detail": project_detail,
                 "token": uuid.uuid4().hex
             }
             new_project = init_document(new_project)
-            # todo: update Project class
-            new_project_id = Project().col.insert_one(new_project).inserted_id
-            # return json_response({'inserted_id': str(new_project_id)})
+            Project().col.insert_one(new_project)
             return redirect('/project/' + project_name, code=302)
         flash(error)
     return render_template('create-project.html')
+
+
+# # class DeleteProjectHandler(BaseHandler):
+# #     # todo: bulk delete
+# #     def post(self, *args, **kwargs):
+# #         project_name = self.get_formdata('name')
+# #         if not project_name:
+# #             return self.json_response(status='fail', error_msg='error project name')
+# #         else:
+# #             project_info = self.Project.is_exist(project_name)
+# #             if not project_info:
+# #                 return self.json_response(status='fail', error_msg='project not exist')
+# #             result = self.mongo.Project.delete_one({'_id': project_name})
+# #             print(result)
+# #             return self.json_response({'delete_result': result.raw_result})

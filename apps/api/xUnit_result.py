@@ -52,7 +52,6 @@ def upload_result():
     new_result['project'] = result['_id']
     new_result = init_document(new_result)
     insert_result = Result().insert(new_result)
-    # todo: update pipeline of project when some stage first created.
     Project().col.update({'_id': result['_id']}, {"$addToSet": {"pipeline": new_result['stage']}})
     return json_response({'inserted_id': str(insert_result.inserted_id)})
 
