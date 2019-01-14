@@ -16,7 +16,8 @@ LOGIN_DISABLED=False
 host=localhost
 port=27017
 db=qaadmin
+serverSelectionTimeoutMS=10
 
-# For register.
+# Admin area for qaadmin system.
 [admin]
 secret_key=Pa5sW0rd!

@@ -4,6 +4,7 @@ import random
 from bson import ObjectId
 from .crypto import encrypt_password
 from pymongo import MongoClient, DESCENDING
+from pymongo.errors import ServerSelectionTimeoutError
 
 from apps.libs.myconfigparser import MyConfig
 
@@ -11,11 +12,16 @@ config = MyConfig.instance()
 
 
 def conn_mongo():
-    DOCKER_FLAG = os.environ.get('DOCKER', False)
-    if DOCKER_FLAG:
-        conn = MongoClient('mongo-test', 27017)
-    else:
-        conn = MongoClient(config['mongo']['host'], int(config['mongo']['port']))
+    try:
+        conn = MongoClient(config['mongo']['host'],
+                           int(config['mongo']['port']),
+                           serverSelectionTimeoutMS= \
+                               config['mongo']['serverSelectionTimeoutMS'])
+        print(conn.server_info())
+    except ServerSelectionTimeoutError:
+        print('Connect to MongoDB "{}" failed.'.format(config['mongo']['host']))
+        exit(1)
+
     db = conn.qaadmin
     return db
 
